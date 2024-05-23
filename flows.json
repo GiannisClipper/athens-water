@@ -80,14 +80,6 @@
         "env": []
     },
     {
-        "id": "9693c2df1733ce49",
-        "type": "tab",
-        "label": "weather response",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "746d8aad27723fd7",
         "type": "sqlitedb",
         "db": "~/.node-red/projects/athens-water/data/water.sqlite",
@@ -150,7 +142,7 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "read globals",
-        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    productionLastDate: global.get( 'productionLastDate' ),\n}\n\nreturn msg;",
+        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    locations: global.get( 'locations' ),\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    reservoirs: global.get( 'reservoirs' ),\n    productionLastDate: global.get( 'productionLastDate' ),\n    factories: global.get( 'factories' ),\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -415,7 +407,7 @@
         "z": "6d278dbe6de7a110",
         "name": "call savings initialization",
         "links": [
-            "19609e09a149192a"
+            "8a59f45495f1788b"
         ],
         "linkType": "static",
         "timeout": "30",
@@ -431,7 +423,7 @@
         "z": "6d278dbe6de7a110",
         "name": "call production initialization",
         "links": [
-            "e183c62838f879b0"
+            "e604ce7017cf9a7f"
         ],
         "linkType": "static",
         "timeout": "30",
@@ -455,26 +447,9 @@
         "y": 340,
         "wires": [
             [
-                "a2dfe1de5b085c5d"
+                "b7a7b0fccef81f35"
             ]
         ]
-    },
-    {
-        "id": "a2dfe1de5b085c5d",
-        "type": "debug",
-        "z": "6d278dbe6de7a110",
-        "name": "debug 17",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 140,
-        "y": 440,
-        "wires": []
     },
     {
         "id": "63251ea6481c533d",
@@ -504,6 +479,22 @@
                 "06c779112978aaa2"
             ]
         ]
+    },
+    {
+        "id": "b7a7b0fccef81f35",
+        "type": "debug",
+        "z": "6d278dbe6de7a110",
+        "name": "debug 19",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 140,
+        "y": 420,
+        "wires": []
     },
     {
         "id": "738e025081242dfd",
@@ -1169,7 +1160,7 @@
         "type": "function",
         "z": "d7c8565c02c92dbd",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'weatherLastDate', lastDate );\nmsg.payload = `Weather last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'weatherLastDate', lastDate );\nmsg.payload = `Initial weather last date: ${lastDate}`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1210,12 +1201,11 @@
         "z": "d7c8565c02c92dbd",
         "name": "link in 5",
         "links": [],
-        "x": 65,
-        "y": 100,
+        "x": 55,
+        "y": 60,
         "wires": [
             [
-                "af66bd9217a38532",
-                "348d3b2d2ea08315"
+                "7ea925825ff95888"
             ]
         ]
     },
@@ -1236,38 +1226,11 @@
         ]
     },
     {
-        "id": "348d3b2d2ea08315",
-        "type": "change",
-        "z": "d7c8565c02c92dbd",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Weather initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 220,
-        "y": 60,
-        "wires": [
-            [
-                "eefbcba086f74da2"
-            ]
-        ]
-    },
-    {
         "id": "3e3759343661ea8a",
         "type": "function",
         "z": "d7c8565c02c92dbd",
         "name": "select locations",
-        "func": "const query = \"\\\n    SELECT id, lat, lon \\\n    FROM locations; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
+        "func": "const query = \"\\\n    SELECT id, name_el, name_en, lat, lon \\\n    FROM locations; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1305,7 +1268,7 @@
         "type": "function",
         "z": "d7c8565c02c92dbd",
         "name": "set locations",
-        "func": "const rows = msg.payload;\nnode.warn( rows )\nglobal.set( 'locations', rows );\n\nmsg.payload = `Weather locations (${rows.length})`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nglobal.set( 'locations', rows );\n\nmsg.payload = `Initial weather locations (${rows.length})`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1323,164 +1286,43 @@
         ]
     },
     {
-        "id": "ebe41c4a7bbaea37",
-        "type": "link out",
-        "z": "369c55fe302803f7",
-        "name": "link out 6",
-        "mode": "return",
-        "links": [],
-        "x": 625,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "7dd56f6571de845d",
+        "id": "7ea925825ff95888",
         "type": "function",
-        "z": "369c55fe302803f7",
-        "name": "select last dates",
-        "func": "const query = \"\\\n    SELECT DISTINCT MAX(date) as lastDate \\\n    FROM savings; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
-        "outputs": 1,
+        "z": "d7c8565c02c92dbd",
+        "name": "Check initialization",
+        "func": "const lastDate = global.get( 'weatherLastDate' );\nconst locations = global.get( 'locations' );\n\nif ( lastDate && locations ) {\n    msg.payload = \"Weather already initialized.\";\n    return [ null, msg ];\n}\n\nmsg.payload = \"Weather initialization...\";\nreturn [ msg, null ];\n",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 420,
+        "x": 230,
+        "y": 60,
         "wires": [
             [
-                "f97ae6a3690ac576"
+                "af66bd9217a38532",
+                "eefbcba086f74da2"
+            ],
+            [
+                "eefbcba086f74da2",
+                "0934098869fcb268"
             ]
         ]
     },
     {
-        "id": "0f3ea61aa2a5cc90",
-        "type": "debug",
-        "z": "369c55fe302803f7",
-        "d": true,
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 380,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "71b1213f178004bb",
-        "type": "function",
-        "z": "369c55fe302803f7",
-        "name": "set missing dates",
-        "func": "const { timeRepr, rangeToDates } = global.get( 'dateHelpers' );\n\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\nconst rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\nconst result = rangeToDates( lastDate, today ).filter( d => d !== lastDate && d !== today );\n\nglobal.set( 'savingsMissingDates', result );\n\nmsg.topic = \"savingsMissingDates\"\nmsg.payload = result;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 500,
-        "wires": [
-            [
-                "ebe41c4a7bbaea37",
-                "0f3ea61aa2a5cc90"
-            ]
-        ]
-    },
-    {
-        "id": "f97ae6a3690ac576",
-        "type": "link call",
-        "z": "369c55fe302803f7",
-        "name": "call database",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 630,
-        "y": 420,
-        "wires": [
-            [
-                "71b1213f178004bb"
-            ]
-        ]
-    },
-    {
-        "id": "011da4bee9a0309a",
-        "type": "link in",
-        "z": "369c55fe302803f7",
-        "name": "link in 6",
-        "links": [],
-        "x": 235,
-        "y": 380,
-        "wires": [
-            [
-                "7dd56f6571de845d",
-                "6e2c200dcae85106"
-            ]
-        ]
-    },
-    {
-        "id": "294a83b0b2097e10",
-        "type": "link call",
-        "z": "369c55fe302803f7",
-        "name": "call logger",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 630,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6e2c200dcae85106",
-        "type": "change",
-        "z": "369c55fe302803f7",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Savings initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 400,
-        "y": 340,
-        "wires": [
-            [
-                "294a83b0b2097e10"
-            ]
-        ]
-    },
-    {
-        "id": "f7043342aae7f695",
+        "id": "2d93842496444882",
         "type": "link out",
         "z": "369c55fe302803f7",
-        "name": "link out 12",
+        "name": "link out 15",
         "mode": "return",
         "links": [],
-        "x": 775,
-        "y": 140,
+        "x": 795,
+        "y": 460,
         "wires": []
     },
     {
-        "id": "053106d470f1c1c9",
+        "id": "9b97c41f2e94dbd7",
         "type": "function",
         "z": "369c55fe302803f7",
         "name": "select last date",
@@ -1495,16 +1337,16 @@
         "y": 140,
         "wires": [
             [
-                "5619d9fb64749aa3"
+                "be738c7b07e56503"
             ]
         ]
     },
     {
-        "id": "2bbfae14794b8b96",
+        "id": "e12c41a077eef835",
         "type": "debug",
         "z": "369c55fe302803f7",
         "d": true,
-        "name": "debug 12",
+        "name": "debug 20",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1513,34 +1355,34 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 220,
+        "x": 840,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "46eba98225771917",
+        "id": "2e7b1715c5b1248d",
         "type": "function",
         "z": "369c55fe302803f7",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'savingsLastDate', lastDate );\nmsg.payload = `Savings last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'savingsLastDate', lastDate );\nmsg.payload = `Initial savings last date: ${lastDate}`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 140,
+        "x": 210,
+        "y": 260,
         "wires": [
             [
-                "f7043342aae7f695",
-                "2bbfae14794b8b96",
-                "661462f660a03b72"
+                "e12c41a077eef835",
+                "bd670a6c945626b3",
+                "4c0cdc252d4eb87f"
             ]
         ]
     },
     {
-        "id": "5619d9fb64749aa3",
+        "id": "be738c7b07e56503",
         "type": "link call",
         "z": "369c55fe302803f7",
         "name": "call database",
@@ -1549,31 +1391,30 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 430,
-        "y": 140,
+        "x": 210,
+        "y": 200,
         "wires": [
             [
-                "46eba98225771917"
+                "2e7b1715c5b1248d"
             ]
         ]
     },
     {
-        "id": "19609e09a149192a",
+        "id": "8a59f45495f1788b",
         "type": "link in",
         "z": "369c55fe302803f7",
-        "name": "link in 11",
+        "name": "link in 13",
         "links": [],
-        "x": 65,
-        "y": 100,
+        "x": 55,
+        "y": 60,
         "wires": [
             [
-                "053106d470f1c1c9",
-                "ed69c349a82068f2"
+                "64214e1c1947fd0e"
             ]
         ]
     },
     {
-        "id": "661462f660a03b72",
+        "id": "bd670a6c945626b3",
         "type": "link call",
         "z": "369c55fe302803f7",
         "name": "call logger",
@@ -1582,198 +1423,110 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 830,
+        "x": 850,
         "y": 60,
         "wires": [
             []
         ]
     },
     {
-        "id": "ed69c349a82068f2",
-        "type": "change",
+        "id": "4c0cdc252d4eb87f",
+        "type": "function",
         "z": "369c55fe302803f7",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Savings initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "name": "select reservoirs",
+        "func": "const query = \"\\\n    SELECT id, name_el, name_en, lat, lon \\\n    FROM reservoirs; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 220,
-        "y": 60,
+        "y": 340,
         "wires": [
             [
-                "661462f660a03b72"
+                "2afbe3378ab16db1"
             ]
         ]
     },
     {
-        "id": "31564887a0816361",
-        "type": "link out",
-        "z": "aba327fbb26c5653",
-        "name": "link out 7",
-        "mode": "return",
-        "links": [],
-        "x": 655,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "5364560e1984ad86",
-        "type": "function",
-        "z": "aba327fbb26c5653",
-        "name": "select last dates",
-        "func": "const query = \"\\\n    SELECT DISTINCT MAX(date) as lastDate \\\n    FROM production; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 440,
-        "wires": [
-            [
-                "361b74b727815eb2"
-            ]
-        ]
-    },
-    {
-        "id": "3e705e3d11d15ff9",
-        "type": "debug",
-        "z": "aba327fbb26c5653",
-        "d": true,
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 410,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "4440bd6878b9ac5b",
-        "type": "function",
-        "z": "aba327fbb26c5653",
-        "name": "set missing dates",
-        "func": "const { timeRepr, rangeToDates } = global.get( 'dateHelpers' );\n\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\nconst rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\nconst result = rangeToDates( lastDate, today ).filter( d => d !== lastDate && d !== today );\n\nglobal.set( 'productionMissingDates', result );\n\nmsg.topic = \"productionMissingDates\"\nmsg.payload = result;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 440,
-        "y": 520,
-        "wires": [
-            [
-                "31564887a0816361",
-                "3e705e3d11d15ff9"
-            ]
-        ]
-    },
-    {
-        "id": "361b74b727815eb2",
+        "id": "2afbe3378ab16db1",
         "type": "link call",
-        "z": "aba327fbb26c5653",
+        "z": "369c55fe302803f7",
         "name": "call database",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 660,
-        "y": 440,
-        "wires": [
-            [
-                "4440bd6878b9ac5b"
-            ]
-        ]
-    },
-    {
-        "id": "d19a62124059031a",
-        "type": "link in",
-        "z": "aba327fbb26c5653",
-        "name": "link in 7",
-        "links": [],
-        "x": 265,
+        "x": 210,
         "y": 400,
         "wires": [
             [
-                "5364560e1984ad86",
-                "50ef25c358e9cabe"
+                "fc76c71878067fc5"
             ]
         ]
     },
     {
-        "id": "1888104fbbce9723",
-        "type": "link call",
-        "z": "aba327fbb26c5653",
-        "name": "call logger",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 650,
-        "y": 360,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "50ef25c358e9cabe",
-        "type": "change",
-        "z": "aba327fbb26c5653",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Production initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 360,
+        "id": "fc76c71878067fc5",
+        "type": "function",
+        "z": "369c55fe302803f7",
+        "name": "set reservoirs",
+        "func": "const rows = msg.payload;\nglobal.set( 'reservoirs', rows );\n\nmsg.payload = `Initial reservoirs (${rows.length})`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 460,
         "wires": [
             [
-                "1888104fbbce9723"
+                "bd670a6c945626b3",
+                "2d93842496444882",
+                "e12c41a077eef835"
             ]
         ]
     },
     {
-        "id": "cb2cdc1f22a97e55",
+        "id": "64214e1c1947fd0e",
+        "type": "function",
+        "z": "369c55fe302803f7",
+        "name": "Check initialization",
+        "func": "const lastDate = global.get( 'savingsLastDate' );\nconst reservoirs = global.get( 'reservoirs' );\n\nif ( lastDate && reservoirs ) {\n    msg.payload = \"Savings already initialized.\";\n    return [ null, msg ];\n}\n\nmsg.payload = \"Savings initialization...\";\nreturn [ msg, null ];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 60,
+        "wires": [
+            [
+                "9b97c41f2e94dbd7",
+                "bd670a6c945626b3"
+            ],
+            [
+                "bd670a6c945626b3",
+                "2d93842496444882"
+            ]
+        ]
+    },
+    {
+        "id": "3dca08942f45f34b",
         "type": "link out",
         "z": "aba327fbb26c5653",
-        "name": "link out 13",
+        "name": "link out 16",
         "mode": "return",
         "links": [],
-        "x": 775,
-        "y": 140,
+        "x": 795,
+        "y": 460,
         "wires": []
     },
     {
-        "id": "ba446bbae8a7978a",
+        "id": "6f07c6e7866c91db",
         "type": "function",
         "z": "aba327fbb26c5653",
         "name": "select last date",
@@ -1788,16 +1541,16 @@
         "y": 140,
         "wires": [
             [
-                "159955d46f8f5399"
+                "7eb3697275baa550"
             ]
         ]
     },
     {
-        "id": "2cafc438311d49c9",
+        "id": "a6c048e345b33e0f",
         "type": "debug",
         "z": "aba327fbb26c5653",
         "d": true,
-        "name": "debug 13",
+        "name": "debug 21",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1806,34 +1559,34 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 220,
+        "x": 840,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "66d76f7c329a111b",
+        "id": "85d5271db264427f",
         "type": "function",
         "z": "aba327fbb26c5653",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'productionLastDate', lastDate );\nmsg.payload = `Production last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'productionLastDate', lastDate );\nmsg.payload = `Initial production last date: ${lastDate}`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 140,
+        "x": 210,
+        "y": 260,
         "wires": [
             [
-                "cb2cdc1f22a97e55",
-                "2cafc438311d49c9",
-                "48d4ab2a8a29a974"
+                "a6c048e345b33e0f",
+                "d32524de155786ef",
+                "7b61b4f0c034ab72"
             ]
         ]
     },
     {
-        "id": "159955d46f8f5399",
+        "id": "7eb3697275baa550",
         "type": "link call",
         "z": "aba327fbb26c5653",
         "name": "call database",
@@ -1842,31 +1595,30 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 430,
-        "y": 140,
+        "x": 210,
+        "y": 200,
         "wires": [
             [
-                "66d76f7c329a111b"
+                "85d5271db264427f"
             ]
         ]
     },
     {
-        "id": "e183c62838f879b0",
+        "id": "e604ce7017cf9a7f",
         "type": "link in",
         "z": "aba327fbb26c5653",
-        "name": "link in 12",
+        "name": "link in 14",
         "links": [],
-        "x": 65,
-        "y": 100,
+        "x": 55,
+        "y": 60,
         "wires": [
             [
-                "ba446bbae8a7978a",
-                "113420698a6dc4c3"
+                "0da6883389d1746f"
             ]
         ]
     },
     {
-        "id": "48d4ab2a8a29a974",
+        "id": "d32524de155786ef",
         "type": "link call",
         "z": "aba327fbb26c5653",
         "name": "call logger",
@@ -1875,36 +1627,94 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 830,
+        "x": 850,
         "y": 60,
         "wires": [
             []
         ]
     },
     {
-        "id": "113420698a6dc4c3",
-        "type": "change",
+        "id": "7b61b4f0c034ab72",
+        "type": "function",
         "z": "aba327fbb26c5653",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Production initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
+        "name": "select factories",
+        "func": "const query = \"\\\n    SELECT id, name_el, name_en, lat, lon \\\n    FROM factories; \\\n\";\n\nmsg.topic = query;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 220,
+        "y": 340,
+        "wires": [
+            [
+                "3ee08acb42f62f86"
+            ]
+        ]
+    },
+    {
+        "id": "3ee08acb42f62f86",
+        "type": "link call",
+        "z": "aba327fbb26c5653",
+        "name": "call database",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "ef91bc11b2cc144f"
+            ]
+        ]
+    },
+    {
+        "id": "ef91bc11b2cc144f",
+        "type": "function",
+        "z": "aba327fbb26c5653",
+        "name": "set factories",
+        "func": "const rows = msg.payload;\nglobal.set( 'factories', rows );\n\nmsg.payload = `Initial factories (${rows.length})`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "d32524de155786ef",
+                "3dca08942f45f34b",
+                "a6c048e345b33e0f"
+            ]
+        ]
+    },
+    {
+        "id": "0da6883389d1746f",
+        "type": "function",
+        "z": "aba327fbb26c5653",
+        "name": "Check initialization",
+        "func": "const lastDate = global.get( 'productionLastDate' );\nconst factories = global.get( 'factories' );\n\nif ( lastDate && factories ) {\n    msg.payload = \"Production already initialized.\";\n    return [ null, msg ];\n}\n\nmsg.payload = \"Production initialization...\";\nreturn [ msg, null ];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
         "y": 60,
         "wires": [
             [
-                "48d4ab2a8a29a974"
+                "6f07c6e7866c91db",
+                "d32524de155786ef"
+            ],
+            [
+                "d32524de155786ef",
+                "3dca08942f45f34b"
             ]
         ]
     },
@@ -1915,167 +1725,10 @@
         "name": "link in 8",
         "links": [],
         "x": 55,
-        "y": 140,
+        "y": 60,
         "wires": [
             [
                 "2fb4cc5afb478162"
-            ]
-        ]
-    },
-    {
-        "id": "1d74a7a5dbc508dc",
-        "type": "function",
-        "z": "1dc82d7c84b0491f",
-        "name": "set dates",
-        "func": "const data = global.get( 'weatherMissingDates' );\n\n// const dates = Object.keys( data ).sort();\n// const payload = dates.map( d => data[ d ] );\n// msg.payload = payload;\n\nmsg.payload = data;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 600,
-        "wires": [
-            [
-                "dbb75ab868515092"
-            ]
-        ]
-    },
-    {
-        "id": "dbb75ab868515092",
-        "type": "split",
-        "z": "1dc82d7c84b0491f",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 430,
-        "y": 600,
-        "wires": [
-            [
-                "5aacd9e1931d9ed8"
-            ]
-        ]
-    },
-    {
-        "id": "22fe76a547891f79",
-        "type": "http request",
-        "z": "1dc82d7c84b0491f",
-        "name": "weather http request",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 540,
-        "y": 640,
-        "wires": [
-            [
-                "e30360faf2928c91"
-            ]
-        ]
-    },
-    {
-        "id": "5aacd9e1931d9ed8",
-        "type": "function",
-        "z": "1dc82d7c84b0491f",
-        "name": "set url",
-        "func": "const { rangeToCounter } = global.get( 'dateHelpers' ); \n\nconst today = global.get( 'today' );\n\nconst { date, location_id, lat, lon } = msg.payload;\nconst past_days = rangeToCounter( date, today );\n//node.warn( date+'-'+today+':'+past_days );\n\nlet url = global.get( 'weatherUrl' );\nurl = url.replace( \"past_days=\", `past_days=${past_days}` );\nurl = url.replace( \"latitude=\", `latitude=${lat}` );\nurl = url.replace( \"longitude=\", `longitude=${lon}` );\n\nmsg.url = 'http://fault'+url;\nmsg.requestParams = {\n    location_id,\n    date,\n};\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 550,
-        "y": 600,
-        "wires": [
-            [
-                "22fe76a547891f79"
-            ]
-        ]
-    },
-    {
-        "id": "e30360faf2928c91",
-        "type": "join",
-        "z": "1dc82d7c84b0491f",
-        "name": "",
-        "mode": "custom",
-        "build": "array",
-        "property": "",
-        "propertyType": "full",
-        "key": "_msgid",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 710,
-        "y": 640,
-        "wires": [
-            [
-                "8cfa70c3d5132b47"
-            ]
-        ]
-    },
-    {
-        "id": "8cfa70c3d5132b47",
-        "type": "debug",
-        "z": "1dc82d7c84b0491f",
-        "name": "debug 10",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 720,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "e53bada2d730c6d2",
-        "type": "inject",
-        "z": "1dc82d7c84b0491f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 600,
-        "wires": [
-            [
-                "1d74a7a5dbc508dc"
             ]
         ]
     },
@@ -2098,7 +1751,8 @@
                 "206f7a0874dd9852"
             ],
             [
-                "1d13a35b302aaeed"
+                "1d13a35b302aaeed",
+                "d30b920902618358"
             ]
         ]
     },
@@ -2157,8 +1811,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 850,
-        "y": 60,
+        "x": 830,
+        "y": 140,
         "wires": [
             []
         ]
@@ -2194,8 +1848,8 @@
             "9eeb04756ec868d7"
         ],
         "uncaught": false,
-        "x": 830,
-        "y": 220,
+        "x": 810,
+        "y": 280,
         "wires": [
             [
                 "60c6b15d3afe44f8"
@@ -2221,8 +1875,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 860,
-        "y": 160,
+        "x": 840,
+        "y": 220,
         "wires": [
             [
                 "1d13a35b302aaeed"
@@ -2313,6 +1967,17 @@
                 "1d13a35b302aaeed"
             ]
         ]
+    },
+    {
+        "id": "d30b920902618358",
+        "type": "link out",
+        "z": "1dc82d7c84b0491f",
+        "name": "link out 14",
+        "mode": "return",
+        "links": [],
+        "x": 775,
+        "y": 60,
+        "wires": []
     },
     {
         "id": "63cdb5618c97f18c",
@@ -2425,113 +2090,6 @@
         "wires": [
             [
                 "c18f7640c61163de"
-            ]
-        ]
-    },
-    {
-        "id": "85d241e4bba2f9f3",
-        "type": "link out",
-        "z": "9693c2df1733ce49",
-        "name": "link out 11",
-        "mode": "return",
-        "links": [],
-        "x": 405,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "7250779b4afc3dc2",
-        "type": "function",
-        "z": "9693c2df1733ce49",
-        "name": "set response",
-        "func": "const { date, location_id } = msg.requestParams;\nnode.warn(msg)\nconst data = msg.payload.daily;\nfor ( let i = 0; i < data.time.length; i++ ) {\n\n    node.warn( date + '-'+ data.time[i] );\n    if ( date === data.time[ i ] ) {\n        const precipitation_sum = data.precipitation_sum[ i ];\n        msg.payload = {\n            date,\n            location_id,\n            temperature_2m_min: data.temperature_2m_min[ i ],\n            temperature_2m_mean: data.temperature_2m_min[ i ],\n            temperature_2m_max: data.temperature_2m_min[ i ],\n            precipitation_sum: data.precipitation_sum[ i ],\n            rain_sum: data.rain_sum[ i ],\n            snowfall_sum: data.snowfall_sum[ i ],\n        }\n        return msg;\n    }\n}\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 210,
-        "y": 140,
-        "wires": [
-            [
-                "85d241e4bba2f9f3",
-                "afc02267e0efcac9"
-            ]
-        ]
-    },
-    {
-        "id": "afc02267e0efcac9",
-        "type": "debug",
-        "z": "9693c2df1733ce49",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 200,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "23c1cf63dacd68a3",
-        "type": "link in",
-        "z": "9693c2df1733ce49",
-        "name": "link in 10",
-        "links": [],
-        "x": 55,
-        "y": 100,
-        "wires": [
-            [
-                "7250779b4afc3dc2",
-                "ea8074a1dab6b17c"
-            ]
-        ]
-    },
-    {
-        "id": "517981a9cbdc2a92",
-        "type": "link call",
-        "z": "9693c2df1733ce49",
-        "name": "call logger",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 450,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ea8074a1dab6b17c",
-        "type": "change",
-        "z": "9693c2df1733ce49",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Response ok",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 220,
-        "y": 60,
-        "wires": [
-            [
-                "517981a9cbdc2a92"
             ]
         ]
     }
