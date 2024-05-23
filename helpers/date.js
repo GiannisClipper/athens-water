@@ -22,9 +22,25 @@ function timeRepr( date, pattern ) {
     return "";
 }
 
+const oneDayInMillisecs = 24 * 60 * 60 * 1000
+
+function daysDistance( reprFrom, reprTo ) {
+
+    const from = new Date( reprFrom );
+    const to = new Date( reprTo );
+
+    return ( to.getTime() - from.getTime() ) / oneDayInMillisecs;
+}
+
+function nextDate( reprDate ) {
+
+    const date = new Date( reprDate );
+
+    return new Date( date.getTime() + oneDayInMillisecs );
+}
+
 function rangeToDates( from, to ) {
 
-    const oneDayInMillisecs = 24 * 60 * 60 * 1000
     const result = [];
 
     from = new Date( from );
@@ -39,7 +55,6 @@ function rangeToDates( from, to ) {
 
 function rangeToCounter( from, to ) {
 
-    const oneDayInMillisecs = 24 * 60 * 60 * 1000
     from = new Date( from );
     to = new Date( to );
 
@@ -50,4 +65,6 @@ module.exports = {
     timeRepr, 
     rangeToDates,
     rangeToCounter,
+    daysDistance,
+    nextDate
 }
