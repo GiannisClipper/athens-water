@@ -8,25 +8,9 @@
         "env": []
     },
     {
-        "id": "23fc340d5df12a5c",
-        "type": "tab",
-        "label": "initialization",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "9e38695607437acd",
         "type": "tab",
         "label": "logger",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "d8d3058640f4a933",
-        "type": "tab",
-        "label": "timeRepr",
         "disabled": false,
         "info": "",
         "env": []
@@ -72,9 +56,9 @@
         "env": []
     },
     {
-        "id": "114ff7d842fa7dbc",
+        "id": "61022c35528d6ffa",
         "type": "tab",
-        "label": "requests",
+        "label": "savings request",
         "disabled": false,
         "info": "",
         "env": []
@@ -90,6 +74,20 @@
         "type": "sqlitedb",
         "db": "athens-water.sqlite",
         "mode": "RWC"
+    },
+    {
+        "id": "37e47c2be4e6d111",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "eydap.gr.crt",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
     },
     {
         "id": "9521260f5086eed6",
@@ -110,13 +108,14 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "'Start' & ' (global.today: ' & $globalContext( 'today' ) & ')...'",
+        "payload": "'Start interval (' &\t'weatherLastDate: ' & $globalContext( 'weatherLastDate' )  & \t', savingsLastDate: ' & $globalContext( 'savingsLastDate' )  & \t', productionLastDate: ' & $globalContext( 'productionLastDate' ) & \t')...'",
         "payloadType": "jsonata",
-        "x": 150,
+        "x": 130,
         "y": 60,
         "wires": [
             [
-                "b3ce7b20bc3e9643"
+                "b3ce7b20bc3e9643",
+                "8c28ad9eafaca440"
             ]
         ]
     },
@@ -133,8 +132,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 900,
-        "y": 480,
+        "x": 680,
+        "y": 220,
         "wires": []
     },
     {
@@ -149,8 +148,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
-        "y": 400,
+        "x": 690,
+        "y": 140,
         "wires": [
             [
                 "ad8fd501b129cfec"
@@ -167,7 +166,7 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 610,
+        "x": 350,
         "y": 60,
         "wires": [
             []
@@ -225,161 +224,20 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "set configuration",
-        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\n\n//https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=15-05-2024\n//https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=15-05-2024\n\nglobal.set( 'weatherUrl', weatherUrl );\n\nmsg.payload = \"Configuration...\";\nreturn msg;",
+        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\nglobal.set( 'weatherUrl', weatherUrl );\n\nconst savingsUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'savingsUrl', savingsUrl );\n\nconst productionUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'productionUrl', productionUrl );\n\n// msg.payload = \"Configuration...\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 60,
+        "x": 360,
+        "y": 140,
         "wires": [
             [
-                "8c28ad9eafaca440",
                 "203946c3788d69ed",
                 "53fa08e0fc78f899",
                 "22ae40ff7482ffd8"
-            ]
-        ]
-    },
-    {
-        "id": "4064c1c68cf281a3",
-        "type": "http request",
-        "z": "6d278dbe6de7a110",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 510,
-        "y": 540,
-        "wires": [
-            [
-                "8b620571267c21d4"
-            ]
-        ]
-    },
-    {
-        "id": "d46eab48a5578696",
-        "type": "inject",
-        "z": "6d278dbe6de7a110",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "http://nodered.org,http://nodered.orgr,http://nodered.org",
-        "payloadType": "str",
-        "x": 90,
-        "y": 540,
-        "wires": [
-            [
-                "a75e5eac00cc8236"
-            ]
-        ]
-    },
-    {
-        "id": "8f31f11958c7a561",
-        "type": "debug",
-        "z": "6d278dbe6de7a110",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "a75e5eac00cc8236",
-        "type": "split",
-        "z": "6d278dbe6de7a110",
-        "name": "",
-        "splt": ",",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 210,
-        "y": 540,
-        "wires": [
-            [
-                "17955a662e4b7b56"
-            ]
-        ]
-    },
-    {
-        "id": "17955a662e4b7b56",
-        "type": "change",
-        "z": "6d278dbe6de7a110",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 350,
-        "y": 540,
-        "wires": [
-            [
-                "4064c1c68cf281a3"
-            ]
-        ]
-    },
-    {
-        "id": "8b620571267c21d4",
-        "type": "join",
-        "z": "6d278dbe6de7a110",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "",
-        "propertyType": "full",
-        "key": "_msgid",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": true,
-        "timeout": "",
-        "count": "",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 650,
-        "y": 540,
-        "wires": [
-            [
-                "8f31f11958c7a561"
             ]
         ]
     },
@@ -393,8 +251,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 190,
-        "y": 240,
+        "x": 170,
+        "y": 360,
         "wires": [
             [
                 "b8a42aa1c8cdc8fe"
@@ -411,10 +269,12 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 510,
-        "y": 240,
+        "x": 470,
+        "y": 360,
         "wires": [
-            []
+            [
+                "137b5884ab0ee30e"
+            ]
         ]
     },
     {
@@ -427,8 +287,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 820,
-        "y": 240,
+        "x": 760,
+        "y": 360,
         "wires": [
             []
         ]
@@ -443,12 +303,10 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 180,
-        "y": 340,
+        "x": 160,
+        "y": 460,
         "wires": [
-            [
-                "b7a7b0fccef81f35"
-            ]
+            []
         ]
     },
     {
@@ -472,8 +330,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 910,
-        "y": 320,
+        "x": 690,
+        "y": 60,
         "wires": [
             [
                 "06c779112978aaa2"
@@ -481,276 +339,19 @@
         ]
     },
     {
-        "id": "b7a7b0fccef81f35",
-        "type": "debug",
-        "z": "6d278dbe6de7a110",
-        "name": "debug 19",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 140,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "738e025081242dfd",
-        "type": "link in",
-        "z": "23fc340d5df12a5c",
-        "name": "link in 1",
-        "links": [],
-        "x": 65,
-        "y": 240,
-        "wires": [
-            [
-                "eb8894e8f74aa763",
-                "fbec0b668e018857"
-            ]
-        ]
-    },
-    {
-        "id": "44ac029af86c87b7",
+        "id": "137b5884ab0ee30e",
         "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call logger",
+        "z": "6d278dbe6de7a110",
+        "name": "call savings request",
         "links": [
-            "992e1a45369732e3"
+            "a3aeb5ed388a6be4"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 710,
-        "y": 340,
+        "x": 450,
+        "y": 460,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "5e6328a771de66ea",
-        "type": "change",
-        "z": "23fc340d5df12a5c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "Initialization...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 480,
-        "y": 300,
-        "wires": [
-            [
-                "44ac029af86c87b7"
-            ]
-        ]
-    },
-    {
-        "id": "a1bf9275c26311e0",
-        "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call weather initialization",
-        "links": [
-            "b25dc8f8d8caacd2"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 510,
-        "y": 60,
-        "wires": [
-            [
-                "27dcd76ce8f5f7bf"
-            ]
-        ]
-    },
-    {
-        "id": "42d9909734948594",
-        "type": "link out",
-        "z": "23fc340d5df12a5c",
-        "name": "link out 5",
-        "mode": "return",
-        "links": [],
-        "x": 785,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "ee7ec613d0e2aad6",
-        "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call savings initialization",
-        "links": [
-            "011da4bee9a0309a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 510,
-        "y": 120,
-        "wires": [
-            [
-                "27dcd76ce8f5f7bf"
-            ]
-        ]
-    },
-    {
-        "id": "31abb96db2016142",
-        "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call production initialization",
-        "links": [
-            "d19a62124059031a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 520,
-        "y": 180,
-        "wires": [
-            [
-                "27dcd76ce8f5f7bf"
-            ]
-        ]
-    },
-    {
-        "id": "ca8788fa5c25af67",
-        "type": "function",
-        "z": "23fc340d5df12a5c",
-        "name": "check global.today",
-        "func": "const { timeRepr } = global.get( 'dateHelpers' );\n\nconst savedToday = global.get( 'today' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nif ( savedToday !== today ) {\n    global.set( 'today', today );\n    return [ msg, null ];\n}\n\nreturn [ null, msg ];",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 210,
-        "y": 240,
-        "wires": [
-            [
-                "5e6328a771de66ea",
-                "a1bf9275c26311e0",
-                "ee7ec613d0e2aad6",
-                "31abb96db2016142"
-            ],
-            [
-                "247f84776e6a43ad"
-            ]
-        ]
-    },
-    {
-        "id": "247f84776e6a43ad",
-        "type": "change",
-        "z": "23fc340d5df12a5c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "No initialization",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 480,
-        "y": 360,
-        "wires": [
-            [
-                "44ac029af86c87b7"
-            ]
-        ]
-    },
-    {
-        "id": "27dcd76ce8f5f7bf",
-        "type": "join",
-        "z": "23fc340d5df12a5c",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": true,
-        "timeout": "",
-        "count": "3",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "num",
-        "reduceFixup": "",
-        "x": 750,
-        "y": 120,
-        "wires": [
-            [
-                "e51dcc5365a7f98c"
-            ]
-        ]
-    },
-    {
-        "id": "e51dcc5365a7f98c",
-        "type": "debug",
-        "z": "23fc340d5df12a5c",
-        "name": "debug 6",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 940,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "eb8894e8f74aa763",
-        "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call weather initialization",
-        "links": [
-            "b25dc8f8d8caacd2"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 410,
-        "y": 480,
-        "wires": [
-            [
-                "42d9909734948594"
-            ]
-        ]
-    },
-    {
-        "id": "fbec0b668e018857",
-        "type": "link call",
-        "z": "23fc340d5df12a5c",
-        "name": "call weather initialization",
-        "links": [
-            "b25dc8f8d8caacd2"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 410,
-        "y": 560,
-        "wires": [
-            [
-                "42d9909734948594"
-            ]
         ]
     },
     {
@@ -765,28 +366,10 @@
         "overwriteFile": "false",
         "encoding": "utf8",
         "x": 240,
-        "y": 300,
+        "y": 220,
         "wires": [
             [
                 "e509d3deb26aca5f"
-            ]
-        ]
-    },
-    {
-        "id": "9ae7920e8caa164f",
-        "type": "link call",
-        "z": "9e38695607437acd",
-        "name": "call timeRepr",
-        "links": [
-            "97bc73569e7297c7"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 230,
-        "y": 140,
-        "wires": [
-            [
-                "409d2af6ef2b6869"
             ]
         ]
     },
@@ -795,7 +378,7 @@
         "type": "function",
         "z": "9e38695607437acd",
         "name": "set log message",
-        "func": "const timeRepr = msg.timeRepr;\nconst entry = msg.payload;\n\nmsg.payload = `${timeRepr} ${entry}`;\n\nmsg.filename = global.get( 'logPath' );\n\nreturn msg;",
+        "func": "const { timeRepr } = global.get( 'dateHelpers' );\n\nconst time = timeRepr( new Date(), 'YYYY-MM-DD HH:MM:SS' );\n\nconst message = msg.payload;\n\nmsg.payload = `${time} ${message}`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -803,7 +386,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 220,
+        "y": 140,
         "wires": [
             [
                 "1cc0862b6d0ccf91"
@@ -820,8 +403,8 @@
         "y": 100,
         "wires": [
             [
-                "9ae7920e8caa164f",
-                "66dca8af6b89b230"
+                "66dca8af6b89b230",
+                "409d2af6ef2b6869"
             ]
         ]
     },
@@ -833,7 +416,7 @@
         "mode": "return",
         "links": [],
         "x": 415,
-        "y": 300,
+        "y": 220,
         "wires": []
     },
     {
@@ -847,8 +430,8 @@
         "createDir": false,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 550,
-        "y": 140,
+        "x": 230,
+        "y": 420,
         "wires": [
             []
         ]
@@ -874,8 +457,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 550,
-        "y": 60,
+        "x": 230,
+        "y": 340,
         "wires": [
             [
                 "bc33fac1bfdac6f3"
@@ -959,51 +542,6 @@
         "x": 840,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "97bc73569e7297c7",
-        "type": "link in",
-        "z": "d8d3058640f4a933",
-        "name": "link in 2",
-        "links": [],
-        "x": 95,
-        "y": 80,
-        "wires": [
-            [
-                "ae905496d474ff8d"
-            ]
-        ]
-    },
-    {
-        "id": "d1fc12086864d130",
-        "type": "link out",
-        "z": "d8d3058640f4a933",
-        "name": "link out 2",
-        "mode": "return",
-        "links": [],
-        "x": 405,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "ae905496d474ff8d",
-        "type": "function",
-        "z": "d8d3058640f4a933",
-        "name": "timeRepr",
-        "func": "const { timeRepr } = global.get( 'dateHelpers' );\n\nmsg.timeRepr = timeRepr( new Date(), 'YYYY-MM-DD HH:MM:SS' );\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 80,
-        "wires": [
-            [
-                "d1fc12086864d130"
-            ]
-        ]
     },
     {
         "id": "4f48bf4d39cb2c86",
@@ -1160,7 +698,7 @@
         "type": "function",
         "z": "d7c8565c02c92dbd",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'weatherLastDate', lastDate );\nmsg.payload = `Initial weather last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\nglobal.set( 'weatherLastDate', lastDate );\n\nmsg.payload = `Initial weather last date: ${lastDate}`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1268,7 +806,7 @@
         "type": "function",
         "z": "d7c8565c02c92dbd",
         "name": "set locations",
-        "func": "const rows = msg.payload;\nglobal.set( 'locations', rows );\n\nmsg.payload = `Initial weather locations (${rows.length})`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nglobal.set( 'locations', rows );\n\nmsg.payload = `Initial weather locations (${rows.length})`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1364,7 +902,7 @@
         "type": "function",
         "z": "369c55fe302803f7",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'savingsLastDate', lastDate );\nmsg.payload = `Initial savings last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\nglobal.set( 'savingsLastDate', lastDate );\n\nmsg.payload = `Initial savings last date: ${lastDate}`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1472,7 +1010,7 @@
         "type": "function",
         "z": "369c55fe302803f7",
         "name": "set reservoirs",
-        "func": "const rows = msg.payload;\nglobal.set( 'reservoirs', rows );\n\nmsg.payload = `Initial reservoirs (${rows.length})`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nglobal.set( 'reservoirs', rows );\n\nmsg.payload = `Initial reservoirs (${rows.length})`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1568,7 +1106,7 @@
         "type": "function",
         "z": "aba327fbb26c5653",
         "name": "set last date",
-        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\n//node.warn( lastDate )\n\nglobal.set( 'productionLastDate', lastDate );\nmsg.payload = `Initial production last date: ${lastDate}`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nconst { lastDate } = rows[ 0 ];\nglobal.set( 'productionLastDate', lastDate );\n\nmsg.payload = `Initial production last date: ${lastDate}`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1676,7 +1214,7 @@
         "type": "function",
         "z": "aba327fbb26c5653",
         "name": "set factories",
-        "func": "const rows = msg.payload;\nglobal.set( 'factories', rows );\n\nmsg.payload = `Initial factories (${rows.length})`;\nreturn msg;",
+        "func": "const rows = msg.payload;\nglobal.set( 'factories', rows );\n\nmsg.payload = `Initial factories (${rows.length})`;\nmsg.topic = undefined;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1737,7 +1275,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "weather request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 10 ) {\n    msg.payload = \"Weather up to date...\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 10 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1761,7 +1299,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "set url",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\n\nconst locations = global.get( 'locations' );\nconst lat = locations.map( l => l.lat ).join( ',' );\nconst lon = locations.map( l => l.lon ).join( ',' );\n\nconst requestDate = msg.payload;\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\nconst past_days = daysDistance( requestDate, today );\n\nlet url = global.get( 'weatherUrl' );\nurl = url.replace( \"past_days=\", `past_days=${past_days}` );\nurl = url.replace( \"latitude=\", `latitude=${lat}` );\nurl = url.replace( \"longitude=\", `longitude=${lon}` );\n\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.url = url;\nmsg.requestParams = {\n    requestDate,\n    past_days,\n};\n\nmsg.payload = `(${requestDate}) => ${url}`;\nreturn msg;\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\n\nconst locations = global.get( 'locations' );\nconst lat = locations.map( l => l.lat ).join( ',' );\nconst lon = locations.map( l => l.lon ).join( ',' );\n\nconst requestDate = msg.payload;\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\nconst past_days = daysDistance( requestDate, today );\n\nlet url = global.get( 'weatherUrl' );\nurl = url.replace( \"past_days=\", `past_days=${past_days}` );\nurl = url.replace( \"latitude=\", `latitude=${lat}` );\nurl = url.replace( \"longitude=\", `longitude=${lon}` );\n\n// global.set( 'weatherLastDate', requestDate );\n\nmsg.url = url;\nmsg.requestParams = {\n    requestDate,\n    past_days,\n};\n\nmsg.payload = `(${requestDate}) => ${url}`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1822,7 +1360,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "set response",
-        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nRESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Data not available yet (${requestDate}).`;\n            }\n\n            result.push( {\n                date: requestDate,\n                location_id: location.id,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
+        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nJSON RESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Data not available yet (${requestDate}).`;\n            }\n\n            result.push( {\n                date: requestDate,\n                location_id: location.id,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1952,7 +1490,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "set last date",
-        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.requestParams = undefined;\nmsg.payload = `Weather update (${requestDate})`;\nreturn msg;",
+        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.payload = `Weather update (${requestDate})`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1980,103 +1518,154 @@
         "wires": []
     },
     {
-        "id": "63cdb5618c97f18c",
+        "id": "a3aeb5ed388a6be4",
         "type": "link in",
-        "z": "114ff7d842fa7dbc",
-        "name": "link in 9",
+        "z": "61022c35528d6ffa",
+        "name": "link in 15",
         "links": [],
         "x": 55,
-        "y": 120,
+        "y": 60,
         "wires": [
             [
-                "fee5dbb6282f2cde",
-                "44e1b7dcce399d0d"
+                "c7c23ca1cd6e436a"
             ]
         ]
     },
     {
-        "id": "23895f135bba12eb",
+        "id": "c7c23ca1cd6e436a",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "savings request loop",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No savings lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 6 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "ee151d8aa972eca3"
+            ],
+            [
+                "47560b1a83aa9b08",
+                "4342dfe695e76b47"
+            ]
+        ]
+    },
+    {
+        "id": "ee151d8aa972eca3",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "set url",
+        "func": "// process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0;\n\nconst { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\n\nconst requestDate = msg.payload;\nconst reverseDate = requestDate.split( '-' ).reverse().join( '-' );\n\nconst url = global.get( 'savingsUrl' ) + reverseDate;\n\nmsg.url = url;\nmsg.requestParams = {\n    requestDate,\n};\n\nmsg.payload = `(${requestDate}) => ${url}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "47560b1a83aa9b08",
+                "d7b103a6c1f51e56"
+            ]
+        ]
+    },
+    {
+        "id": "d7b103a6c1f51e56",
+        "type": "http request",
+        "z": "61022c35528d6ffa",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "37e47c2be4e6d111",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "704eed10a1bf43df"
+            ]
+        ]
+    },
+    {
+        "id": "47560b1a83aa9b08",
         "type": "link call",
-        "z": "114ff7d842fa7dbc",
+        "z": "61022c35528d6ffa",
         "name": "call logger",
         "links": [
             "992e1a45369732e3"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 430,
-        "y": 60,
+        "x": 830,
+        "y": 140,
         "wires": [
             []
         ]
     },
     {
-        "id": "fee5dbb6282f2cde",
-        "type": "change",
-        "z": "114ff7d842fa7dbc",
+        "id": "704eed10a1bf43df",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "set response",
+        "func": "const reservoirs = global.get( 'reservoirs' );\nconst { requestDate } = msg.requestParams;\n\n/*\nHTML RESPONSE LOOKS LIKE =>\n<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"grdSavings\" style=\"width:910px;border-collapse:collapse;\">\n  <tr>\n    <th scope=\"col\">Ημερομηνία</th><th scope=\"col\">ΕΥΗΝΟΣ</th><th scope=\"col\">ΜΑΡΑΘΩΝΑΣ</th><th scope=\"col\">ΜΟΡΝΟΣ</th><th scope=\"col\">ΥΛΙΚΗ</th><th scope=\"col\">ΣΥΝΟΛΟ</th>\n  </tr><tr>\n    <td>22/05/2024</td><td>67.414.000 </td><td>26.047.000 </td><td>442.235.000 </td><td>338.832.000 </td><td>874.528.000 </td>\n  </tr><tr>\n    <td>23/05/2024</td><td>67.414.000 </td><td>26.132.000 </td><td>441.128.000 </td><td>338.644.000 </td><td>873.318.000 </td>\n  </tr>\n</table>\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nconst html = payload;\nconst table = html.split(\"<table\")[1];\n\nconst rows = table.match(/(<tr)(.*?)(<\\/tr>)/gs);\n\nfor (let i = 0; i < rows.length; i++) {\n\n    if (i > 0) { // to skip labels\n        let values = rows[i].match( /(<td>)(.*?)(<\\/td>)/gs ); // s = including new line in chars\n        values = values.map( v => v.replace( \"<td>\", \"\" ).replace( \"</td>\", \"\" ).trim() );\n        values = values.map( v => v.replaceAll( \".\", \"\" ) ); // 1.234.000 => 1234000\n\n        const [ dd, mm, yyyy ] = values[ 0 ].split( '/' );\n        const date = `${yyyy}-${mm}-${dd}`;\n\n        if ( date === requestDate ) {\n\n            values = values.slice( 1, -1 ); // exclude date and total\n            // node.warn( values );\n\n            if ( values.length !== reservoirs.length ) {\n                throw `[ERROR] Response not matching reservoirs length (${values.length} vs ${reservoirs.length}).`;\n            }\n\n            const result = [];\n            for ( let j = 0; j < values.length; j++ ) {\n                result.push( {\n                    date,\n                    reservoir_id: reservoirs[ j ].id,\n                    quantity: values[ j ]\n                \n                } );\n            }\n            msg.payload = result;\n            return msg;\n        }\n    }\n}\n\nthrow `[WARNING] Data not available yet (${requestDate}).`;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "a076f80433e32a0f"
+            ]
+        ]
+    },
+    {
+        "id": "7977c8012078d6f0",
+        "type": "catch",
+        "z": "61022c35528d6ffa",
         "name": "",
+        "scope": [
+            "c7c23ca1cd6e436a",
+            "d7b103a6c1f51e56",
+            "704eed10a1bf43df"
+        ],
+        "uncaught": false,
+        "x": 810,
+        "y": 280,
+        "wires": [
+            [
+                "2eac0f1e97633ab0"
+            ]
+        ]
+    },
+    {
+        "id": "2eac0f1e97633ab0",
+        "type": "change",
+        "z": "61022c35528d6ffa",
+        "name": "set log message",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Requests...",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 200,
-        "y": 60,
-        "wires": [
-            [
-                "23895f135bba12eb"
-            ]
-        ]
-    },
-    {
-        "id": "c18f7640c61163de",
-        "type": "link call",
-        "z": "114ff7d842fa7dbc",
-        "name": "call weather requests",
-        "links": [
-            "19a9ec6c9f2b7b9e"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 460,
-        "y": 180,
-        "wires": [
-            [
-                "5802083054ec8a6e"
-            ]
-        ]
-    },
-    {
-        "id": "5802083054ec8a6e",
-        "type": "link out",
-        "z": "114ff7d842fa7dbc",
-        "name": "link out 10",
-        "mode": "return",
-        "links": [],
-        "x": 655,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "44e1b7dcce399d0d",
-        "type": "change",
-        "z": "114ff7d842fa7dbc",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "payload.weatherMissingDates",
+                "to": "error.message",
                 "tot": "msg"
             }
         ],
@@ -2085,12 +1674,118 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 200,
-        "y": 180,
+        "x": 840,
+        "y": 220,
         "wires": [
             [
-                "c18f7640c61163de"
+                "47560b1a83aa9b08"
             ]
         ]
+    },
+    {
+        "id": "810a0a9d8b3d7e36",
+        "type": "delay",
+        "z": "61022c35528d6ffa",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 260,
+        "y": 580,
+        "wires": [
+            [
+                "c7c23ca1cd6e436a"
+            ]
+        ]
+    },
+    {
+        "id": "a076f80433e32a0f",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "insert weather",
+        "func": "const { payload } = msg;\n\nconst rows = [];\nfor ( let row of payload ) {\n    const { date, reservoir_id, quantity } = row;\n\n    rows.push( `(\"${date}\",${reservoir_id},${quantity})` );\n}\n\nconst values = rows.join( ',' );\n\nconst query = `INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "68451f8805a4ded4",
+                "47560b1a83aa9b08"
+            ]
+        ]
+    },
+    {
+        "id": "68451f8805a4ded4",
+        "type": "link call",
+        "z": "61022c35528d6ffa",
+        "name": "call database",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 270,
+        "y": 440,
+        "wires": [
+            [
+                "53d7020558aeb4ee"
+            ]
+        ]
+    },
+    {
+        "id": "53d7020558aeb4ee",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "set last date",
+        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'savingsLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.payload = `Savings update (${requestDate})`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "810a0a9d8b3d7e36",
+                "47560b1a83aa9b08"
+            ]
+        ]
+    },
+    {
+        "id": "4342dfe695e76b47",
+        "type": "link out",
+        "z": "61022c35528d6ffa",
+        "name": "link out 17",
+        "mode": "return",
+        "links": [],
+        "x": 775,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "649a9d800333157e",
+        "type": "comment",
+        "z": "61022c35528d6ffa",
+        "name": "about ca certificate",
+        "info": "  SPECIFIC SETTINGS IN NODE-RED:\n  in settings.js => process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0\n  in http-request => tick \"Enable secure (SSL/TLS) connection\" > create new TLS Config > upload CA certicicate > uncheck \"Verify server certificate\".\n  based on: unable to verify the first certificate in Node-Red\n  https://stackoverflow.com/questions/42983635/error-unable-to-verify-the-first-certificate-in-node-red/42984958#42984958\n\n  GENERAL INFO USING NODEJS:\n  fetch( \"https://eydap.gr\" );\n  error: unable to verify the first certificate ('UNABLE_TO_VERIFY_LEAF_SIGNATURE')\n  solution: process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0;\n  Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification\n  based on: Node Fetch Request Fails on Server: Unable to Get Local Issuer Certificate\n  https://stackoverflow.com/questions/51995925/node-fetch-request-fails-on-server-unable-to-get-local-issuer-certificate\n\n  curl -v https://www.eydap.gr\n  error: unable to get local issuer certificate\n  solution: chrome > https://eydap.gr > connection is secure > certificate is valid > details > export (crt file)\n  (create a backup of /etc/ssl/certs/ca-certificates.crt)\n  append crt file content in /etc/ssl/certs/ca-certificates.crt\n",
+        "x": 290,
+        "y": 200,
+        "wires": []
     }
 ]
