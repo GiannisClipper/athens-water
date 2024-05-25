@@ -37,8 +37,30 @@ process.env.NR_MADRID_CSV='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/servi
 process.env.NR_MADRID_SQLITE='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/services-and-network-systems/flows/madrid/data.sqlite' 
 process.env.NR_MADRID_URL='http://informo.munimadrid.es/informo/tmadrid/pm.xml'
 
-process.env.ATHENS_WATER_LOGS_PATH='./projects/athens-water/logs'
-process.env.ATHENS_WATER_DATA_PATH='./projects/athens-water/data'
+process.env.AW_VHOST='athenswater';
+process.env.AW_EXCHANGES='weather,savings,production,status';
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+/*
+  SPECIFIC SETTINGS IN NODE-RED:
+  in settings.js => process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
+  in http-request => tick "Enable secure (SSL/TLS) connection" > create new TLS Config > upload CA certicicate > uncheck "Verify server certificate".
+  based on: unable to verify the first certificate in Node-Red
+  https://stackoverflow.com/questions/42983635/error-unable-to-verify-the-first-certificate-in-node-red/42984958#42984958
+
+  GENERAL INFO USING NODEJS:
+  fetch( "https://eydap.gr" );
+  error: unable to verify the first certificate ('UNABLE_TO_VERIFY_LEAF_SIGNATURE')
+  solution: process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+  Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification
+  based on: Node Fetch Request Fails on Server: Unable to Get Local Issuer Certificate
+  https://stackoverflow.com/questions/51995925/node-fetch-request-fails-on-server-unable-to-get-local-issuer-certificate
+
+  curl -v https://www.eydap.gr
+  error: unable to get local issuer certificate
+  solution: chrome > https://eydap.gr > connection is secure > certificate is valid > details > export (crt file)
+  (create a backup of /etc/ssl/certs/ca-certificates.crt)
+  append crt file content in /etc/ssl/certs/ca-certificates.crt
+*/
 
 module.exports = {
 
