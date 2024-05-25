@@ -50,7 +50,7 @@
     {
         "id": "1dc82d7c84b0491f",
         "type": "tab",
-        "label": "weather request",
+        "label": "weather subsystem",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "61022c35528d6ffa",
         "type": "tab",
-        "label": "savings request",
+        "label": "savings subsystem",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "d21f4bda462bb9a5",
         "type": "tab",
-        "label": "production request",
+        "label": "production subsystem",
         "disabled": false,
         "info": "",
         "env": []
@@ -401,13 +401,13 @@
         "id": "b8a42aa1c8cdc8fe",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call weather request",
+        "name": "call weather subsystem",
         "links": [
             "19a9ec6c9f2b7b9e"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 160,
+        "x": 170,
         "y": 460,
         "wires": [
             []
@@ -446,13 +446,13 @@
         "id": "137b5884ab0ee30e",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call savings request",
+        "name": "call savings subsystem",
         "links": [
             "a3aeb5ed388a6be4"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 450,
+        "x": 460,
         "y": 460,
         "wires": [
             []
@@ -462,13 +462,13 @@
         "id": "a7706206c42909fc",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call production request",
+        "name": "call production subsystem",
         "links": [
             "b3c337ed58cf68bd"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 760,
+        "x": 770,
         "y": 460,
         "wires": [
             []
@@ -1395,7 +1395,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "weather request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 9 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 8 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1452,7 +1452,7 @@
         "senderr": false,
         "headers": [],
         "x": 270,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
                 "9eeb04756ec868d7"
@@ -1480,7 +1480,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "parse response",
-        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nJSON RESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Weather data not available yet (${requestDate}).`;\n            }\n            result.push( {\n                date: requestDate,\n                location: location,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
+        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nJSON RESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Weather data not available yet (${requestDate}).`;\n            }\n            result.push( {\n                date: requestDate,\n                location,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1488,7 +1488,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 260,
+        "y": 220,
         "wires": [
             [
                 "8f401e0f3efb798c"
@@ -1507,7 +1507,7 @@
         ],
         "uncaught": false,
         "x": 810,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "60c6b15d3afe44f8"
@@ -1559,7 +1559,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 720,
+        "y": 580,
         "wires": [
             [
                 "2fb4cc5afb478162"
@@ -1579,7 +1579,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 400,
+        "y": 340,
         "wires": [
             [
                 "19824c02c61e45f3",
@@ -1598,7 +1598,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 270,
-        "y": 460,
+        "y": 380,
         "wires": [
             [
                 "665e54770bf372e0"
@@ -1618,7 +1618,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 640,
+        "y": 500,
         "wires": [
             [
                 "015c0ec7d6ec099f",
@@ -1648,7 +1648,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 270,
-        "y": 580,
+        "y": 460,
         "wires": [
             [
                 "b313c853354a574e"
@@ -1676,7 +1676,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 340,
+        "y": 300,
         "wires": [
             [
                 "c6ca5fcc2f3a3473"
@@ -1704,7 +1704,7 @@
         "to": "",
         "reg": false,
         "x": 270,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "60ac5ac331342725"
@@ -1730,7 +1730,7 @@
         "type": "function",
         "z": "61022c35528d6ffa",
         "name": "savings request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No savings lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 6 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No savings lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 5 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1787,7 +1787,7 @@
         "senderr": false,
         "headers": [],
         "x": 270,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "704eed10a1bf43df"
@@ -1814,19 +1814,19 @@
         "id": "704eed10a1bf43df",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "set response",
-        "func": "const reservoirs = global.get( 'reservoirs' );\nconst { requestDate } = msg.requestParams;\n\n/*\nHTML RESPONSE LOOKS LIKE =>\n<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"grdSavings\" style=\"width:910px;border-collapse:collapse;\">\n  <tr>\n    <th scope=\"col\">Ημερομηνία</th><th scope=\"col\">ΕΥΗΝΟΣ</th><th scope=\"col\">ΜΑΡΑΘΩΝΑΣ</th><th scope=\"col\">ΜΟΡΝΟΣ</th><th scope=\"col\">ΥΛΙΚΗ</th><th scope=\"col\">ΣΥΝΟΛΟ</th>\n  </tr><tr>\n    <td>22/05/2024</td><td>67.414.000 </td><td>26.047.000 </td><td>442.235.000 </td><td>338.832.000 </td><td>874.528.000 </td>\n  </tr><tr>\n    <td>23/05/2024</td><td>67.414.000 </td><td>26.132.000 </td><td>441.128.000 </td><td>338.644.000 </td><td>873.318.000 </td>\n  </tr>\n</table>\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nconst html = payload;\nconst table = html.split(\"<table\")[1];\n\nconst rows = table.match(/(<tr)(.*?)(<\\/tr>)/gs);\n\nfor (let i = 0; i < rows.length; i++) {\n\n    if (i > 0) { // to skip labels\n        let values = rows[i].match( /(<td>)(.*?)(<\\/td>)/gs ); // s = including new line in chars\n        values = values.map( v => v.replace( \"<td>\", \"\" ).replace( \"</td>\", \"\" ).trim() );\n        values = values.map( v => v.replaceAll( \".\", \"\" ) ); // 1.234.000 => 1234000\n\n        const [ dd, mm, yyyy ] = values[ 0 ].split( '/' );\n        const date = `${yyyy}-${mm}-${dd}`;\n\n        if ( date === requestDate ) {\n\n            values = values.slice( 1, -1 ); // exclude date and total\n            // node.warn( values );\n\n            if ( values.length !== reservoirs.length ) {\n                throw `[ERROR] Response not matching reservoirs length (${values.length} vs ${reservoirs.length}).`;\n            }\n\n            const result = [];\n            for ( let j = 0; j < values.length; j++ ) {\n                result.push( {\n                    date,\n                    reservoir_id: reservoirs[ j ].id,\n                    quantity: values[ j ]\n                \n                } );\n            }\n            msg.payload = result;\n            return msg;\n        }\n    }\n}\n\nthrow `[WARNING] Savings data not available yet (${requestDate}).`;\n",
+        "name": "parse response",
+        "func": "const reservoirs = global.get( 'reservoirs' );\nconst { requestDate } = msg.requestParams;\n\n/*\nHTML RESPONSE LOOKS LIKE =>\n<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"grdSavings\" style=\"width:910px;border-collapse:collapse;\">\n  <tr>\n    <th scope=\"col\">Ημερομηνία</th><th scope=\"col\">ΕΥΗΝΟΣ</th><th scope=\"col\">ΜΑΡΑΘΩΝΑΣ</th><th scope=\"col\">ΜΟΡΝΟΣ</th><th scope=\"col\">ΥΛΙΚΗ</th><th scope=\"col\">ΣΥΝΟΛΟ</th>\n  </tr><tr>\n    <td>22/05/2024</td><td>67.414.000 </td><td>26.047.000 </td><td>442.235.000 </td><td>338.832.000 </td><td>874.528.000 </td>\n  </tr><tr>\n    <td>23/05/2024</td><td>67.414.000 </td><td>26.132.000 </td><td>441.128.000 </td><td>338.644.000 </td><td>873.318.000 </td>\n  </tr>\n</table>\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nconst html = payload;\nconst table = html.split(\"<table\")[1];\n\nconst rows = table.match(/(<tr)(.*?)(<\\/tr>)/gs);\n\nfor (let i = 0; i < rows.length; i++) {\n\n    if (i > 0) { // to skip labels\n        let values = rows[i].match( /(<td>)(.*?)(<\\/td>)/gs ); // s = including new line in chars\n        values = values.map( v => v.replace( \"<td>\", \"\" ).replace( \"</td>\", \"\" ).trim() );\n        values = values.map( v => v.replaceAll( \".\", \"\" ) ); // 1.234.000 => 1234000\n\n        const [ dd, mm, yyyy ] = values[ 0 ].split( '/' );\n        const date = `${yyyy}-${mm}-${dd}`;\n\n        if ( date === requestDate ) {\n\n            values = values.slice( 1, -1 ); // exclude date and total\n            // node.warn( values );\n\n            if ( values.length !== reservoirs.length ) {\n                throw `[ERROR] Response not matching reservoirs length (${values.length} vs ${reservoirs.length}).`;\n            }\n\n            const result = [];\n            for ( let j = 0; j < values.length; j++ ) {\n\n                const reservoir = reservoirs[ j ];\n                result.push( {\n                    date,\n                    reservoir,\n                    quantity: values[ j ]\n                \n                } );\n            }\n            msg.payload = result;\n            return msg;\n        }\n    }\n}\n\nthrow `[WARNING] Savings data not available yet (${requestDate}).`;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 300,
+        "x": 280,
+        "y": 260,
         "wires": [
             [
-                "a076f80433e32a0f"
+                "b7122021235d740f"
             ]
         ]
     },
@@ -1842,7 +1842,7 @@
         ],
         "uncaught": false,
         "x": 810,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "2eac0f1e97633ab0"
@@ -1894,7 +1894,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "c7c23ca1cd6e436a"
@@ -1905,8 +1905,8 @@
         "id": "a076f80433e32a0f",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "insert weather",
-        "func": "const { payload } = msg;\n\nconst rows = [];\nfor ( let row of payload ) {\n    const { date, reservoir_id, quantity } = row;\n\n    rows.push( `(\"${date}\",${reservoir_id},${quantity})` );\n}\n\nconst values = rows.join( ',' );\n\nconst query = `INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "name": "insert savings",
+        "func": "const { payload } = msg;\n\nconst rows = [];\nfor ( let row of payload ) {\n    const { date, reservoir, quantity } = row;\n\n    rows.push( `(\"${date}\",${reservoir.id},${quantity})` );\n}\n\nconst values = rows.join( ',' );\n\nconst query = `INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1933,10 +1933,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 270,
-        "y": 440,
+        "y": 420,
         "wires": [
             [
-                "53d7020558aeb4ee"
+                "c3aa965745a302cd"
             ]
         ]
     },
@@ -1953,7 +1953,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "810a0a9d8b3d7e36",
@@ -1979,8 +1979,82 @@
         "name": "about ca certificate",
         "info": "  SPECIFIC SETTINGS IN NODE-RED:\n  in settings.js => process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0\n  in http-request => tick \"Enable secure (SSL/TLS) connection\" > create new TLS Config > upload CA certicicate > uncheck \"Verify server certificate\".\n  based on: unable to verify the first certificate in Node-Red\n  https://stackoverflow.com/questions/42983635/error-unable-to-verify-the-first-certificate-in-node-red/42984958#42984958\n\n  GENERAL INFO USING NODEJS:\n  fetch( \"https://eydap.gr\" );\n  error: unable to verify the first certificate ('UNABLE_TO_VERIFY_LEAF_SIGNATURE')\n  solution: process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0;\n  Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification\n  based on: Node Fetch Request Fails on Server: Unable to Get Local Issuer Certificate\n  https://stackoverflow.com/questions/51995925/node-fetch-request-fails-on-server-unable-to-get-local-issuer-certificate\n\n  curl -v https://www.eydap.gr\n  error: unable to get local issuer certificate\n  solution: chrome > https://eydap.gr > connection is secure > certificate is valid > details > export (crt file)\n  (create a backup of /etc/ssl/certs/ca-certificates.crt)\n  append crt file content in /etc/ssl/certs/ca-certificates.crt\n",
         "x": 290,
-        "y": 200,
+        "y": 180,
         "wires": []
+    },
+    {
+        "id": "b7122021235d740f",
+        "type": "change",
+        "z": "61022c35528d6ffa",
+        "name": "preset publish",
+        "rules": [
+            {
+                "t": "set",
+                "p": "publish",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "a076f80433e32a0f"
+            ]
+        ]
+    },
+    {
+        "id": "c3aa965745a302cd",
+        "type": "change",
+        "z": "61022c35528d6ffa",
+        "name": "set publish",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "publish",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "e155bbefca1f3401"
+            ]
+        ]
+    },
+    {
+        "id": "e155bbefca1f3401",
+        "type": "link call",
+        "z": "61022c35528d6ffa",
+        "name": "call publish",
+        "links": [
+            "346adf5f28e6d8c6"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "53d7020558aeb4ee"
+            ]
+        ]
     },
     {
         "id": "b3c337ed58cf68bd",
@@ -2001,7 +2075,7 @@
         "type": "function",
         "z": "d21f4bda462bb9a5",
         "name": "production request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'productionLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No production lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 6 ) {\n    msg.payload = \"Production up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'productionLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No production lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 5 ) {\n    msg.payload = \"Production up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -2058,7 +2132,7 @@
         "senderr": false,
         "headers": [],
         "x": 270,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "382e19da3f5505a7"
@@ -2085,19 +2159,19 @@
         "id": "382e19da3f5505a7",
         "type": "function",
         "z": "d21f4bda462bb9a5",
-        "name": "set response",
-        "func": "const factories = global.get( 'factories' );\nconst { requestDate } = msg.requestParams;\n\n/*\nHTML RESPONSE LOOKS LIKE =>\n<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"grdSavings\" style=\"width:910px;border-collapse:collapse;\">\n  <tr>\n    <th scope=\"col\">Ημερομηνία</th><th scope=\"col\">ΑΣΠΡΟΠΥΡΓΟΣ</th><th scope=\"col\">ΓΑΛΑΤΣΙ</th><th scope=\"col\">ΚΙΟΥΡΚΑ</th><th scope=\"col\">ΜΕΝΙΔΙ</th><th scope=\"col\">ΣΥΝΟΛΟ</th>\n  </tr><tr>\n    <td>21/05/2024</td><td>131.020 </td><td>334.564 </td><td>139.389 </td><td>555.391 </td><td>1.160.364 </td>\n  </tr><tr>\n    <td>22/05/2024</td><td>132.730 </td><td>342.627 </td><td>124.210 </td><td>582.403 </td><td>1.181.970 </td>\n  </tr>\n</table>\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nconst html = payload;\nconst table = html.split(\"<table\")[1];\n\nconst rows = table.match(/(<tr)(.*?)(<\\/tr>)/gs);\n\nfor (let i = 0; i < rows.length; i++) {\n\n    if (i > 0) { // to skip labels\n        let values = rows[i].match( /(<td>)(.*?)(<\\/td>)/gs ); // s = including new line in chars\n        values = values.map( v => v.replace( \"<td>\", \"\" ).replace( \"</td>\", \"\" ).trim() );\n        values = values.map( v => v.replaceAll( \".\", \"\" ) ); // 1.234.000 => 1234000\n\n        const [ dd, mm, yyyy ] = values[ 0 ].split( '/' );\n        const date = `${yyyy}-${mm}-${dd}`;\n\n        if ( date === requestDate ) {\n\n            values = values.slice( 1, -1 ); // exclude date and total\n            // node.warn( values );\n\n            if ( values.length !== factories.length ) {\n                throw `[ERROR] Response not matching factories length (${values.length} vs ${factories.length}).`;\n            }\n\n            const result = [];\n            for ( let j = 0; j < values.length; j++ ) {\n                result.push( {\n                    date,\n                    factory_id: factories[ j ].id,\n                    quantity: values[ j ]\n                \n                } );\n            }\n            msg.payload = result;\n            return msg;\n        }\n    }\n}\n\nthrow `[WARNING] Production data not available yet (${requestDate}).`;\n",
+        "name": "parse response",
+        "func": "const factories = global.get( 'factories' );\nconst { requestDate } = msg.requestParams;\n\n/*\nHTML RESPONSE LOOKS LIKE =>\n<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"grdSavings\" style=\"width:910px;border-collapse:collapse;\">\n  <tr>\n    <th scope=\"col\">Ημερομηνία</th><th scope=\"col\">ΑΣΠΡΟΠΥΡΓΟΣ</th><th scope=\"col\">ΓΑΛΑΤΣΙ</th><th scope=\"col\">ΚΙΟΥΡΚΑ</th><th scope=\"col\">ΜΕΝΙΔΙ</th><th scope=\"col\">ΣΥΝΟΛΟ</th>\n  </tr><tr>\n    <td>21/05/2024</td><td>131.020 </td><td>334.564 </td><td>139.389 </td><td>555.391 </td><td>1.160.364 </td>\n  </tr><tr>\n    <td>22/05/2024</td><td>132.730 </td><td>342.627 </td><td>124.210 </td><td>582.403 </td><td>1.181.970 </td>\n  </tr>\n</table>\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nconst html = payload;\nconst table = html.split(\"<table\")[1];\n\nconst rows = table.match(/(<tr)(.*?)(<\\/tr>)/gs);\n\nfor (let i = 0; i < rows.length; i++) {\n\n    if (i > 0) { // to skip labels\n        let values = rows[i].match( /(<td>)(.*?)(<\\/td>)/gs ); // s = including new line in chars\n        values = values.map( v => v.replace( \"<td>\", \"\" ).replace( \"</td>\", \"\" ).trim() );\n        values = values.map( v => v.replaceAll( \".\", \"\" ) ); // 1.234.000 => 1234000\n\n        const [ dd, mm, yyyy ] = values[ 0 ].split( '/' );\n        const date = `${yyyy}-${mm}-${dd}`;\n\n        if ( date === requestDate ) {\n\n            values = values.slice( 1, -1 ); // exclude date and total\n            // node.warn( values );\n\n            if ( values.length !== factories.length ) {\n                throw `[ERROR] Response not matching factories length (${values.length} vs ${factories.length}).`;\n            }\n\n            const result = [];\n            for ( let j = 0; j < values.length; j++ ) {\n\n                const factory = factories[ j ];\n                result.push( {\n                    date,\n                    factory,\n                    quantity: values[ j ]\n                \n                } );\n            }\n            msg.payload = result;\n            return msg;\n        }\n    }\n}\n\nthrow `[WARNING] Production data not available yet (${requestDate}).`;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 300,
+        "x": 280,
+        "y": 260,
         "wires": [
             [
-                "15d8990b4f617272"
+                "2d0286ed0a9be577"
             ]
         ]
     },
@@ -2113,7 +2187,7 @@
         ],
         "uncaught": false,
         "x": 810,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "14e5d743cc9f4824"
@@ -2165,7 +2239,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "722008d1f8785f62"
@@ -2176,8 +2250,8 @@
         "id": "15d8990b4f617272",
         "type": "function",
         "z": "d21f4bda462bb9a5",
-        "name": "insert weather",
-        "func": "const { payload } = msg;\n\nconst rows = [];\nfor ( let row of payload ) {\n    const { date, factory_id, quantity } = row;\n\n    rows.push( `(\"${date}\",${factory_id},${quantity})` );\n}\n\nconst values = rows.join( ',' );\n\nconst query = `INSERT INTO production (date,factory_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "name": "insert production",
+        "func": "const { payload } = msg;\n\nconst rows = [];\nfor ( let row of payload ) {\n    const { date, factory, quantity } = row;\n\n    rows.push( `(\"${date}\",${factory.id},${quantity})` );\n}\n\nconst values = rows.join( ',' );\n\nconst query = `INSERT INTO production (date,factory_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2204,10 +2278,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 270,
-        "y": 440,
+        "y": 420,
         "wires": [
             [
-                "150def491b82fe85"
+                "8e5dfc208b5fa7a5"
             ]
         ]
     },
@@ -2224,7 +2298,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "809c36996292b6ee",
@@ -2250,8 +2324,82 @@
         "name": "about ca certificate",
         "info": "  SPECIFIC SETTINGS IN NODE-RED:\n  in settings.js => process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0\n  in http-request => tick \"Enable secure (SSL/TLS) connection\" > create new TLS Config > upload CA certicicate > uncheck \"Verify server certificate\".\n  based on: unable to verify the first certificate in Node-Red\n  https://stackoverflow.com/questions/42983635/error-unable-to-verify-the-first-certificate-in-node-red/42984958#42984958\n\n  GENERAL INFO USING NODEJS:\n  fetch( \"https://eydap.gr\" );\n  error: unable to verify the first certificate ('UNABLE_TO_VERIFY_LEAF_SIGNATURE')\n  solution: process.env[\"NODE_TLS_REJECT_UNAUTHORIZED\"] = 0;\n  Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification\n  based on: Node Fetch Request Fails on Server: Unable to Get Local Issuer Certificate\n  https://stackoverflow.com/questions/51995925/node-fetch-request-fails-on-server-unable-to-get-local-issuer-certificate\n\n  curl -v https://www.eydap.gr\n  error: unable to get local issuer certificate\n  solution: chrome > https://eydap.gr > connection is secure > certificate is valid > details > export (crt file)\n  (create a backup of /etc/ssl/certs/ca-certificates.crt)\n  append crt file content in /etc/ssl/certs/ca-certificates.crt\n",
         "x": 290,
-        "y": 200,
+        "y": 180,
         "wires": []
+    },
+    {
+        "id": "2d0286ed0a9be577",
+        "type": "change",
+        "z": "d21f4bda462bb9a5",
+        "name": "preset publish",
+        "rules": [
+            {
+                "t": "set",
+                "p": "publish",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "15d8990b4f617272"
+            ]
+        ]
+    },
+    {
+        "id": "8e5dfc208b5fa7a5",
+        "type": "change",
+        "z": "d21f4bda462bb9a5",
+        "name": "set publish",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "publish",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "8c2b091c486df767"
+            ]
+        ]
+    },
+    {
+        "id": "8c2b091c486df767",
+        "type": "link call",
+        "z": "d21f4bda462bb9a5",
+        "name": "call publish",
+        "links": [
+            "ccdcc2fdde08e718"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 270,
+        "y": 500,
+        "wires": [
+            [
+                "150def491b82fe85"
+            ]
+        ]
     },
     {
         "id": "3c4c570a2f5ad214",
@@ -2267,7 +2415,7 @@
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 230,
+        "x": 290,
         "y": 60,
         "wires": []
     },
@@ -2277,12 +2425,13 @@
         "z": "bac88e4feb8bab3d",
         "name": "link in weather exchange",
         "links": [],
-        "x": 55,
+        "x": 115,
         "y": 60,
         "wires": [
             [
                 "3c4c570a2f5ad214",
-                "735079cce6fe051f"
+                "735079cce6fe051f",
+                "78327d262f4b2133"
             ]
         ]
     },
@@ -2321,7 +2470,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
+        "x": 280,
         "y": 120,
         "wires": [
             [
@@ -2343,7 +2492,7 @@
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 230,
+        "x": 290,
         "y": 200,
         "wires": []
     },
@@ -2361,7 +2510,7 @@
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 240,
+        "x": 300,
         "y": 340,
         "wires": []
     },
@@ -2384,7 +2533,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
+        "x": 280,
         "y": 260,
         "wires": [
             [
@@ -2411,7 +2560,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
+        "x": 280,
         "y": 400,
         "wires": [
             [
@@ -2425,12 +2574,13 @@
         "z": "bac88e4feb8bab3d",
         "name": "link in savings exchange",
         "links": [],
-        "x": 55,
+        "x": 115,
         "y": 200,
         "wires": [
             [
                 "7b776b5260599c79",
-                "36dab2cdafd398dc"
+                "36dab2cdafd398dc",
+                "78327d262f4b2133"
             ]
         ]
     },
@@ -2440,12 +2590,13 @@
         "z": "bac88e4feb8bab3d",
         "name": "link in production exchange",
         "links": [],
-        "x": 55,
+        "x": 115,
         "y": 340,
         "wires": [
             [
                 "22949025a62cfe73",
-                "565eaf0f4ec6d9d3"
+                "565eaf0f4ec6d9d3",
+                "78327d262f4b2133"
             ]
         ]
     },
@@ -2463,7 +2614,7 @@
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 220,
+        "x": 280,
         "y": 480,
         "wires": []
     },
@@ -2486,7 +2637,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
+        "x": 280,
         "y": 540,
         "wires": [
             [
@@ -2500,12 +2651,13 @@
         "z": "bac88e4feb8bab3d",
         "name": "link in result exchange",
         "links": [],
-        "x": 55,
+        "x": 115,
         "y": 480,
         "wires": [
             [
                 "e5a271de8bd6c1a0",
-                "1cb08c474388e315"
+                "1cb08c474388e315",
+                "78327d262f4b2133"
             ]
         ]
     },
@@ -2718,6 +2870,17 @@
         "statusType": "auto",
         "x": 880,
         "y": 520,
+        "wires": []
+    },
+    {
+        "id": "78327d262f4b2133",
+        "type": "link out",
+        "z": "bac88e4feb8bab3d",
+        "name": "link out 19",
+        "mode": "return",
+        "links": [],
+        "x": 65,
+        "y": 640,
         "wires": []
     },
     {
