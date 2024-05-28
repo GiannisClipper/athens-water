@@ -2077,10 +2077,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 770,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
-                "47c0cc3fa1788772"
+                "fd625fd18723a0ea"
             ]
         ]
     },
@@ -2146,7 +2146,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 760,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
@@ -2195,6 +2195,26 @@
         "wires": [
             [
                 "b0496667bb6e2d75"
+            ]
+        ]
+    },
+    {
+        "id": "fd625fd18723a0ea",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "clustering (k-means)",
+        "func": "const clusterMaker = context.global.clusters;\n\nconst data = msg.payload.map( x => [ x.period_avg ] );\nconst period30_avg = data[ data.length - 1 ][ 0 ];\n\nclusterMaker.k( 5 );\nclusterMaker.iterations( 750 );\nclusterMaker.data( data );\n\nconst clusters = msg.payload=clusterMaker.clusters();\nclusters.sort( ( a, b ) => a.centroid[ 0 ] - b.centroid[ 0 ] );\n\n\nlet matchingCluster = 0;\nlet diff = null;\nlet min = null;\nfor ( let i = 0; i < clusters.length; i++ ) {\n    diff = Math.abs( clusters[ i ].centroid[ 0 ] - period30_avg );\n    if ( i == 0 || diff < min ) {\n\tmatchingCluster = i;\n    }\n    min = diff;\n}\n\nconst centroids = clusters.map( x => x.centroid[ 0 ] );\nconst labels = [ 'lower', 'low', 'middle', 'high', 'higher' ];\n\nmsg.payload = {\n    period30_avg,\n    result: `in ${labels[ matchingCluster ]} levels`,\n    clusters,\n    centroids,\n}\n\nreturn msg;\n\n// global.set( \"foundClusters\", msg.payload );\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 560,
+        "wires": [
+            [
+                "47c0cc3fa1788772"
             ]
         ]
     },
