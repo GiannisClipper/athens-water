@@ -475,6 +475,16 @@
         ]
     },
     {
+        "id": "a802322ce1f9bb87",
+        "type": "comment",
+        "z": "6d278dbe6de7a110",
+        "name": "about result...",
+        "info": "global resultLastDate (min of lastDates)\n\ncheck for new resultLastDate\n\nmake queries for 30days periods\n\nmean savings\nmean production\nsavings/production\nsum precipitation\n\nsavings/production compared to \nprev year precipitation\n\nk-means\n",
+        "x": 410,
+        "y": 540,
+        "wires": []
+    },
+    {
         "id": "1cc0862b6d0ccf91",
         "type": "file",
         "z": "9e38695607437acd",
@@ -2053,6 +2063,138 @@
         "wires": [
             [
                 "53d7020558aeb4ee"
+            ]
+        ]
+    },
+    {
+        "id": "b13255295c221290",
+        "type": "link call",
+        "z": "61022c35528d6ffa",
+        "name": "call database",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 770,
+        "y": 560,
+        "wires": [
+            [
+                "47c0cc3fa1788772"
+            ]
+        ]
+    },
+    {
+        "id": "3d489cd28a96257f",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "select single",
+        "func": "const query = `\nSELECT SUBSTR(date,1,4) AS year, count( date ) as days, SUM( day_sum ) AS period_sum, AVG( day_sum ) AS period_avg FROM \n(\nSELECT count(*), date, SUM( quantity ) AS day_sum, avg( quantity ) AS quantity \nFROM savings \nWHERE ( SUBSTR(date,6,2)=='05' AND SUBSTR(date,9,2)>'11' ) OR ( SUBSTR(date,6,2)=='06' AND SUBSTR(date,9,2)<='11' )\nGROUP BY date\n)\nGROUP BY SUBSTR(date,1,4);\n`;\n//INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 480,
+        "wires": [
+            [
+                "b13255295c221290"
+            ]
+        ]
+    },
+    {
+        "id": "09bf6c5347e6067b",
+        "type": "inject",
+        "z": "61022c35528d6ffa",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 680,
+        "y": 440,
+        "wires": [
+            [
+                "3d489cd28a96257f"
+            ]
+        ]
+    },
+    {
+        "id": "47c0cc3fa1788772",
+        "type": "debug",
+        "z": "61022c35528d6ffa",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b0496667bb6e2d75",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "select double",
+        "func": "const query = `\nSELECT \na.year AS aYear, b.year as bYear, a.year || '-' || b.year AS years,\na.days AS aDays, b.days as bDays, a.days + b.days AS days,\na.period_sum AS aPeriod_sum, b.period_sum AS bPeriod_sum, a.period_sum + b.period_sum AS period_sum,\n( a.period_sum + b.period_sum ) / ( a.days + b.days ) AS period_avg\nFROM\n(\n\tSELECT SUBSTR(date,1,4) AS year, count( date ) as days, SUM( day_sum ) AS period_sum, AVG( day_sum ) AS period_avg \n    FROM \n\t(\n\t\tSELECT count(*), date, SUM( quantity ) AS day_sum, avg( quantity ) AS quantity \n\t\tFROM savings \n\t\tWHERE SUBSTR(date,6,2)=='12' AND SUBSTR(date,9,2)>'11'\n\t\tGROUP BY date\n\t)\n\tGROUP BY SUBSTR(date,1,4) ORDER BY SUBSTR(date,1,4)\n) a\nJOIN\n(\n\tSELECT SUBSTR(date,1,4) AS year, count( date ) as days, SUM( day_sum ) AS period_sum, AVG( day_sum ) AS period_avg \n\tFROM \n\t(\n\t\tSELECT count(*), date, SUM( quantity ) AS day_sum, avg( quantity ) AS quantity \n\t\tFROM savings \n\t\tWHERE SUBSTR(date,6,2)=='01' AND SUBSTR(date,9,2)<='11'\n\t\tGROUP BY date\n\t)\n\tGROUP BY SUBSTR(date,1,4) ORDER BY SUBSTR(date,1,4)\n) b\nON CAST(a.year AS INT)=CAST(b.year AS INT)-1;`;\n//INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 480,
+        "wires": [
+            [
+                "b13255295c221290"
+            ]
+        ]
+    },
+    {
+        "id": "55bda5e00745f1da",
+        "type": "inject",
+        "z": "61022c35528d6ffa",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 860,
+        "y": 440,
+        "wires": [
+            [
+                "b0496667bb6e2d75"
             ]
         ]
     },
