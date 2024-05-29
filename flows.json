@@ -136,6 +136,14 @@
         "env": []
     },
     {
+        "id": "1701ccc8d2838ab0",
+        "type": "tab",
+        "label": "clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "746d8aad27723fd7",
         "type": "sqlitedb",
         "db": "~/.node-red/projects/athens-water/data/water.sqlite",
@@ -2089,7 +2097,7 @@
         "type": "function",
         "z": "61022c35528d6ffa",
         "name": "select single",
-        "func": "const query = `\nSELECT SUBSTR(date,1,4) AS year, count( date ) as days, SUM( day_sum ) AS period_sum, AVG( day_sum ) AS period_avg FROM \n(\nSELECT count(*), date, SUM( quantity ) AS day_sum, avg( quantity ) AS quantity \nFROM savings \nWHERE ( SUBSTR(date,6,2)=='05' AND SUBSTR(date,9,2)>'11' ) OR ( SUBSTR(date,6,2)=='06' AND SUBSTR(date,9,2)<='11' )\nGROUP BY date\n)\nGROUP BY SUBSTR(date,1,4);\n`;\n//INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\nreturn msg;\n",
+        "func": "/*\nUPDATE reservoirs SET lat = 38.66, lon = 21.85 WHERE id == 1;\nUPDATE reservoirs SET lat = 38.40, lon = 23.28 WHERE id == 2;\nUPDATE reservoirs SET lat = 38.54, lon = 22.16 WHERE id == 3;\nUPDATE reservoirs SET lat = 38.40, lon = 23.28 WHERE id == 4;\n*/\n\n/* result per reservoir_id \n \nconst query = `\n    SELECT SUBSTR(date, 1, 4) AS year, count(date) as days, SUM(day_sum) AS period_sum, AVG(day_sum) AS period_avg, reservoir_id FROM\n        (\n            SELECT count(*), date, SUM(quantity) AS day_sum, avg(quantity) AS quantity, reservoir_id \n        FROM savings \n        WHERE(SUBSTR(date, 6, 2) == '05' AND SUBSTR(date, 9, 2) > '11') OR(SUBSTR(date, 6, 2) == '06' AND SUBSTR(date, 9, 2) <= '11')\n        GROUP BY date, reservoir_id\n        )\n    GROUP BY SUBSTR(date, 1, 4), reservoir_id;\n`;\n*/\n/* all reservoirs*/\nconst query = `\n    SELECT SUBSTR(date,1,4) AS year, count( date ) as days, SUM( day_sum ) AS period_sum, AVG( day_sum ) AS period_avg FROM \n    (\n        SELECT count(*), date, SUM( quantity ) AS day_sum, avg( quantity ) AS quantity \n        FROM savings \n        WHERE ( SUBSTR(date,6,2)=='05' AND SUBSTR(date,9,2)>'11' ) OR ( SUBSTR(date,6,2)=='06' AND SUBSTR(date,9,2)<='11' )\n        GROUP BY date\n    )\n    GROUP BY SUBSTR(date,1,4);\n`;\n\n\n//INSERT INTO savings (date,reservoir_id,quantity) VALUES ${values}`;\n\nmsg.topic = query;\nmsg.payload = query;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2145,7 +2153,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 760,
+        "x": 880,
         "y": 620,
         "wires": []
     },
@@ -2202,20 +2210,123 @@
         "id": "fd625fd18723a0ea",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "clustering (k-means)",
-        "func": "const clusterMaker = context.global.clusters;\n\nconst data = msg.payload.map( x => [ x.period_avg ] );\nconst period30_avg = data[ data.length - 1 ][ 0 ];\n\nclusterMaker.k( 5 );\nclusterMaker.iterations( 750 );\nclusterMaker.data( data );\n\nconst clusters = msg.payload=clusterMaker.clusters();\nclusters.sort( ( a, b ) => a.centroid[ 0 ] - b.centroid[ 0 ] );\n\n\nlet matchingCluster = 0;\nlet diff = null;\nlet min = null;\nfor ( let i = 0; i < clusters.length; i++ ) {\n    diff = Math.abs( clusters[ i ].centroid[ 0 ] - period30_avg );\n    if ( i == 0 || diff < min ) {\n\tmatchingCluster = i;\n    }\n    min = diff;\n}\n\nconst centroids = clusters.map( x => x.centroid[ 0 ] );\nconst labels = [ 'lower', 'low', 'middle', 'high', 'higher' ];\n\nmsg.payload = {\n    period30_avg,\n    result: `in ${labels[ matchingCluster ]} levels`,\n    clusters,\n    centroids,\n}\n\nreturn msg;\n\n// global.set( \"foundClusters\", msg.payload );\n\n",
+        "name": "clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst reservoirs = global.get( 'reservoirs' );\n\nconst data = msg.payload.map( x => [ x.period_avg ] );\nconst value = data[ data.length - 1 ][ 0 ];\n\nconst clusters = makeClusters( data );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nnode.warn( clusters );\n\nconst levels = [ 'lower', 'low', 'middle', 'high', 'higher' ];\nconst colors = [ 'red', 'orange', 'yellow', 'green', 'blue' ];\n\nconst level = levels[ matchingClusterIndex ]; \nconst color = colors[ matchingClusterIndex ]; \n\nconst name = 'Lake';\nlet lat= 37.98;\nlet lon =\t23.72;\nlet iconColor = color;\nconst label = name;\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc(value) )\nconst savings = `in ${levels[matchingClusterIndex]} levels (${valueRepr} κμ)`;\n\nmsg.payload = { name, lat, lon, iconColor, label, savings };\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
+        "x": 760,
         "y": 560,
         "wires": [
             [
-                "47c0cc3fa1788772"
+                "47c0cc3fa1788772",
+                "822cfc2cf49ce0a5"
             ]
+        ]
+    },
+    {
+        "id": "822cfc2cf49ce0a5",
+        "type": "worldmap",
+        "z": "61022c35528d6ffa",
+        "name": "Reservoirs map",
+        "lat": "37.98",
+        "lon": "23.72",
+        "zoom": "8",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 700,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "a64c3a2f864ff32f",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "function 1",
+        "func": "const levels = [ 'lower', 'low', 'middle', 'high', 'higher' ];\nconst colors = [ 'red', 'orange', 'yellow', 'green', 'blue' ];\n\nconst { value, matchingClusterIndex } = msg.payload;\nconst level = levels[ matchingClusterIndex ]; \nconst color = colors[ matchingClusterIndex ]; \n\nconst name = 'Lake';\nlet lat= 37.98;\nlet lon =\t23.72;\nlet iconColor = color;\nconst label = name;\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc(value) )\nconst savings = `in ${levels[matchingClusterIndex]} levels (${valueRepr} κμ)`;\n\nmsg.payload = { name, lat, lon, iconColor, label, savings };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be1101ec2b2f890b",
+        "type": "function",
+        "z": "61022c35528d6ffa",
+        "name": "function 2",
+        "func": "const { period30_avg, result } = msg.payload;\nconst name = result+'2';\nlet lat= 37.48;\nlet lon =\t23.22;\nlet iconColor = \"red\";\n\nmsg.payload = { name, lat, lon, period30_avg, iconColor, label: name };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc654baa5279bb0a",
+        "type": "link call",
+        "z": "61022c35528d6ffa",
+        "name": "call make clusters",
+        "links": [
+            "947bd917e5da173c"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 390,
+        "y": 720,
+        "wires": [
+            [
+                "09210395896326d6"
+            ]
+        ]
+    },
+    {
+        "id": "09210395896326d6",
+        "type": "link call",
+        "z": "61022c35528d6ffa",
+        "name": "call match centroid",
+        "links": [
+            "2a6bcaabbfb29370"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 410,
+        "y": 780,
+        "wires": [
+            []
         ]
     },
     {
@@ -5650,6 +5761,96 @@
         "wires": [
             [
                 "2e8dd8d7f98b2fc6"
+            ]
+        ]
+    },
+    {
+        "id": "947bd917e5da173c",
+        "type": "link in",
+        "z": "1701ccc8d2838ab0",
+        "name": "link in make clusters",
+        "links": [],
+        "x": 135,
+        "y": 60,
+        "wires": [
+            [
+                "ec09b1e3b5cd2e87"
+            ]
+        ]
+    },
+    {
+        "id": "b3cf6bdd4a2e32f2",
+        "type": "link out",
+        "z": "1701ccc8d2838ab0",
+        "name": "link out 20",
+        "mode": "return",
+        "links": [],
+        "x": 465,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ec09b1e3b5cd2e87",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "make clusters",
+        "func": "const clusterMaker = context.global.clusters;\nconst { value, data } = msg.payload;\n\nclusterMaker.k( 5 );\nclusterMaker.iterations( 750 );\nclusterMaker.data( data );\n\nconst clusters = msg.payload=clusterMaker.clusters();\nclusters.sort( ( a, b ) => a.centroid[ 0 ] - b.centroid[ 0 ] );\n\nmsg.payload = { value, data, clusters };\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 60,
+        "wires": [
+            [
+                "b3cf6bdd4a2e32f2"
+            ]
+        ]
+    },
+    {
+        "id": "2a6bcaabbfb29370",
+        "type": "link in",
+        "z": "1701ccc8d2838ab0",
+        "name": "link in matching cluster",
+        "links": [],
+        "x": 135,
+        "y": 140,
+        "wires": [
+            [
+                "eb0c6c5dda0c2626"
+            ]
+        ]
+    },
+    {
+        "id": "6d77386d213d7ff2",
+        "type": "link out",
+        "z": "1701ccc8d2838ab0",
+        "name": "link out 21",
+        "mode": "return",
+        "links": [],
+        "x": 465,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "eb0c6c5dda0c2626",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "match centroid",
+        "func": "const { value, clusters } = msg.payload;\n\nlet matchingClusterIndex = 0;\nlet diff = null;\nlet min = null;\nfor ( let i = 0; i < clusters.length; i++ ) {\n    diff = Math.abs( clusters[ i ].centroid[ 0 ] - value );\n    if ( i == 0 || diff < min ) {\n\tmatchingClusterIndex = i;\n    }\n    min = diff;\n}\n\nmsg.payload = { value, clusters, matchingClusterIndex };\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "6d77386d213d7ff2"
             ]
         ]
     }
