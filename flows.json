@@ -176,6 +176,14 @@
         "env": []
     },
     {
+        "id": "c05f2d05a65c769e",
+        "type": "tab",
+        "label": "registration",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "746d8aad27723fd7",
         "type": "sqlitedb",
         "db": "~/.node-red/projects/athens-water/data/water.sqlite",
@@ -290,7 +298,7 @@
         "finalize": "",
         "libs": [],
         "x": 520,
-        "y": 120,
+        "y": 140,
         "wires": [
             [
                 "53fa08e0fc78f899"
@@ -308,7 +316,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 920,
-        "y": 200,
+        "y": 220,
         "wires": [
             [
                 "b8a42aa1c8cdc8fe"
@@ -326,7 +334,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 170,
-        "y": 200,
+        "y": 220,
         "wires": [
             [
                 "137b5884ab0ee30e"
@@ -344,7 +352,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 540,
-        "y": 200,
+        "y": 220,
         "wires": [
             [
                 "a7706206c42909fc"
@@ -362,7 +370,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 900,
-        "y": 240,
+        "y": 260,
         "wires": [
             [
                 "df32b1f787ac74b7"
@@ -380,7 +388,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 160,
-        "y": 240,
+        "y": 260,
         "wires": [
             [
                 "22ae40ff7482ffd8",
@@ -400,7 +408,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 530,
-        "y": 240,
+        "y": 260,
         "wires": [
             [
                 "203946c3788d69ed",
@@ -420,7 +428,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 320,
+        "y": 340,
         "wires": [
             []
         ]
@@ -463,7 +471,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 210,
-        "y": 360,
+        "y": 380,
         "wires": [
             []
         ]
@@ -479,7 +487,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 580,
-        "y": 320,
+        "y": 340,
         "wires": [
             []
         ]
@@ -495,7 +503,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 930,
-        "y": 320,
+        "y": 340,
         "wires": [
             []
         ]
@@ -511,7 +519,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 560,
-        "y": 360,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1063,7 +1071,7 @@
         "mode": "return",
         "links": [],
         "x": 795,
-        "y": 460,
+        "y": 340,
         "wires": []
     },
     {
@@ -1079,30 +1087,12 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "d0991d10c4ce3042"
             ]
         ]
-    },
-    {
-        "id": "312898d0fbebd781",
-        "type": "debug",
-        "z": "d7c8565c02c92dbd",
-        "d": true,
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "cdb267699f7f8439",
@@ -1117,10 +1107,9 @@
         "finalize": "",
         "libs": [],
         "x": 210,
-        "y": 260,
+        "y": 200,
         "wires": [
             [
-                "312898d0fbebd781",
                 "eefbcba086f74da2",
                 "3e3759343661ea8a"
             ]
@@ -1137,7 +1126,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "cdb267699f7f8439"
@@ -1187,7 +1176,7 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 340,
+        "y": 260,
         "wires": [
             [
                 "8867e13fca9a584d"
@@ -1205,7 +1194,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 400,
+        "y": 300,
         "wires": [
             [
                 "d094265b5a62e802"
@@ -1225,12 +1214,11 @@
         "finalize": "",
         "libs": [],
         "x": 210,
-        "y": 460,
+        "y": 340,
         "wires": [
             [
                 "eefbcba086f74da2",
-                "0934098869fcb268",
-                "312898d0fbebd781"
+                "0934098869fcb268"
             ]
         ]
     },
@@ -1267,7 +1255,7 @@
         "mode": "return",
         "links": [],
         "x": 795,
-        "y": 460,
+        "y": 340,
         "wires": []
     },
     {
@@ -1283,7 +1271,7 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "be738c7b07e56503"
@@ -1303,12 +1291,11 @@
         "finalize": "",
         "libs": [],
         "x": 210,
-        "y": 260,
+        "y": 200,
         "wires": [
             [
                 "bd670a6c945626b3",
-                "4c0cdc252d4eb87f",
-                "e12c41a077eef835"
+                "4c0cdc252d4eb87f"
             ]
         ]
     },
@@ -1323,7 +1310,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "2e7b1715c5b1248d"
@@ -1373,7 +1360,7 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 340,
+        "y": 260,
         "wires": [
             [
                 "2afbe3378ab16db1"
@@ -1391,7 +1378,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 400,
+        "y": 300,
         "wires": [
             [
                 "fc76c71878067fc5"
@@ -1411,12 +1398,11 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 460,
+        "y": 340,
         "wires": [
             [
                 "bd670a6c945626b3",
-                "2d93842496444882",
-                "e12c41a077eef835"
+                "2d93842496444882"
             ]
         ]
     },
@@ -1446,24 +1432,6 @@
         ]
     },
     {
-        "id": "e12c41a077eef835",
-        "type": "debug",
-        "z": "369c55fe302803f7",
-        "d": true,
-        "name": "debug 20",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 180,
-        "wires": []
-    },
-    {
         "id": "3dca08942f45f34b",
         "type": "link out",
         "z": "aba327fbb26c5653",
@@ -1471,7 +1439,7 @@
         "mode": "return",
         "links": [],
         "x": 795,
-        "y": 460,
+        "y": 340,
         "wires": []
     },
     {
@@ -1487,30 +1455,12 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "7eb3697275baa550"
             ]
         ]
-    },
-    {
-        "id": "a6c048e345b33e0f",
-        "type": "debug",
-        "z": "aba327fbb26c5653",
-        "d": true,
-        "name": "debug 21",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "85d5271db264427f",
@@ -1525,10 +1475,9 @@
         "finalize": "",
         "libs": [],
         "x": 210,
-        "y": 260,
+        "y": 200,
         "wires": [
             [
-                "a6c048e345b33e0f",
                 "d32524de155786ef",
                 "7b61b4f0c034ab72"
             ]
@@ -1545,7 +1494,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "85d5271db264427f"
@@ -1595,7 +1544,7 @@
         "finalize": "",
         "libs": [],
         "x": 220,
-        "y": 340,
+        "y": 260,
         "wires": [
             [
                 "3ee08acb42f62f86"
@@ -1613,7 +1562,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 220,
-        "y": 400,
+        "y": 300,
         "wires": [
             [
                 "ef91bc11b2cc144f"
@@ -1633,12 +1582,11 @@
         "finalize": "",
         "libs": [],
         "x": 210,
-        "y": 460,
+        "y": 340,
         "wires": [
             [
                 "d32524de155786ef",
-                "3dca08942f45f34b",
-                "a6c048e345b33e0f"
+                "3dca08942f45f34b"
             ]
         ]
     },
@@ -1686,7 +1634,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "weather request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 7 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No weather lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 6 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1771,7 +1719,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "parse response",
-        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nJSON RESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Weather data not available yet (${requestDate}).`;\n            }\n            result.push( {\n                date: requestDate,\n                location,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
+        "func": "const locations = global.get( 'locations' );\nconst { requestDate, past_days } = msg.requestParams;\n\n/*\nJSON RESPONSE LOOKS LIKE =>\n[{ \n  \"latitude\": 37.996483, \"longitude\": 23.709677, \"generationtime_ms\": 0.31006336212158203, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 92.0, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [1, 1, 1, null], \"temperature_2m_min\": [19.3, 19.5, 20.9, null], \"temperature_2m_mean\": [24.2, 24.1, null, null], \"temperature_2m_max\": [29.1, 29.2, 22.0, null], \"precipitation_sum\": [0.00, 0.00, null, null], \"rain_sum\": [0.00, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] }\n},{ \n  \"latitude\": 38.558872, \"longitude\": 22.377718, \"generationtime_ms\": 0.2340078353881836, \"utc_offset_seconds\": 10800, \"timezone\": \"Europe/Athens\", \"timezone_abbreviation\": \"EEST\", \"elevation\": 206.0, \"location_id\": 1, \n  \"daily_units\": { \"time\": \"iso8601\", \"weather_code\": \"wmo code\", \"temperature_2m_min\": \"°C\", \"temperature_2m_mean\": \"°C\", \"temperature_2m_max\": \"°C\", \"precipitation_sum\": \"mm\", \"rain_sum\": \"mm\", \"snowfall_sum\": \"cm\" }, \n  \"daily\": { \"time\": [\"2024-05-20\", \"2024-05-21\", \"2024-05-22\", \"2024-05-23\"], \"weather_code\": [51, 2, 0, null], \"temperature_2m_min\": [18.6, 18.9, 18.3, null], \"temperature_2m_mean\": [24.0, 24.4, null, null], \"temperature_2m_max\": [29.3, 30.9, 19.3, null], \"precipitation_sum\": [0.10, 0.00, null, null], \"rain_sum\": [0.10, 0.00, null, null], \"snowfall_sum\": [0.00, 0.00, null, null] } \n}]\n*/\n\nconst { statusCode, payload } = msg;\n\nif ( statusCode !== 200 ) {\n    throw `[ERROR] Status code ${statusCode}. ${payload}.`;\n}\n\nif ( payload.length !== locations.length ) {\n    throw `[ERROR] Response not matching locations length (${payload.length} vs ${locations.length}).`;\n}\n\nconst result = [];\nfor ( let i = 0; i < payload.length; i++ ) {\n    const location = locations[ i ];\n    const { time, \n        weather_code,\n        temperature_2m_min,\n        temperature_2m_mean,\n        temperature_2m_max,\n        precipitation_sum,\n        rain_sum,\n        snowfall_sum,\n    } = payload[ i ].daily;\n\n    for ( let j = 0; j < time.length; j++ ) {\n        if ( time[ j ] == requestDate ) {\n            if (\n                temperature_2m_min[ j ] == undefined || temperature_2m_min[ j ] === null &&\n                temperature_2m_mean[ j ] === undefined || temperature_2m_mean[ j ] === null &&\n                temperature_2m_max[ j ] === undefined || temperature_2m_max[ j ] === null &&\n                precipitation_sum[ j ] === undefined || precipitation_sum[ j ] === null\n            ) {\n                throw `[WARNING] Weather data not available yet (${requestDate}).`;\n            }\n\n            rain_sum[i] = rain_sum[i] === undefined ? null : rain_sum[ i ]; \n            snowfall_sum[i] = snowfall_sum[i] === undefined ? null : snowfall_sum[i]; \n\n            result.push( {\n                date: requestDate,\n                location,\n                weather_code: weather_code[ j ],\n                temperature_2m_min: temperature_2m_min[ j ],\n                temperature_2m_mean:temperature_2m_mean[ j ],\n                temperature_2m_max: temperature_2m_max[ j ],\n                precipitation_sum: precipitation_sum[ j ],\n                rain_sum: rain_sum[ i ],\n                snowfall_sum: snowfall_sum[ i ]\n            } );\n            break;\n        }\n    }\n    if ( result.length !== i + 1 ) {\n        throw `[ERROR] No of the responded times matching requested date (${requestDate}).`;\n    }\n}\n\nmsg.payload = result;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2048,7 +1996,7 @@
         "type": "function",
         "z": "61022c35528d6ffa",
         "name": "savings request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No savings lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 4 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No savings lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 3 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -2393,7 +2341,7 @@
         "type": "function",
         "z": "d21f4bda462bb9a5",
         "name": "production request loop",
-        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'productionLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No production lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 4 ) {\n    msg.payload = \"Production up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
+        "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'productionLastDate' );\n\nif ( ! lastDate || lastDate === \"\" ) {\n    throw \"[ERROR] No production lastDate found.\"\n}\n\nif ( daysDistance( lastDate, today ) <= 3 ) {\n    msg.payload = \"Production up to date.\"\n    return [ null, msg ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ msg, null ];\n",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -7089,6 +7037,272 @@
             [
                 "e7b8060b470b3ca5",
                 "84f0b490692f53d2"
+            ]
+        ]
+    },
+    {
+        "id": "547ff65f37d94edb",
+        "type": "http in",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "url": "/register/username/:username/password/:password/exchanges/:exchanges",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "9a30c7dfe3f94f88",
+                "94d7a80de5ca2315"
+            ]
+        ]
+    },
+    {
+        "id": "9a30c7dfe3f94f88",
+        "type": "debug",
+        "z": "c05f2d05a65c769e",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5e1a1e95a8bb2c53",
+        "type": "http response",
+        "z": "c05f2d05a65c769e",
+        "name": "send response",
+        "statusCode": "",
+        "headers": {},
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "0841672cf9af9759",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "check username",
+        "func": "const { username } = msg.req.params;\n\nconst usernames = msg.payload;\n\nnode.warn(usernames);\n\nif (usernames.includes(username ) ) {\n    msg.statusCode = 200;\n    msg.payload = `Error from Athens-water. Invalid registration. Username ${username} not available.`;\n    return [null, msg];\n}\n\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "2032088449cbed34"
+            ],
+            [
+                "5e1a1e95a8bb2c53"
+            ]
+        ]
+    },
+    {
+        "id": "94d7a80de5ca2315",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "retrieve users request",
+        "func": "const path = '/users'\nmsg.url = path;\nmsg.method = 'GET';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "82dab64868db30c4"
+            ]
+        ]
+    },
+    {
+        "id": "82dab64868db30c4",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "call RabbitMQ api",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "587a5f1a2f1cf992"
+            ]
+        ]
+    },
+    {
+        "id": "587a5f1a2f1cf992",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "parse response",
+        "func": "const { payload } = msg;\nconst names = payload.map( x => x.name );\nmsg.payload = names;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "0841672cf9af9759"
+            ]
+        ]
+    },
+    {
+        "id": "bb9dc6c395721bc9",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "check exchanges",
+        "func": "let { exchanges, username } = msg.req.params;\nexchanges = exchanges.split( ',' );\n\nconst existingExchanges = msg.payload;\n\nnode.warn(exchanges);\nnode.warn(existingExchanges);\n\nfor ( let exchange of exchanges ) {\n    if (!existingExchanges.includes(exchange ) ) {\n        msg.statusCode = 200;\n        msg.payload = `Error from Athens-water. Invalid registration. Exchange ${exchange} not available.`;\n        return [null, msg];\n    }\n}\n\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges.join(',')} exchanges.`;\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "5ec2a1163f0b1f92"
+            ],
+            [
+                "5e1a1e95a8bb2c53"
+            ]
+        ]
+    },
+    {
+        "id": "20063f98b5c417ee",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "get response",
+        "func": "const { payload } = msg;\nconst names = payload.map( x => x.name );\nmsg.payload = names;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "bb9dc6c395721bc9"
+            ]
+        ]
+    },
+    {
+        "id": "c895025fb03bc432",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "call RabbitMQ api",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "20063f98b5c417ee"
+            ]
+        ]
+    },
+    {
+        "id": "2032088449cbed34",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "retreive exchanges request",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst path = `/exchanges/${AW_VHOST}`;\nmsg.url = path;\nmsg.method = 'GET';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "c895025fb03bc432"
+            ]
+        ]
+    },
+    {
+        "id": "5ec2a1163f0b1f92",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "create user request",
+        "func": "const { username, password } = msg.req.params;\nconst path = `/users/${username}`\n\nconst body = {\n    password: password,\n    tags: \"athenswater,consumer\"\n};\n\nnode.warn( body )\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "e8b47afadef0ca81"
+            ]
+        ]
+    },
+    {
+        "id": "e8b47afadef0ca81",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "call RabbitMQ api",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "3f71aa715cbd16c1"
+            ]
+        ]
+    },
+    {
+        "id": "3f71aa715cbd16c1",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "make response",
+        "func": "let { exchanges, username } = msg.req.params;\n\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges} exchanges.`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 600,
+        "wires": [
+            [
+                "5e1a1e95a8bb2c53"
             ]
         ]
     }
