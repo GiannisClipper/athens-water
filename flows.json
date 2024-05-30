@@ -251,7 +251,7 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "read globals",
-        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    locations: global.get( 'locations' ),\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    reservoirs: global.get( 'reservoirs' ),\n    productionLastDate: global.get( 'productionLastDate' ),\n    factories: global.get( 'factories' ),\n}\n\nreturn msg;",
+        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    locations: global.get( 'locations' ),\n\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    savingsClusteringDate: global.get( 'savingsClusteringDate' ),\n    reservoirs: global.get( 'reservoirs' ),\n\n    productionLastDate: global.get( 'productionLastDate' ),\n    factories: global.get( 'factories' ),\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -316,7 +316,7 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "clean globals",
-        "func": "global.set( 'weatherExitLoop', undefined );\nglobal.set( 'savingsExitLoop', undefined );\nglobal.set( 'productionExitLoop', undefined );\n\nglobal.set( 'weatherLastDate', undefined );\nglobal.set( 'savingsLastDate', undefined );\nglobal.set( 'productionLastDate', undefined );\n\nreturn msg;",
+        "func": "global.set( 'weatherExitLoop', undefined );\nglobal.set( 'savingsExitLoop', undefined );\nglobal.set( 'productionExitLoop', undefined );\n\nglobal.set( 'weatherLastDate', undefined );\nglobal.set( 'savingsLastDate', undefined );\nglobal.set( 'productionLastDate', undefined );\n\nglobal.set( 'savingsClusteringDate', undefined );\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -334,7 +334,7 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "set configuration",
-        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\nglobal.set( 'weatherUrl', weatherUrl );\n\nconst savingsUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'savingsUrl', savingsUrl );\n\nconst productionUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'productionUrl', productionUrl );\n\n// msg.payload = \"Configuration...\";\nreturn msg;",
+        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\nglobal.set( 'weatherUrl', weatherUrl );\n\nconst savingsUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'savingsUrl', savingsUrl );\n\nconst productionUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'productionUrl', productionUrl );\n\nconst clusterLevels = [\n    { name: 'lower', color: 'red' },\n    { name: 'low', color: 'orange' },\n    { name: 'mid', color: 'yellow' },\n    { name: 'high', color: 'green' },\n    { name: 'higher', color: 'blue' }\n];\nglobal.set( 'clusterLevels', clusterLevels );\n\n// msg.payload = \"Configuration...\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -418,7 +418,9 @@
         "x": 170,
         "y": 460,
         "wires": [
-            []
+            [
+                "dd923233c8752e63"
+            ]
         ]
     },
     {
@@ -491,6 +493,67 @@
         "x": 410,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "d3bef09c1516c13f",
+        "type": "link call",
+        "z": "6d278dbe6de7a110",
+        "name": "",
+        "links": [
+            "ccaf19d7f0d0e632"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 170,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd923233c8752e63",
+        "type": "switch",
+        "z": "6d278dbe6de7a110",
+        "name": "",
+        "property": "savingsClusteringDate",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "savingsLastDate",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "ee298ac1e1e396e3"
+            ]
+        ]
+    },
+    {
+        "id": "ee298ac1e1e396e3",
+        "type": "function",
+        "z": "6d278dbe6de7a110",
+        "name": "set clustering date",
+        "func": "const lastDate = global.get( 'savingsLastDate' );\nglobal.set( 'savingsClusteringDate', lastDate );\nmsg.payload = lastDate;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "d3bef09c1516c13f"
+            ]
+        ]
     },
     {
         "id": "1cc0862b6d0ccf91",
@@ -1577,7 +1640,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 580,
+        "y": 620,
         "wires": [
             [
                 "2fb4cc5afb478162"
@@ -1628,7 +1691,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "set last date",
-        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.publish = undefined;\nmsg.payload = `Weather update (${requestDate})`;\nreturn msg;",
+        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.publish = undefined;\nmsg.payload = requestDate;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1639,8 +1702,7 @@
         "y": 500,
         "wires": [
             [
-                "015c0ec7d6ec099f",
-                "1d13a35b302aaeed"
+                "02caf14b0c28d596"
             ]
         ]
     },
@@ -1726,6 +1788,34 @@
         "wires": [
             [
                 "60ac5ac331342725"
+            ]
+        ]
+    },
+    {
+        "id": "02caf14b0c28d596",
+        "type": "change",
+        "z": "1dc82d7c84b0491f",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Weather update ' & msg.payload & '...'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "1d13a35b302aaeed",
+                "015c0ec7d6ec099f"
             ]
         ]
     },
@@ -2258,76 +2348,6 @@
         "x": 700,
         "y": 620,
         "wires": []
-    },
-    {
-        "id": "a64c3a2f864ff32f",
-        "type": "function",
-        "z": "61022c35528d6ffa",
-        "name": "function 1",
-        "func": "const levels = [ 'lower', 'low', 'middle', 'high', 'higher' ];\nconst colors = [ 'red', 'orange', 'yellow', 'green', 'blue' ];\n\nconst { value, matchingClusterIndex } = msg.payload;\nconst level = levels[ matchingClusterIndex ]; \nconst color = colors[ matchingClusterIndex ]; \n\nconst name = 'Lake';\nlet lat= 37.98;\nlet lon =\t23.72;\nlet iconColor = color;\nconst label = name;\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc(value) )\nconst savings = `in ${levels[matchingClusterIndex]} levels (${valueRepr} κμ)`;\n\nmsg.payload = { name, lat, lon, iconColor, label, savings };\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 660,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "be1101ec2b2f890b",
-        "type": "function",
-        "z": "61022c35528d6ffa",
-        "name": "function 2",
-        "func": "const { period30_avg, result } = msg.payload;\nconst name = result+'2';\nlet lat= 37.48;\nlet lon =\t23.22;\nlet iconColor = \"red\";\n\nmsg.payload = { name, lat, lon, period30_avg, iconColor, label: name };\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 360,
-        "y": 820,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fc654baa5279bb0a",
-        "type": "link call",
-        "z": "61022c35528d6ffa",
-        "name": "call make clusters",
-        "links": [
-            "947bd917e5da173c"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 390,
-        "y": 720,
-        "wires": [
-            [
-                "09210395896326d6"
-            ]
-        ]
-    },
-    {
-        "id": "09210395896326d6",
-        "type": "link call",
-        "z": "61022c35528d6ffa",
-        "name": "call match centroid",
-        "links": [
-            "2a6bcaabbfb29370"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 410,
-        "y": 780,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "b3c337ed58cf68bd",
@@ -5765,93 +5785,225 @@
         ]
     },
     {
-        "id": "947bd917e5da173c",
-        "type": "link in",
+        "id": "98de8468dc0441db",
+        "type": "link call",
         "z": "1701ccc8d2838ab0",
-        "name": "link in make clusters",
-        "links": [],
-        "x": 135,
-        "y": 60,
+        "name": "call database",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 250,
+        "y": 180,
         "wires": [
             [
-                "ec09b1e3b5cd2e87"
+                "1308a07171a44c2c"
             ]
         ]
     },
     {
-        "id": "b3cf6bdd4a2e32f2",
+        "id": "afdbd47ad6f8a286",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "select period30",
+        "func": "/*\nUPDATE reservoirs SET lat = 38.66, lon = 21.85 WHERE id == 1;\nUPDATE reservoirs SET lat = 38.16, lon = 23.90 WHERE id == 2;\nUPDATE reservoirs SET lat = 38.54, lon = 22.16 WHERE id == 3;\nUPDATE reservoirs SET lat = 38.40, lon = 23.28 WHERE id == 4;\n*/\n\n/* all reservoirs\nconst query = `\n    SELECT \n        SUBSTR(date,1,4) AS year, \n        count( date ) as days, \n        SUM( day_sum ) AS period_sum, \n        AVG( day_sum ) AS period_avg \n    FROM \n    (\n        SELECT \n            count(*), \n            date, \n            SUM( quantity ) AS day_sum, \n            avg( quantity ) AS quantity \n        FROM savings\n        WHERE ( SUBSTR(date,6,2)=='05' AND SUBSTR(date,9,2)>'11' ) \n        OR ( SUBSTR(date,6,2)=='06' AND SUBSTR(date,9,2)<='11' )\n        GROUP BY date\n    )\n    GROUP BY SUBSTR(date,1,4);\n`;\n*/\n\n/* result per reservoir_id */\nconst { startPeriod30 } = global.get( 'dateHelpers' );\nconst date2 = msg.payload;\n// const date2 = global.get( 'savingsLastDate');\nconst date1 = startPeriod30( date2 );\n\nconst [ y1, m1, d1 ] = date1.split( '-' ); \nconst [ y2, m2, d2 ] = date2.split( '-' ); \n\nconst period = `${d1}/${m1}-${d2}/${m2}`;\n\nconst query = y1 === y2 \n?\n`\nSELECT \n    '${period}' AS period, \n    reservoir_id, \n    SUBSTR(date, 1, 4) AS year,\n    count(date) as days, \n    SUM(day_sum) AS period_sum, \n    AVG(day_sum) AS period_avg\nFROM\n(\n    SELECT \n        reservoir_id,\n        date, \n        SUM(quantity) AS day_sum, \n        avg(quantity) AS quantity\n    FROM savings\n    WHERE quantity > 0 \n    AND \n    (\n        (SUBSTR(date, 6, 2) = '${m1}' AND SUBSTR(date, 9, 2) >= '${d1}') \n        OR (SUBSTR(date, 6, 2) = '${m2}' AND SUBSTR(date, 9, 2) <= '${d2}')\n    )\n    GROUP BY date, reservoir_id\n)\nGROUP BY SUBSTR(date, 1, 4), reservoir_id;\n`\n:\n`\nSELECT \n    '${period}' AS period, a.reservoir_id AS reservoir_id,\n    a.year AS aYear, b.year as bYear, a.year || '-' || b.year AS years,\n    a.days AS aDays, b.days as bDays, a.days + b.days AS days,\n    a.period_sum AS aPeriod_sum, b.period_sum AS bPeriod_sum, a.period_sum + b.period_sum AS period_sum,\n    ( a.period_sum + b.period_sum ) / ( a.days + b.days ) AS period_avg\nFROM\n(\n\tSELECT \n        reservoir_id, \n        SUBSTR(date,1,4) AS year, \n        count( date ) as days, \n        SUM( day_sum ) AS period_sum, \n        AVG( day_sum ) AS period_avg\n    FROM \n\t(\n\t\tSELECT \n            reservoir_id, \n            date, \n            SUM( quantity ) AS day_sum, \n            avg( quantity ) AS quantity \n\t\tFROM savings \n\t\tWHERE quantity > 0 AND SUBSTR(date,6,2) = '${m1}' AND SUBSTR(date,9,2) >= '${d1}'\n\t\tGROUP BY date, reservoir_id\n\t)\n\tGROUP BY SUBSTR(date,1,4), reservoir_id\n) a\nJOIN\n(\n\tSELECT \n        reservoir_id, \n        SUBSTR(date,1,4) AS year, \n        count( date ) as days, \n        SUM( day_sum ) AS period_sum, \n        AVG( day_sum ) AS period_avg\n\tFROM \n\t(\n\t\tSELECT \n            reservoir_id, \n            date, \n            SUM( quantity ) AS day_sum, \n            avg( quantity ) AS quantity \n\t\tFROM savings \n\t\tWHERE quantity > 0 AND SUBSTR(date,6,2) = '${m2}' AND SUBSTR(date,9,2) <= '${d2}'\n\t\tGROUP BY date, reservoir_id\n\t)\n\tGROUP BY SUBSTR(date,1,4), reservoir_id\n) b\nON CAST(a.year AS INT) = CAST(b.year AS INT)-1 AND a.reservoir_id = b.reservoir_id;\n`\n;\n\nmsg.topic = query;\nmsg.payload = query;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "98de8468dc0441db",
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "9cbd116b7819126a",
+        "type": "debug",
+        "z": "1701ccc8d2838ab0",
+        "name": "debug 27",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1308a07171a44c2c",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst reservoirs = global.get( 'reservoirs' );\nconst data = msg.payload;\n\nfor ( let reservoir of reservoirs ) {\n\n    const reservoirData = data.filter( x => x.reservoir_id === reservoir.id );\n    if (reservoirData.length === 0) {\n        continue;\n    }\n\n    const period = reservoirData[ reservoirData.length - 1 ].period;\n    const value = reservoirData[ reservoirData.length - 1 ].period_avg;\n    const values = reservoirData.map( x => [ x.period_avg ] );\n    const clusters = makeClusters( values );\n    // node.warn( clusters );\n    const matchingClusterIndex = matchCluster( clusters, value );\n\n    const levels = clusterLevels.map( x => x.name );\n    levels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\n    const level = levels.join( ' ' );\n    const color = clusterLevels[ matchingClusterIndex ].color; \n    const valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\n    msg.topic = undefined;\n    msg.payload = { \n        name: reservoir.name_en,\n        lat: reservoir.lat,\n        lon: reservoir.lon,\n        label: reservoir.name_en,\n        iconColor: color, \n        period,\n        average: `${valueRepr} cubic meters`,\n        level \n    };\n    node.send( msg );\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 240,
+        "wires": [
+            [
+                "9cbd116b7819126a",
+                "5c4075558bfa1515",
+                "f89090b34c3bea4d"
+            ]
+        ]
+    },
+    {
+        "id": "5c4075558bfa1515",
+        "type": "worldmap",
+        "z": "1701ccc8d2838ab0",
+        "name": "Savings map",
+        "lat": "38.43",
+        "lon": "22.87",
+        "zoom": "9",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 250,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "27b42da3153d628e",
+        "type": "link call",
+        "z": "1701ccc8d2838ab0",
+        "name": "call logger",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 850,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "300a3f9168a9b4ed",
+        "type": "catch",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "scope": [
+            "5c4075558bfa1515"
+        ],
+        "uncaught": false,
+        "x": 830,
+        "y": 180,
+        "wires": [
+            [
+                "d71439a2eba7fc77"
+            ]
+        ]
+    },
+    {
+        "id": "d71439a2eba7fc77",
+        "type": "change",
+        "z": "1701ccc8d2838ab0",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 120,
+        "wires": [
+            [
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "08b8eaebd93fb988",
+        "type": "change",
+        "z": "1701ccc8d2838ab0",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Clustering savings ' & msg.payload & '...'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "ccaf19d7f0d0e632",
+        "type": "link in",
+        "z": "1701ccc8d2838ab0",
+        "name": "link in clustering savings",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "08b8eaebd93fb988",
+                "afdbd47ad6f8a286"
+            ]
+        ]
+    },
+    {
+        "id": "f89090b34c3bea4d",
         "type": "link out",
         "z": "1701ccc8d2838ab0",
         "name": "link out 20",
         "mode": "return",
         "links": [],
-        "x": 465,
-        "y": 60,
+        "x": 795,
+        "y": 320,
         "wires": []
-    },
-    {
-        "id": "ec09b1e3b5cd2e87",
-        "type": "function",
-        "z": "1701ccc8d2838ab0",
-        "name": "make clusters",
-        "func": "const clusterMaker = context.global.clusters;\nconst { value, data } = msg.payload;\n\nclusterMaker.k( 5 );\nclusterMaker.iterations( 750 );\nclusterMaker.data( data );\n\nconst clusters = msg.payload=clusterMaker.clusters();\nclusters.sort( ( a, b ) => a.centroid[ 0 ] - b.centroid[ 0 ] );\n\nmsg.payload = { value, data, clusters };\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 60,
-        "wires": [
-            [
-                "b3cf6bdd4a2e32f2"
-            ]
-        ]
-    },
-    {
-        "id": "2a6bcaabbfb29370",
-        "type": "link in",
-        "z": "1701ccc8d2838ab0",
-        "name": "link in matching cluster",
-        "links": [],
-        "x": 135,
-        "y": 140,
-        "wires": [
-            [
-                "eb0c6c5dda0c2626"
-            ]
-        ]
-    },
-    {
-        "id": "6d77386d213d7ff2",
-        "type": "link out",
-        "z": "1701ccc8d2838ab0",
-        "name": "link out 21",
-        "mode": "return",
-        "links": [],
-        "x": 465,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "eb0c6c5dda0c2626",
-        "type": "function",
-        "z": "1701ccc8d2838ab0",
-        "name": "match centroid",
-        "func": "const { value, clusters } = msg.payload;\n\nlet matchingClusterIndex = 0;\nlet diff = null;\nlet min = null;\nfor ( let i = 0; i < clusters.length; i++ ) {\n    diff = Math.abs( clusters[ i ].centroid[ 0 ] - value );\n    if ( i == 0 || diff < min ) {\n\tmatchingClusterIndex = i;\n    }\n    min = diff;\n}\n\nmsg.payload = { value, clusters, matchingClusterIndex };\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 140,
-        "wires": [
-            [
-                "6d77386d213d7ff2"
-            ]
-        ]
     }
 ]
