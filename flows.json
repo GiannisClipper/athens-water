@@ -50,7 +50,7 @@
     {
         "id": "1dc82d7c84b0491f",
         "type": "tab",
-        "label": "weather subprocess",
+        "label": "weather request",
         "disabled": false,
         "info": "",
         "env": []
@@ -58,7 +58,7 @@
     {
         "id": "61022c35528d6ffa",
         "type": "tab",
-        "label": "savings subprocess",
+        "label": "savings request",
         "disabled": false,
         "info": "",
         "env": []
@@ -66,7 +66,7 @@
     {
         "id": "d21f4bda462bb9a5",
         "type": "tab",
-        "label": "production subprocess",
+        "label": "production request",
         "disabled": false,
         "info": "",
         "env": []
@@ -282,7 +282,7 @@
         "type": "function",
         "z": "6d278dbe6de7a110",
         "name": "system configuration",
-        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\nglobal.set( 'weatherUrl', weatherUrl );\n\nconst savingsUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'savingsUrl', savingsUrl );\n\nconst productionUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'productionUrl', productionUrl );\n\nconst clusterLevels = [\n    { name: 'lower', color: 'red' },\n    { name: 'low', color: 'orange' },\n    { name: 'mid', color: 'yellow' },\n    { name: 'high', color: 'green' },\n    { name: 'higher', color: 'blue' }\n];\nglobal.set( 'clusterLevels', clusterLevels );\n\n// msg.payload = \"Configuration...\";\nreturn msg;",
+        "func": "const weatherUrl = \"https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=&latitude=&longitude=\";\nglobal.set( 'weatherUrl', weatherUrl );\n\nconst savingsUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'savingsUrl', savingsUrl );\n\nconst productionUrl = \"https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=\";\nglobal.set( 'productionUrl', productionUrl );\n\nconst clusterLevels = [\n    { name: 'lower', color: 'LightPink' },\n    { name: 'low', color: 'Khaki' },\n    { name: 'mid', color: 'MediumAquaMarine' },\n    { name: 'high', color: 'DeepSkyBlue' },\n    { name: 'higher', color: 'DodgerBlue' }\n];\nglobal.set( 'clusterLevels', clusterLevels );\n\n// msg.payload = \"Configuration...\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -290,7 +290,7 @@
         "finalize": "",
         "libs": [],
         "x": 520,
-        "y": 100,
+        "y": 120,
         "wires": [
             [
                 "53fa08e0fc78f899"
@@ -301,13 +301,13 @@
         "id": "203946c3788d69ed",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call weather initialization",
+        "name": "",
         "links": [
             "b25dc8f8d8caacd2"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 910,
+        "x": 920,
         "y": 200,
         "wires": [
             [
@@ -319,7 +319,7 @@
         "id": "53fa08e0fc78f899",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call savings initialization",
+        "name": "",
         "links": [
             "8a59f45495f1788b"
         ],
@@ -337,7 +337,7 @@
         "id": "22ae40ff7482ffd8",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call production initialization",
+        "name": "",
         "links": [
             "e604ce7017cf9a7f"
         ],
@@ -355,17 +355,17 @@
         "id": "b8a42aa1c8cdc8fe",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call weather subprocess",
+        "name": "",
         "links": [
             "19a9ec6c9f2b7b9e"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 910,
+        "x": 900,
         "y": 240,
         "wires": [
             [
-                "a8fbb2e079a44221"
+                "df32b1f787ac74b7"
             ]
         ]
     },
@@ -373,19 +373,19 @@
         "id": "137b5884ab0ee30e",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call savings subprocess",
+        "name": "",
         "links": [
             "a3aeb5ed388a6be4"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 170,
+        "x": 160,
         "y": 240,
         "wires": [
             [
-                "7637e69411de56ce",
                 "22ae40ff7482ffd8",
-                "e9b7467e4f8f448e"
+                "d3bef09c1516c13f",
+                "984f5693c685252b"
             ]
         ]
     },
@@ -393,19 +393,19 @@
         "id": "a7706206c42909fc",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call production subprocess",
+        "name": "",
         "links": [
             "b3c337ed58cf68bd"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 540,
+        "x": 530,
         "y": 240,
         "wires": [
             [
                 "203946c3788d69ed",
-                "1d849ec391f9130c",
-                "27f4c4232a03ca21"
+                "b9f94398602677e8",
+                "d656a9f4dd3515b1"
             ]
         ]
     },
@@ -419,30 +419,10 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 240,
-        "y": 380,
+        "x": 220,
+        "y": 320,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "ee298ac1e1e396e3",
-        "type": "function",
-        "z": "6d278dbe6de7a110",
-        "name": "set date",
-        "func": "const lastDate = global.get( 'savingsLastDate' );\nglobal.set( 'reservoirsClusteringDate', lastDate );\nmsg.payload = lastDate;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 180,
-        "y": 340,
-        "wires": [
-            [
-                "d3bef09c1516c13f"
-            ]
         ]
     },
     {
@@ -473,76 +453,6 @@
         ]
     },
     {
-        "id": "7637e69411de56ce",
-        "type": "switch",
-        "z": "6d278dbe6de7a110",
-        "name": "if not already done",
-        "property": "reservoirsClusteringDate",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "savingsLastDate",
-                "vt": "global"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 210,
-        "y": 300,
-        "wires": [
-            [
-                "ee298ac1e1e396e3"
-            ]
-        ]
-    },
-    {
-        "id": "e9b7467e4f8f448e",
-        "type": "switch",
-        "z": "6d278dbe6de7a110",
-        "name": "if not already done",
-        "property": "savingsClusteringDate",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "savingsLastDate",
-                "vt": "global"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 210,
-        "y": 440,
-        "wires": [
-            [
-                "32e0776d379debed"
-            ]
-        ]
-    },
-    {
-        "id": "32e0776d379debed",
-        "type": "function",
-        "z": "6d278dbe6de7a110",
-        "name": "set date",
-        "func": "const lastDate = global.get( 'savingsLastDate' );\nglobal.set( 'savingsClusteringDate', lastDate );\nmsg.payload = lastDate;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 180,
-        "y": 480,
-        "wires": [
-            [
-                "984f5693c685252b"
-            ]
-        ]
-    },
-    {
         "id": "984f5693c685252b",
         "type": "link call",
         "z": "6d278dbe6de7a110",
@@ -552,55 +462,10 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 230,
-        "y": 520,
+        "x": 210,
+        "y": 360,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "1d849ec391f9130c",
-        "type": "switch",
-        "z": "6d278dbe6de7a110",
-        "name": "if not already done",
-        "property": "productionClusteringDate",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "productionLastDate",
-                "vt": "global"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 570,
-        "y": 300,
-        "wires": [
-            [
-                "6b7431bc6f1845dc"
-            ]
-        ]
-    },
-    {
-        "id": "6b7431bc6f1845dc",
-        "type": "function",
-        "z": "6d278dbe6de7a110",
-        "name": "set date",
-        "func": "const lastDate = global.get( 'productionLastDate' );\nglobal.set( 'productionClusteringDate', lastDate );\nmsg.payload = lastDate;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 540,
-        "y": 340,
-        "wires": [
-            [
-                "b9f94398602677e8"
-            ]
         ]
     },
     {
@@ -613,55 +478,10 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 600,
-        "y": 380,
+        "x": 580,
+        "y": 320,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "a8fbb2e079a44221",
-        "type": "switch",
-        "z": "6d278dbe6de7a110",
-        "name": "if not already done",
-        "property": "weatherClusteringDate",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "weatherLastDate",
-                "vt": "global"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 910,
-        "y": 300,
-        "wires": [
-            [
-                "46f7471fe2090f9f"
-            ]
-        ]
-    },
-    {
-        "id": "46f7471fe2090f9f",
-        "type": "function",
-        "z": "6d278dbe6de7a110",
-        "name": "set date",
-        "func": "const lastDate = global.get( 'weatherLastDate' );\nglobal.set( 'weatherClusteringDate', lastDate );\nmsg.payload = lastDate;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 340,
-        "wires": [
-            [
-                "df32b1f787ac74b7"
-            ]
         ]
     },
     {
@@ -675,7 +495,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 930,
-        "y": 380,
+        "y": 320,
         "wires": [
             []
         ]
@@ -690,30 +510,9 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 580,
-        "y": 480,
+        "x": 560,
+        "y": 360,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "27f4c4232a03ca21",
-        "type": "function",
-        "z": "6d278dbe6de7a110",
-        "name": "if not already done",
-        "func": "const { minDate } = global.get( 'dateHelpers' );\nconst waterClusteringDate = global.get( 'waterClusteringDate' );\n\nconst newWaterClusteringDate = minDate( [\n    global.get( 'savingsLastDate' ),\n    global.get( 'productionLastDate' )\n] );\n\nif (newWaterClusteringDate !== waterClusteringDate ) {\n    global.set('waterClusteringDate', newWaterClusteringDate );\n    msg.payload = newWaterClusteringDate;\n    return [ msg, null ];   \n}\n\nreturn [ null, msg ];",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 570,
-        "y": 440,
-        "wires": [
-            [
-                "d656a9f4dd3515b1"
-            ],
             []
         ]
     },
@@ -728,8 +527,8 @@
         "createDir": false,
         "overwriteFile": "false",
         "encoding": "utf8",
-        "x": 550,
-        "y": 220,
+        "x": 230,
+        "y": 140,
         "wires": [
             [
                 "e509d3deb26aca5f"
@@ -748,8 +547,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 180,
+        "x": 230,
+        "y": 100,
         "wires": [
             [
                 "1cc0862b6d0ccf91"
@@ -762,8 +561,8 @@
         "z": "9e38695607437acd",
         "name": "link in logger",
         "links": [],
-        "x": 375,
-        "y": 180,
+        "x": 55,
+        "y": 100,
         "wires": [
             [
                 "66dca8af6b89b230",
@@ -778,8 +577,8 @@
         "name": "link out 3",
         "mode": "return",
         "links": [],
-        "x": 725,
-        "y": 220,
+        "x": 405,
+        "y": 140,
         "wires": []
     },
     {
@@ -795,8 +594,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
-        "y": 140,
+        "x": 220,
+        "y": 60,
         "wires": []
     },
     {
@@ -809,8 +608,8 @@
             "bc33fac1bfdac6f3"
         ],
         "uncaught": false,
-        "x": 910,
-        "y": 220,
+        "x": 190,
+        "y": 300,
         "wires": [
             [
                 "e5dd25d01ed47935"
@@ -836,8 +635,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 940,
-        "y": 180,
+        "x": 220,
+        "y": 260,
         "wires": [
             [
                 "7c9527a0cc39587f"
@@ -856,8 +655,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 920,
-        "y": 140,
+        "x": 200,
+        "y": 220,
         "wires": []
     },
     {
@@ -871,7 +670,7 @@
         "createDir": false,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 150,
+        "x": 830,
         "y": 340,
         "wires": [
             []
@@ -898,7 +697,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 810,
         "y": 300,
         "wires": [
             [
@@ -919,7 +718,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 140,
+        "x": 820,
         "y": 140,
         "wires": []
     },
@@ -935,7 +734,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 150,
+        "x": 830,
         "y": 100,
         "wires": [
             [
@@ -964,7 +763,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 810,
         "y": 200,
         "wires": [
             [
@@ -984,7 +783,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 150,
+        "x": 830,
         "y": 240,
         "wires": [
             []
@@ -1011,7 +810,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 810,
         "y": 60,
         "wires": [
             [
@@ -1331,13 +1130,13 @@
         "id": "d0991d10c4ce3042",
         "type": "link call",
         "z": "d7c8565c02c92dbd",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 200,
         "wires": [
             [
@@ -1349,7 +1148,7 @@
         "id": "b25dc8f8d8caacd2",
         "type": "link in",
         "z": "d7c8565c02c92dbd",
-        "name": "link in 5",
+        "name": "link in weather initialization",
         "links": [],
         "x": 55,
         "y": 60,
@@ -1363,7 +1162,7 @@
         "id": "eefbcba086f74da2",
         "type": "link call",
         "z": "d7c8565c02c92dbd",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -1399,13 +1198,13 @@
         "id": "8867e13fca9a584d",
         "type": "link call",
         "z": "d7c8565c02c92dbd",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 400,
         "wires": [
             [
@@ -1517,13 +1316,13 @@
         "id": "be738c7b07e56503",
         "type": "link call",
         "z": "369c55fe302803f7",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 200,
         "wires": [
             [
@@ -1535,7 +1334,7 @@
         "id": "8a59f45495f1788b",
         "type": "link in",
         "z": "369c55fe302803f7",
-        "name": "link in 13",
+        "name": "link in savings initialization",
         "links": [],
         "x": 55,
         "y": 60,
@@ -1549,7 +1348,7 @@
         "id": "bd670a6c945626b3",
         "type": "link call",
         "z": "369c55fe302803f7",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -1585,13 +1384,13 @@
         "id": "2afbe3378ab16db1",
         "type": "link call",
         "z": "369c55fe302803f7",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 400,
         "wires": [
             [
@@ -1739,13 +1538,13 @@
         "id": "7eb3697275baa550",
         "type": "link call",
         "z": "aba327fbb26c5653",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 200,
         "wires": [
             [
@@ -1757,7 +1556,7 @@
         "id": "e604ce7017cf9a7f",
         "type": "link in",
         "z": "aba327fbb26c5653",
-        "name": "link in 14",
+        "name": "link in production initialization",
         "links": [],
         "x": 55,
         "y": 60,
@@ -1771,7 +1570,7 @@
         "id": "d32524de155786ef",
         "type": "link call",
         "z": "aba327fbb26c5653",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -1807,13 +1606,13 @@
         "id": "3ee08acb42f62f86",
         "type": "link call",
         "z": "aba327fbb26c5653",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 210,
+        "x": 220,
         "y": 400,
         "wires": [
             [
@@ -1872,7 +1671,7 @@
         "id": "19a9ec6c9f2b7b9e",
         "type": "link in",
         "z": "1dc82d7c84b0491f",
-        "name": "link in 8",
+        "name": "link in weather request",
         "links": [],
         "x": 55,
         "y": 60,
@@ -1955,7 +1754,7 @@
         "id": "1d13a35b302aaeed",
         "type": "link call",
         "z": "1dc82d7c84b0491f",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -2083,13 +1882,13 @@
         "id": "19824c02c61e45f3",
         "type": "link call",
         "z": "1dc82d7c84b0491f",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 270,
+        "x": 280,
         "y": 380,
         "wires": [
             [
@@ -2234,7 +2033,7 @@
         "id": "a3aeb5ed388a6be4",
         "type": "link in",
         "z": "61022c35528d6ffa",
-        "name": "link in 15",
+        "name": "link in savings request",
         "links": [],
         "x": 55,
         "y": 60,
@@ -2317,7 +2116,7 @@
         "id": "47560b1a83aa9b08",
         "type": "link call",
         "z": "61022c35528d6ffa",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -2445,13 +2244,13 @@
         "id": "68451f8805a4ded4",
         "type": "link call",
         "z": "61022c35528d6ffa",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 270,
+        "x": 280,
         "y": 420,
         "wires": [
             [
@@ -2579,7 +2378,7 @@
         "id": "b3c337ed58cf68bd",
         "type": "link in",
         "z": "d21f4bda462bb9a5",
-        "name": "link in 16",
+        "name": "link in production request",
         "links": [],
         "x": 55,
         "y": 60,
@@ -2662,7 +2461,7 @@
         "id": "0c42eba578cf0c01",
         "type": "link call",
         "z": "d21f4bda462bb9a5",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -2790,13 +2589,13 @@
         "id": "45074707b3343bdf",
         "type": "link call",
         "z": "d21f4bda462bb9a5",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 270,
+        "x": 280,
         "y": 420,
         "wires": [
             [
@@ -6023,21 +5822,21 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 180,
+        "y": 220,
         "wires": []
     },
     {
         "id": "266b71e4d0db2853",
         "type": "link call",
         "z": "a8ca5f37ab8664a6",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 890,
-        "y": 60,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6050,7 +5849,7 @@
         "mode": "return",
         "links": [],
         "x": 835,
-        "y": 240,
+        "y": 60,
         "wires": []
     },
     {
@@ -6064,7 +5863,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 260,
-        "y": 180,
+        "y": 240,
         "wires": [
             [
                 "f444e4306180eff9"
@@ -6084,7 +5883,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "193e53da1dcf8019",
@@ -6112,7 +5911,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "266b71e4d0db2853"
@@ -6129,8 +5928,7 @@
         "y": 60,
         "wires": [
             [
-                "f80e433eb3f5cbe9",
-                "ef61379ce7dc460d"
+                "195d01cff4a595f0"
             ]
         ]
     },
@@ -6145,7 +5943,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 310,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "266b71e4d0db2853",
@@ -6175,7 +5973,7 @@
         "payload": "2024-05-23",
         "payloadType": "str",
         "x": 130,
-        "y": 420,
+        "y": 480,
         "wires": [
             [
                 "ef61379ce7dc460d"
@@ -6204,9 +6002,33 @@
         "payload": "2024-01-05",
         "payloadType": "str",
         "x": 130,
-        "y": 380,
+        "y": 440,
         "wires": [
             [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "195d01cff4a595f0",
+        "type": "function",
+        "z": "a8ca5f37ab8664a6",
+        "name": "if already done",
+        "func": "const savingsClusteringDate = global.get( 'savingsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (savingsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('savingsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "193e53da1dcf8019"
+            ],
+            [
+                "f80e433eb3f5cbe9",
                 "ef61379ce7dc460d"
             ]
         ]
@@ -6215,14 +6037,14 @@
         "id": "98de8468dc0441db",
         "type": "link call",
         "z": "1701ccc8d2838ab0",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 250,
-        "y": 180,
+        "x": 260,
+        "y": 240,
         "wires": [
             [
                 "1308a07171a44c2c"
@@ -6242,7 +6064,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 280,
+        "y": 340,
         "wires": []
     },
     {
@@ -6258,7 +6080,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "9cbd116b7819126a",
@@ -6296,21 +6118,21 @@
         "mapopt": "",
         "mapwms": false,
         "x": 260,
-        "y": 300,
+        "y": 360,
         "wires": []
     },
     {
         "id": "27b42da3153d628e",
         "type": "link call",
         "z": "1701ccc8d2838ab0",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 890,
-        "y": 60,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6325,7 +6147,7 @@
         ],
         "uncaught": false,
         "x": 870,
-        "y": 180,
+        "y": 260,
         "wires": [
             [
                 "d71439a2eba7fc77"
@@ -6352,7 +6174,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 120,
+        "y": 200,
         "wires": [
             [
                 "27b42da3153d628e"
@@ -6379,7 +6201,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "27b42da3153d628e"
@@ -6396,8 +6218,7 @@
         "y": 60,
         "wires": [
             [
-                "08b8eaebd93fb988",
-                "cbc139c0f6212c2a"
+                "80d2166d46fb727d"
             ]
         ]
     },
@@ -6408,8 +6229,8 @@
         "name": "link out 20",
         "mode": "return",
         "links": [],
-        "x": 845,
-        "y": 340,
+        "x": 835,
+        "y": 60,
         "wires": []
     },
     {
@@ -6434,7 +6255,7 @@
         "payload": "2024-05-23",
         "payloadType": "str",
         "x": 130,
-        "y": 460,
+        "y": 580,
         "wires": [
             [
                 "cbc139c0f6212c2a"
@@ -6452,7 +6273,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 310,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "98de8468dc0441db",
@@ -6482,9 +6303,33 @@
         "payload": "2024-01-05",
         "payloadType": "str",
         "x": 130,
-        "y": 420,
+        "y": 540,
         "wires": [
             [
+                "cbc139c0f6212c2a"
+            ]
+        ]
+    },
+    {
+        "id": "80d2166d46fb727d",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "if already done",
+        "func": "const reservoirsClusteringDate = global.get( 'reservoirsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (reservoirsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('reservoirsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "f89090b34c3bea4d"
+            ],
+            [
+                "08b8eaebd93fb988",
                 "cbc139c0f6212c2a"
             ]
         ]
@@ -6502,21 +6347,21 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 180,
+        "y": 220,
         "wires": []
     },
     {
         "id": "313ab92c54b8b2c3",
         "type": "link call",
         "z": "b7ec5c0795a0393f",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 890,
-        "y": 60,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6529,21 +6374,21 @@
         "mode": "return",
         "links": [],
         "x": 835,
-        "y": 240,
+        "y": 60,
         "wires": []
     },
     {
         "id": "8226ab4353aadeb1",
         "type": "link call",
         "z": "b7ec5c0795a0393f",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 250,
-        "y": 180,
+        "x": 260,
+        "y": 240,
         "wires": [
             [
                 "9242e2dffccfb7fb"
@@ -6563,7 +6408,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "e9db637dda81a734",
@@ -6581,7 +6426,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "'Weather clustering (' & msg.payload & ')'",
+                "to": "'Production clustering (' & msg.payload & ')'",
                 "tot": "jsonata"
             }
         ],
@@ -6591,7 +6436,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "313ab92c54b8b2c3"
@@ -6608,8 +6453,7 @@
         "y": 60,
         "wires": [
             [
-                "6c30f7113ddbe4b3",
-                "2e929dca24e77fa9"
+                "1a6118c29bd78b28"
             ]
         ]
     },
@@ -6624,7 +6468,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 310,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "8226ab4353aadeb1",
@@ -6654,7 +6498,7 @@
         "payload": "2024-05-23",
         "payloadType": "str",
         "x": 130,
-        "y": 420,
+        "y": 500,
         "wires": [
             [
                 "2e929dca24e77fa9"
@@ -6683,9 +6527,33 @@
         "payload": "2024-01-05",
         "payloadType": "str",
         "x": 130,
-        "y": 380,
+        "y": 460,
         "wires": [
             [
+                "2e929dca24e77fa9"
+            ]
+        ]
+    },
+    {
+        "id": "1a6118c29bd78b28",
+        "type": "function",
+        "z": "b7ec5c0795a0393f",
+        "name": "if already done",
+        "func": "const productionClusteringDate = global.get( 'productionClusteringDate' );\nconst lastDate = global.get('productionLastDate');\n\nif (productionClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('productionClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "3a90528d185d0347"
+            ],
+            [
+                "6c30f7113ddbe4b3",
                 "2e929dca24e77fa9"
             ]
         ]
@@ -6703,21 +6571,21 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 180,
+        "y": 220,
         "wires": []
     },
     {
         "id": "20542212bb2afe38",
         "type": "link call",
         "z": "11322c65b3bfae17",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 890,
-        "y": 60,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6730,21 +6598,21 @@
         "mode": "return",
         "links": [],
         "x": 835,
-        "y": 240,
+        "y": 60,
         "wires": []
     },
     {
         "id": "70cfed66a576c432",
         "type": "link call",
         "z": "11322c65b3bfae17",
-        "name": "call database",
+        "name": "",
         "links": [
             "ab0e6d979d760a4a"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 250,
-        "y": 180,
+        "x": 260,
+        "y": 240,
         "wires": [
             [
                 "d7e7389c63dc7b62"
@@ -6764,7 +6632,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 240,
+        "y": 300,
         "wires": [
             [
                 "bc4d3eb33981ed7b",
@@ -6782,7 +6650,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "'Production clustering (' & msg.payload & ')'",
+                "to": "'Weather clustering (' & msg.payload & ')'",
                 "tot": "jsonata"
             }
         ],
@@ -6792,7 +6660,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "20542212bb2afe38"
@@ -6809,8 +6677,7 @@
         "y": 60,
         "wires": [
             [
-                "6791b2dc385a8eec",
-                "bd751375a065374d"
+                "73e0b8bf57532c58"
             ]
         ]
     },
@@ -6854,7 +6721,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 310,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "70cfed66a576c432",
@@ -6892,6 +6759,30 @@
         ]
     },
     {
+        "id": "73e0b8bf57532c58",
+        "type": "function",
+        "z": "11322c65b3bfae17",
+        "name": "if already done",
+        "func": "const weatherClusteringDate = global.get( 'weatherClusteringDate' );\nconst lastDate = global.get('weatherLastDate');\n\nif (weatherClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('weatherClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "cb80b2332117524a"
+            ],
+            [
+                "6791b2dc385a8eec",
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
         "id": "7ab903a24411f2b3",
         "type": "debug",
         "z": "42c32db0efd3bac1",
@@ -6904,7 +6795,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 180,
+        "y": 220,
         "wires": []
     },
     {
@@ -6918,7 +6809,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 890,
-        "y": 60,
+        "y": 140,
         "wires": [
             []
         ]
@@ -6931,7 +6822,7 @@
         "mode": "return",
         "links": [],
         "x": 835,
-        "y": 240,
+        "y": 60,
         "wires": []
     },
     {
@@ -6945,7 +6836,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 250,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "5f9e3ca1b8ea45f3"
@@ -6965,7 +6856,7 @@
         "finalize": "",
         "libs": [],
         "x": 260,
-        "y": 460,
+        "y": 520,
         "wires": [
             [
                 "7ab903a24411f2b3",
@@ -6983,7 +6874,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "'Production clustering (' & msg.payload & ')'",
+                "to": "'Water clustering (' & msg.payload & ')'",
                 "tot": "jsonata"
             }
         ],
@@ -6993,7 +6884,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 60,
+        "y": 120,
         "wires": [
             [
                 "81d8c3d0c7b606be"
@@ -7010,8 +6901,7 @@
         "y": 60,
         "wires": [
             [
-                "e7b8060b470b3ca5",
-                "84f0b490692f53d2"
+                "27f4c4232a03ca21"
             ]
         ]
     },
@@ -7037,7 +6927,7 @@
         "payload": "2024-01-05",
         "payloadType": "str",
         "x": 130,
-        "y": 580,
+        "y": 600,
         "wires": [
             [
                 "84f0b490692f53d2"
@@ -7055,7 +6945,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 350,
-        "y": 180,
+        "y": 240,
         "wires": [
             [
                 "cb919f46fd03bd4b"
@@ -7074,7 +6964,7 @@
         "stream": false,
         "addname": "",
         "x": 230,
-        "y": 120,
+        "y": 180,
         "wires": [
             [
                 "51d8baa7fc7dba59",
@@ -7093,7 +6983,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 350,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "cb919f46fd03bd4b"
@@ -7121,7 +7011,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 230,
-        "y": 280,
+        "y": 340,
         "wires": [
             [
                 "17d51e8ea5d860c7"
@@ -7141,7 +7031,7 @@
         "finalize": "",
         "libs": [],
         "x": 240,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "ed1602f667ce9c52",
@@ -7171,9 +7061,33 @@
         "payload": "2024-05-23",
         "payloadType": "str",
         "x": 130,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
+                "84f0b490692f53d2"
+            ]
+        ]
+    },
+    {
+        "id": "27f4c4232a03ca21",
+        "type": "function",
+        "z": "42c32db0efd3bac1",
+        "name": "if already done",
+        "func": "const { minDate } = global.get( 'dateHelpers' );\nconst waterClusteringDate = global.get( 'waterClusteringDate' );\n\nconst newWaterClusteringDate = minDate( [\n    global.get( 'savingsLastDate' ),\n    global.get( 'productionLastDate' )\n] );\n\nif (newWaterClusteringDate == waterClusteringDate ) {\n    return [ msg, null ];   \n}\n\nglobal.set('waterClusteringDate', newWaterClusteringDate);\nmsg.payload = newWaterClusteringDate;\n\nreturn [ null, msg ];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "b0771a85114491a8"
+            ],
+            [
+                "e7b8060b470b3ca5",
                 "84f0b490692f53d2"
             ]
         ]
