@@ -1,13 +1,5 @@
 [
     {
-        "id": "f0359d4577eb4ffc",
-        "type": "tab",
-        "label": "admin",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "6d278dbe6de7a110",
         "type": "tab",
         "label": "start",
@@ -18,7 +10,7 @@
     {
         "id": "9e38695607437acd",
         "type": "tab",
-        "label": "logger",
+        "label": "admin",
         "disabled": false,
         "info": "",
         "env": []
@@ -144,17 +136,17 @@
         "env": []
     },
     {
-        "id": "1701ccc8d2838ab0",
+        "id": "a8ca5f37ab8664a6",
         "type": "tab",
-        "label": "reservoirs clustering",
+        "label": "savings clustering",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "a8ca5f37ab8664a6",
+        "id": "1701ccc8d2838ab0",
         "type": "tab",
-        "label": "savings clustering",
+        "label": "reservoirs clustering",
         "disabled": false,
         "info": "",
         "env": []
@@ -238,119 +230,6 @@
         "vhost": "athenswater",
         "tls": false,
         "credsFromSettings": false
-    },
-    {
-        "id": "ad8fd501b129cfec",
-        "type": "debug",
-        "z": "f0359d4577eb4ffc",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 140,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "06c779112978aaa2",
-        "type": "function",
-        "z": "f0359d4577eb4ffc",
-        "name": "read globals",
-        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    locations: global.get( 'locations' ),\n\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    reservoirs: global.get( 'reservoirs' ),\n\n    productionLastDate: global.get( 'productionLastDate' ),\n    factories: global.get( 'factories' ),\n\n    reservoirsClusteringDate: global.get( 'reservoirsClusteringDate' ),\n    savingsClusteringDate: global.get('savingsClusteringDate'),\n    productionClusteringDate: global.get('productionClusteringDate'),\n    weatherClusteringDate: global.get('weatherClusteringDate'),\n    waterClusteringDate: global.get('waterClusteringDate'),\n\n    reservoirsClusteringResult: global.get('reservoirsClusteringResult'),\n    savingsClusteringResult: global.get('savingsClusteringResult'),\n    productionClusteringResult: global.get('productionClusteringResult'),\n    weatherClusteringResult: global.get('weatherClusteringResult'),\n    waterClusteringResult: global.get('waterClusteringResult'),\n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 150,
-        "y": 120,
-        "wires": [
-            [
-                "ad8fd501b129cfec"
-            ]
-        ]
-    },
-    {
-        "id": "b48859fe2d07cd72",
-        "type": "inject",
-        "z": "f0359d4577eb4ffc",
-        "name": "trigger",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 390,
-        "y": 60,
-        "wires": [
-            [
-                "0578fa751ff3e995"
-            ]
-        ]
-    },
-    {
-        "id": "0578fa751ff3e995",
-        "type": "function",
-        "z": "f0359d4577eb4ffc",
-        "name": "clean globals",
-        "func": "global.set( 'weatherExitLoop', undefined );\nglobal.set( 'savingsExitLoop', undefined );\nglobal.set( 'productionExitLoop', undefined );\n\nglobal.set( 'weatherLastDate', undefined );\nglobal.set( 'savingsLastDate', undefined );\nglobal.set( 'productionLastDate', undefined );\n\nglobal.set( 'reservoirsClusteringDate', undefined );\nglobal.set( 'savingsClusteringDate', undefined );\nglobal.set( 'productionClusteringDate', undefined );\nglobal.set( 'weatherClusteringDate', undefined );\nglobal.set( 'waterClusteringDate', undefined );\n\nglobal.set('reservoirsClusteringResult', undefined);\nglobal.set('savingsClusteringResult', undefined);\nglobal.set('productionClusteringResult', undefined);\nglobal.set('weatherClusteringResult', undefined);\nglobal.set('waterClusteringResult', undefined);\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "63251ea6481c533d",
-        "type": "inject",
-        "z": "f0359d4577eb4ffc",
-        "name": "trigger",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 130,
-        "y": 60,
-        "wires": [
-            [
-                "06c779112978aaa2"
-            ]
-        ]
     },
     {
         "id": "9521260f5086eed6",
@@ -849,7 +728,7 @@
         "createDir": false,
         "overwriteFile": "false",
         "encoding": "utf8",
-        "x": 240,
+        "x": 550,
         "y": 220,
         "wires": [
             [
@@ -869,8 +748,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 240,
-        "y": 140,
+        "x": 550,
+        "y": 180,
         "wires": [
             [
                 "1cc0862b6d0ccf91"
@@ -881,10 +760,10 @@
         "id": "992e1a45369732e3",
         "type": "link in",
         "z": "9e38695607437acd",
-        "name": "link in 3",
+        "name": "link in logger",
         "links": [],
-        "x": 65,
-        "y": 100,
+        "x": 375,
+        "y": 180,
         "wires": [
             [
                 "66dca8af6b89b230",
@@ -899,61 +778,15 @@
         "name": "link out 3",
         "mode": "return",
         "links": [],
-        "x": 415,
+        "x": 725,
         "y": 220,
         "wires": []
-    },
-    {
-        "id": "bc33fac1bfdac6f3",
-        "type": "file",
-        "z": "9e38695607437acd",
-        "name": "delete log file",
-        "filename": "athens-water.log",
-        "filenameType": "str",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "delete",
-        "encoding": "none",
-        "x": 230,
-        "y": 420,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fd8fe79b83e94a46",
-        "type": "inject",
-        "z": "9e38695607437acd",
-        "name": "admin mgmt",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 230,
-        "y": 340,
-        "wires": [
-            [
-                "bc33fac1bfdac6f3"
-            ]
-        ]
     },
     {
         "id": "66dca8af6b89b230",
         "type": "debug",
         "z": "9e38695607437acd",
-        "name": "debug 15",
+        "name": "debug logger",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -962,8 +795,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 220,
-        "y": 60,
+        "x": 540,
+        "y": 140,
         "wires": []
     },
     {
@@ -976,7 +809,7 @@
             "bc33fac1bfdac6f3"
         ],
         "uncaught": false,
-        "x": 830,
+        "x": 910,
         "y": 220,
         "wires": [
             [
@@ -1003,8 +836,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 860,
-        "y": 140,
+        "x": 940,
+        "y": 180,
         "wires": [
             [
                 "7c9527a0cc39587f"
@@ -1023,9 +856,168 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
-        "y": 60,
+        "x": 920,
+        "y": 140,
         "wires": []
+    },
+    {
+        "id": "bc33fac1bfdac6f3",
+        "type": "file",
+        "z": "9e38695607437acd",
+        "name": "delete log file",
+        "filename": "athens-water.log",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd8fe79b83e94a46",
+        "type": "inject",
+        "z": "9e38695607437acd",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "bc33fac1bfdac6f3"
+            ]
+        ]
+    },
+    {
+        "id": "ad8fd501b129cfec",
+        "type": "debug",
+        "z": "9e38695607437acd",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "06c779112978aaa2",
+        "type": "function",
+        "z": "9e38695607437acd",
+        "name": "read globals",
+        "func": "msg.payload = {\n    weatherLastDate: global.get( 'weatherLastDate' ),\n    locations: global.get( 'locations' ),\n\n    savingsLastDate: global.get( 'savingsLastDate' ),\n    reservoirs: global.get( 'reservoirs' ),\n\n    productionLastDate: global.get( 'productionLastDate' ),\n    factories: global.get( 'factories' ),\n\n    reservoirsClusteringDate: global.get( 'reservoirsClusteringDate' ),\n    savingsClusteringDate: global.get('savingsClusteringDate'),\n    productionClusteringDate: global.get('productionClusteringDate'),\n    weatherClusteringDate: global.get('weatherClusteringDate'),\n    waterClusteringDate: global.get('waterClusteringDate'),\n\n    reservoirsClusteringResult: global.get('reservoirsClusteringResult'),\n    savingsClusteringResult: global.get('savingsClusteringResult'),\n    productionClusteringResult: global.get('productionClusteringResult'),\n    weatherClusteringResult: global.get('weatherClusteringResult'),\n    waterClusteringResult: global.get('waterClusteringResult'),\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "ad8fd501b129cfec"
+            ]
+        ]
+    },
+    {
+        "id": "b48859fe2d07cd72",
+        "type": "inject",
+        "z": "9e38695607437acd",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "0578fa751ff3e995"
+            ]
+        ]
+    },
+    {
+        "id": "0578fa751ff3e995",
+        "type": "function",
+        "z": "9e38695607437acd",
+        "name": "clean globals",
+        "func": "// global.set( 'weatherExitLoop', undefined );\n// global.set( 'savingsExitLoop', undefined );\n// global.set( 'productionExitLoop', undefined );\n\nglobal.set( 'weatherLastDate', undefined );\nglobal.set( 'savingsLastDate', undefined );\nglobal.set( 'productionLastDate', undefined );\n\nglobal.set( 'reservoirsClusteringDate', undefined );\nglobal.set( 'savingsClusteringDate', undefined );\nglobal.set( 'productionClusteringDate', undefined );\nglobal.set( 'weatherClusteringDate', undefined );\nglobal.set( 'waterClusteringDate', undefined );\n\nglobal.set('reservoirsClusteringResult', undefined);\nglobal.set('savingsClusteringResult', undefined);\nglobal.set('productionClusteringResult', undefined);\nglobal.set('weatherClusteringResult', undefined);\nglobal.set('waterClusteringResult', undefined);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "63251ea6481c533d",
+        "type": "inject",
+        "z": "9e38695607437acd",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "06c779112978aaa2"
+            ]
+        ]
     },
     {
         "id": "4f48bf4d39cb2c86",
@@ -6019,6 +6011,207 @@
         ]
     },
     {
+        "id": "c7ef80a6ea38e846",
+        "type": "debug",
+        "z": "a8ca5f37ab8664a6",
+        "name": "debug 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "266b71e4d0db2853",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "call logger",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "193e53da1dcf8019",
+        "type": "link out",
+        "z": "a8ca5f37ab8664a6",
+        "name": "link out 22",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1df0e0ece91af8f3",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "f444e4306180eff9"
+            ]
+        ]
+    },
+    {
+        "id": "f444e4306180eff9",
+        "type": "function",
+        "z": "a8ca5f37ab8664a6",
+        "name": "savings clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "193e53da1dcf8019",
+                "c7ef80a6ea38e846"
+            ]
+        ]
+    },
+    {
+        "id": "f80e433eb3f5cbe9",
+        "type": "change",
+        "z": "a8ca5f37ab8664a6",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Savings clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "266b71e4d0db2853"
+            ]
+        ]
+    },
+    {
+        "id": "825d7f4f827524c2",
+        "type": "link in",
+        "z": "a8ca5f37ab8664a6",
+        "name": "link in savings clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "f80e433eb3f5cbe9",
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "ef61379ce7dc460d",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "9478bf2057f22b65"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "266b71e4d0db2853",
+                "1df0e0ece91af8f3"
+            ]
+        ]
+    },
+    {
+        "id": "adb61f3a0489986d",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "02766e51d35f3d41",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
         "id": "98de8468dc0441db",
         "type": "link call",
         "z": "1701ccc8d2838ab0",
@@ -6293,207 +6486,6 @@
         "wires": [
             [
                 "cbc139c0f6212c2a"
-            ]
-        ]
-    },
-    {
-        "id": "c7ef80a6ea38e846",
-        "type": "debug",
-        "z": "a8ca5f37ab8664a6",
-        "name": "debug 28",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "266b71e4d0db2853",
-        "type": "link call",
-        "z": "a8ca5f37ab8664a6",
-        "name": "call logger",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 890,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "193e53da1dcf8019",
-        "type": "link out",
-        "z": "a8ca5f37ab8664a6",
-        "name": "link out 22",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "1df0e0ece91af8f3",
-        "type": "link call",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 260,
-        "y": 180,
-        "wires": [
-            [
-                "f444e4306180eff9"
-            ]
-        ]
-    },
-    {
-        "id": "f444e4306180eff9",
-        "type": "function",
-        "z": "a8ca5f37ab8664a6",
-        "name": "savings clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 240,
-        "wires": [
-            [
-                "193e53da1dcf8019",
-                "c7ef80a6ea38e846"
-            ]
-        ]
-    },
-    {
-        "id": "f80e433eb3f5cbe9",
-        "type": "change",
-        "z": "a8ca5f37ab8664a6",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Savings clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 60,
-        "wires": [
-            [
-                "266b71e4d0db2853"
-            ]
-        ]
-    },
-    {
-        "id": "825d7f4f827524c2",
-        "type": "link in",
-        "z": "a8ca5f37ab8664a6",
-        "name": "link in savings clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "f80e433eb3f5cbe9",
-                "ef61379ce7dc460d"
-            ]
-        ]
-    },
-    {
-        "id": "ef61379ce7dc460d",
-        "type": "link call",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "links": [
-            "9478bf2057f22b65"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 310,
-        "y": 120,
-        "wires": [
-            [
-                "266b71e4d0db2853",
-                "1df0e0ece91af8f3"
-            ]
-        ]
-    },
-    {
-        "id": "adb61f3a0489986d",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 420,
-        "wires": [
-            [
-                "ef61379ce7dc460d"
-            ]
-        ]
-    },
-    {
-        "id": "02766e51d35f3d41",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 380,
-        "wires": [
-            [
-                "ef61379ce7dc460d"
             ]
         ]
     },
