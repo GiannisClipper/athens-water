@@ -142,6 +142,17 @@ const startPeriod30 = date2 => {
     return `${y1}-${m1}-${d1}`;
 }
 
+const minDate = dates => {
+
+    let result = dates[ 0 ];
+    for ( let date of dates ) {
+        if ( date < result ) {
+            result = date;
+        }
+    }
+    return result;
+}
+
 module.exports = {
     timeRepr,
     // rangeToDates,
@@ -149,4 +160,5 @@ module.exports = {
     daysDistance,
     nextDate,
     startPeriod30,
+    minDate
 }
