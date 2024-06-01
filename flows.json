@@ -7682,7 +7682,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "set response",
-        "func": "const { username, exchanges  } = msg.req.params;\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges} exchange(s).`;\nreturn msg;",
+        "func": "const { username, keys  } = msg.req.params;\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${keys} routing key(s).`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
