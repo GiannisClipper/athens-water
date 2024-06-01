@@ -7475,11 +7475,11 @@
         "type": "http in",
         "z": "c05f2d05a65c769e",
         "name": "",
-        "url": "/register/username/:username/password/:password/exchanges/:exchanges",
+        "url": "/register/username/:username/password/:password/keys/:keys",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 320,
+        "x": 280,
         "y": 60,
         "wires": [
             [
@@ -7559,7 +7559,7 @@
         "y": 220,
         "wires": [
             [
-                "2032088449cbed34"
+                "20063f98b5c417ee"
             ]
         ]
     },
@@ -7567,57 +7567,19 @@
         "id": "20063f98b5c417ee",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "validate exchanges",
-        "func": "const existingExchanges = msg.payload.map( x => x.name );\n// node.warn(existingExchanges);\n\nlet { exchanges } = msg.req.params;\nexchanges = exchanges.split( ',' );\n// node.warn(exchanges);\n\nfor ( let exchange of exchanges ) {\n    if (!existingExchanges.includes(exchange ) ) {\n        throw `Error from Athens-water. Invalid registration. Exchange ${exchange} not available.`;\n    }\n}\n\nreturn msg;",
+        "name": "validate keys",
+        "func": "const AW_ROUTING_KEYS = env.get( 'AW_ROUTING_KEYS' );\nconst routingKeys = AW_ROUTING_KEYS.split( ',' );\n// node.warn(routingKeys);\n\nlet { keys } = msg.req.params;\nkeys = keys.split( ',' );\n// node.warn(keys);\n\nfor ( let key of keys ) {\n    if (!routingKeys.includes(key ) ) {\n        throw `Error from Athens-water. Invalid registration. Routing key '${key}' not available.`;\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 130,
-        "y": 360,
-        "wires": [
-            [
-                "5ec2a1163f0b1f92"
-            ]
-        ]
-    },
-    {
-        "id": "c895025fb03bc432",
-        "type": "link call",
-        "z": "c05f2d05a65c769e",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 130,
-        "y": 320,
-        "wires": [
-            [
-                "20063f98b5c417ee"
-            ]
-        ]
-    },
-    {
-        "id": "2032088449cbed34",
-        "type": "function",
-        "z": "c05f2d05a65c769e",
-        "name": "retreive exchanges",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/exchanges/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 130,
+        "x": 110,
         "y": 280,
         "wires": [
             [
-                "c895025fb03bc432"
+                "5ec2a1163f0b1f92"
             ]
         ]
     },
@@ -7778,7 +7740,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "create binding",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { exchange, queue } = msg.payload;\n\nconst path = `/bindings/${AW_VHOST}/e/${exchange}/q/${queue}`;\n\nconst body = null;\n\n// const body = {\n    //  routing_key: \"my_routing_key\", \n    //  arguments: {\"x-arg\": \"value\"}\n// };\n\nmsg.url = path;\nmsg.method = 'POST';\nmsg.payload = body;\nmsg.binding = undefined;\n\nreturn msg;\n\n",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { exchange, queue, routingKey } = msg.payload;\n\nconst path = `/bindings/${AW_VHOST}/e/${exchange}/q/${queue}`;\n\nconst body = {\n     routing_key: routingKey, \n    //  arguments: {\"x-arg\": \"value\"}\n};\n\nmsg.url = path;\nmsg.method = 'POST';\nmsg.payload = body;\nmsg.binding = undefined;\n\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -7817,7 +7779,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "define bindings",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nlet { exchanges } = msg.req.params;\nexchanges = exchanges.split( ',' );\nconst { queue } = msg;\n\nconst bindings = [];\nfor ( let exchange of exchanges ) {\n    bindings.push( { exchange, queue } );\n}\n\nmsg.payload = bindings;\nreturn msg;",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst AW_EXCHANGE = env.get( 'AW_EXCHANGE' );\nlet { keys } = msg.req.params;\nkeys = keys.split( ',' );\nconst { queue } = msg;\n\nconst bindings = [];\nfor ( let routingKey of keys ) {\n    bindings.push( { \n        exchange: AW_EXCHANGE, \n        queue,\n        routingKey, \n    } );\n}\n\nmsg.payload = bindings;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
