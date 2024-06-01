@@ -72,9 +72,49 @@
         "env": []
     },
     {
+        "id": "a8ca5f37ab8664a6",
+        "type": "tab",
+        "label": "savings clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b7ec5c0795a0393f",
+        "type": "tab",
+        "label": "production clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "42c32db0efd3bac1",
+        "type": "tab",
+        "label": "water clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "11322c65b3bfae17",
+        "type": "tab",
+        "label": "weather clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1701ccc8d2838ab0",
+        "type": "tab",
+        "label": "reservoirs clustering",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "bac88e4feb8bab3d",
         "type": "tab",
-        "label": "publish",
+        "label": "rabbitmq publish",
         "disabled": false,
         "info": "",
         "env": []
@@ -136,41 +176,9 @@
         "env": []
     },
     {
-        "id": "a8ca5f37ab8664a6",
+        "id": "08eda6c1b66e16e5",
         "type": "tab",
-        "label": "savings clustering",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "1701ccc8d2838ab0",
-        "type": "tab",
-        "label": "reservoirs clustering",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "b7ec5c0795a0393f",
-        "type": "tab",
-        "label": "production clustering",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "11322c65b3bfae17",
-        "type": "tab",
-        "label": "weather clustering",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "42c32db0efd3bac1",
-        "type": "tab",
-        "label": "water clustering",
+        "label": "rabbitmq admin",
         "disabled": false,
         "info": "",
         "env": []
@@ -187,14 +195,6 @@
         "id": "caf565125e59062a",
         "type": "tab",
         "label": "rabbitmq unregister",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "08eda6c1b66e16e5",
-        "type": "tab",
-        "label": "rabbitmq admin",
         "disabled": false,
         "info": "",
         "env": []
@@ -694,8 +694,8 @@
         "createDir": false,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 210,
-        "y": 620,
+        "x": 810,
+        "y": 340,
         "wires": [
             []
         ]
@@ -721,8 +721,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 580,
+        "x": 790,
+        "y": 300,
         "wires": [
             [
                 "bc33fac1bfdac6f3"
@@ -742,8 +742,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 200,
-        "y": 420,
+        "x": 800,
+        "y": 140,
         "wires": []
     },
     {
@@ -758,8 +758,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 210,
-        "y": 380,
+        "x": 810,
+        "y": 100,
         "wires": [
             [
                 "ad8fd501b129cfec"
@@ -787,8 +787,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 480,
+        "x": 790,
+        "y": 200,
         "wires": [
             [
                 "0578fa751ff3e995"
@@ -807,8 +807,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 210,
-        "y": 520,
+        "x": 810,
+        "y": 240,
         "wires": [
             []
         ]
@@ -834,8 +834,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 340,
+        "x": 790,
+        "y": 60,
         "wires": [
             [
                 "06c779112978aaa2"
@@ -1746,7 +1746,7 @@
         "y": 220,
         "wires": [
             [
-                "8f401e0f3efb798c"
+                "c6ca5fcc2f3a3473"
             ]
         ]
     },
@@ -1814,7 +1814,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 620,
+        "y": 460,
         "wires": [
             [
                 "2fb4cc5afb478162"
@@ -1834,7 +1834,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 340,
+        "y": 300,
         "wires": [
             [
                 "19824c02c61e45f3",
@@ -1853,10 +1853,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 280,
-        "y": 380,
+        "y": 340,
         "wires": [
             [
-                "665e54770bf372e0"
+                "b313c853354a574e"
             ]
         ]
     },
@@ -1865,7 +1865,7 @@
         "type": "function",
         "z": "1dc82d7c84b0491f",
         "name": "set last date",
-        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.publish = undefined;\nmsg.payload = requestDate;\n\nreturn msg;",
+        "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'weatherLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.publish = undefined;\nmsg.payload = `Weather update (${requestDate})`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1873,10 +1873,11 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 500,
+        "y": 380,
         "wires": [
             [
-                "02caf14b0c28d596"
+                "015c0ec7d6ec099f",
+                "1d13a35b302aaeed"
             ]
         ]
     },
@@ -1890,108 +1891,6 @@
         "x": 775,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "60ac5ac331342725",
-        "type": "link call",
-        "z": "1dc82d7c84b0491f",
-        "name": "call publish",
-        "links": [
-            "fc7aaaa19c985f47"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 270,
-        "y": 460,
-        "wires": [
-            [
-                "b313c853354a574e"
-            ]
-        ]
-    },
-    {
-        "id": "8f401e0f3efb798c",
-        "type": "change",
-        "z": "1dc82d7c84b0491f",
-        "name": "preset publish",
-        "rules": [
-            {
-                "t": "set",
-                "p": "publish",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 300,
-        "wires": [
-            [
-                "c6ca5fcc2f3a3473"
-            ]
-        ]
-    },
-    {
-        "id": "665e54770bf372e0",
-        "type": "change",
-        "z": "1dc82d7c84b0491f",
-        "name": "set publish",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "publish",
-                "tot": "msg",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 270,
-        "y": 420,
-        "wires": [
-            [
-                "60ac5ac331342725"
-            ]
-        ]
-    },
-    {
-        "id": "02caf14b0c28d596",
-        "type": "change",
-        "z": "1dc82d7c84b0491f",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Weather update ' & msg.payload & '...'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 540,
-        "wires": [
-            [
-                "1d13a35b302aaeed",
-                "015c0ec7d6ec099f"
-            ]
-        ]
     },
     {
         "id": "a3aeb5ed388a6be4",
@@ -2035,7 +1934,7 @@
         "id": "ee151d8aa972eca3",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "set url",
+        "name": "prepare url",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\n\nconst requestDate = msg.payload;\nconst reverseDate = requestDate.split( '-' ).reverse().join( '-' );\n\nconst url = global.get( 'savingsUrl' ) + reverseDate;\n\nmsg.url = url;\nmsg.requestParams = {\n    requestDate,\n};\n\nmsg.payload = `(${requestDate}) => ${url}`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -2043,7 +1942,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
+        "x": 270,
         "y": 140,
         "wires": [
             [
@@ -2108,7 +2007,7 @@
         "y": 260,
         "wires": [
             [
-                "b7122021235d740f"
+                "a076f80433e32a0f"
             ]
         ]
     },
@@ -2124,7 +2023,7 @@
         ],
         "uncaught": false,
         "x": 810,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
                 "2eac0f1e97633ab0"
@@ -2151,7 +2050,7 @@
         "to": "",
         "reg": false,
         "x": 840,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "47560b1a83aa9b08"
@@ -2176,7 +2075,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 620,
+        "y": 500,
         "wires": [
             [
                 "c7c23ca1cd6e436a"
@@ -2196,7 +2095,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 380,
+        "y": 340,
         "wires": [
             [
                 "68451f8805a4ded4",
@@ -2215,10 +2114,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 280,
-        "y": 420,
+        "y": 380,
         "wires": [
             [
-                "c3aa965745a302cd"
+                "53d7020558aeb4ee"
             ]
         ]
     },
@@ -2226,7 +2125,7 @@
         "id": "53d7020558aeb4ee",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "set last date",
+        "name": "update last date",
         "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'savingsLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.payload = `Savings update (${requestDate})`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -2234,8 +2133,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 540,
+        "x": 280,
+        "y": 420,
         "wires": [
             [
                 "810a0a9d8b3d7e36",
@@ -2263,80 +2162,6 @@
         "x": 290,
         "y": 180,
         "wires": []
-    },
-    {
-        "id": "b7122021235d740f",
-        "type": "change",
-        "z": "61022c35528d6ffa",
-        "name": "preset publish",
-        "rules": [
-            {
-                "t": "set",
-                "p": "publish",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 340,
-        "wires": [
-            [
-                "a076f80433e32a0f"
-            ]
-        ]
-    },
-    {
-        "id": "c3aa965745a302cd",
-        "type": "change",
-        "z": "61022c35528d6ffa",
-        "name": "set publish",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "publish",
-                "tot": "msg",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 270,
-        "y": 460,
-        "wires": [
-            [
-                "e155bbefca1f3401"
-            ]
-        ]
-    },
-    {
-        "id": "e155bbefca1f3401",
-        "type": "link call",
-        "z": "61022c35528d6ffa",
-        "name": "call publish",
-        "links": [
-            "346adf5f28e6d8c6"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 270,
-        "y": 500,
-        "wires": [
-            [
-                "53d7020558aeb4ee"
-            ]
-        ]
     },
     {
         "id": "b3c337ed58cf68bd",
@@ -2380,7 +2205,7 @@
         "id": "ca1ff0ef5d5f0a54",
         "type": "function",
         "z": "d21f4bda462bb9a5",
-        "name": "set url",
+        "name": "prepare url",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\n\nconst requestDate = msg.payload;\nconst reverseDate = requestDate.split( '-' ).reverse().join( '-' );\n\nconst url = global.get( 'productionUrl' ) + reverseDate;\n\nmsg.url = url;\nmsg.requestParams = {\n    requestDate,\n};\n\nmsg.payload = `(${requestDate}) => ${url}`;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -2388,7 +2213,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
+        "x": 270,
         "y": 140,
         "wires": [
             [
@@ -2453,7 +2278,7 @@
         "y": 260,
         "wires": [
             [
-                "2d0286ed0a9be577"
+                "15d8990b4f617272"
             ]
         ]
     },
@@ -2521,7 +2346,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 260,
-        "y": 620,
+        "y": 500,
         "wires": [
             [
                 "722008d1f8785f62"
@@ -2541,7 +2366,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 380,
+        "y": 340,
         "wires": [
             [
                 "45074707b3343bdf",
@@ -2560,10 +2385,10 @@
         "linkType": "static",
         "timeout": "30",
         "x": 280,
-        "y": 420,
+        "y": 380,
         "wires": [
             [
-                "8e5dfc208b5fa7a5"
+                "150def491b82fe85"
             ]
         ]
     },
@@ -2571,7 +2396,7 @@
         "id": "150def491b82fe85",
         "type": "function",
         "z": "d21f4bda462bb9a5",
-        "name": "set last date",
+        "name": "update last date",
         "func": "const { requestDate } = msg.requestParams;\nglobal.set( 'productionLastDate', requestDate );\n\nmsg.topic = undefined;\nmsg.requestParams = undefined;\nmsg.payload = `Production update (${requestDate})`;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -2579,8 +2404,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 540,
+        "x": 280,
+        "y": 420,
         "wires": [
             [
                 "809c36996292b6ee",
@@ -2610,46 +2435,99 @@
         "wires": []
     },
     {
-        "id": "2d0286ed0a9be577",
-        "type": "change",
-        "z": "d21f4bda462bb9a5",
-        "name": "preset publish",
-        "rules": [
-            {
-                "t": "set",
-                "p": "publish",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg",
-                "dc": true
-            }
+        "id": "c7ef80a6ea38e846",
+        "type": "debug",
+        "z": "a8ca5f37ab8664a6",
+        "name": "debug 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "266b71e4d0db2853",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
         ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 340,
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "193e53da1dcf8019",
+        "type": "link out",
+        "z": "a8ca5f37ab8664a6",
+        "name": "link out 22",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1df0e0ece91af8f3",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 220,
         "wires": [
             [
-                "15d8990b4f617272"
+                "f444e4306180eff9"
             ]
         ]
     },
     {
-        "id": "8e5dfc208b5fa7a5",
+        "id": "f444e4306180eff9",
+        "type": "function",
+        "z": "a8ca5f37ab8664a6",
+        "name": "savings clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 280,
+        "wires": [
+            [
+                "e3714ab3c2eca9bf",
+                "c7ef80a6ea38e846"
+            ]
+        ]
+    },
+    {
+        "id": "f80e433eb3f5cbe9",
         "type": "change",
-        "z": "d21f4bda462bb9a5",
-        "name": "set publish",
+        "z": "a8ca5f37ab8664a6",
+        "name": "set log message",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "publish",
-                "tot": "msg",
-                "dc": true
+                "to": "'Savings clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2657,29 +2535,1375 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 460,
+        "x": 260,
+        "y": 120,
         "wires": [
             [
-                "8c2b091c486df767"
+                "266b71e4d0db2853"
             ]
         ]
     },
     {
-        "id": "8c2b091c486df767",
+        "id": "825d7f4f827524c2",
+        "type": "link in",
+        "z": "a8ca5f37ab8664a6",
+        "name": "link in savings clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "195d01cff4a595f0"
+            ]
+        ]
+    },
+    {
+        "id": "ef61379ce7dc460d",
         "type": "link call",
-        "z": "d21f4bda462bb9a5",
-        "name": "call publish",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "9478bf2057f22b65"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "266b71e4d0db2853",
+                "1df0e0ece91af8f3"
+            ]
+        ]
+    },
+    {
+        "id": "adb61f3a0489986d",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "02766e51d35f3d41",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "195d01cff4a595f0",
+        "type": "function",
+        "z": "a8ca5f37ab8664a6",
+        "name": "if already done",
+        "func": "const savingsClusteringDate = global.get( 'savingsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (savingsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('savingsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "193e53da1dcf8019"
+            ],
+            [
+                "f80e433eb3f5cbe9",
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "e155bbefca1f3401",
+        "type": "link call",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "links": [
+            "346adf5f28e6d8c6"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "193e53da1dcf8019"
+            ]
+        ]
+    },
+    {
+        "id": "e3714ab3c2eca9bf",
+        "type": "function",
+        "z": "a8ca5f37ab8664a6",
+        "name": "prepare publish",
+        "func": "const savings = msg.payload;\nmsg.payload = { savings };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "e155bbefca1f3401"
+            ]
+        ]
+    },
+    {
+        "id": "e9db637dda81a734",
+        "type": "debug",
+        "z": "b7ec5c0795a0393f",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "313ab92c54b8b2c3",
+        "type": "link call",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a90528d185d0347",
+        "type": "link out",
+        "z": "b7ec5c0795a0393f",
+        "name": "link out 23",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8226ab4353aadeb1",
+        "type": "link call",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "9242e2dffccfb7fb"
+            ]
+        ]
+    },
+    {
+        "id": "9242e2dffccfb7fb",
+        "type": "function",
+        "z": "b7ec5c0795a0393f",
+        "name": "production clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    productionAvg: value,\n    productionRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set( 'productionClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "5be46b2aceca3b99",
+                "e9db637dda81a734"
+            ]
+        ]
+    },
+    {
+        "id": "6c30f7113ddbe4b3",
+        "type": "change",
+        "z": "b7ec5c0795a0393f",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Production clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "313ab92c54b8b2c3"
+            ]
+        ]
+    },
+    {
+        "id": "a629a24ab77645c8",
+        "type": "link in",
+        "z": "b7ec5c0795a0393f",
+        "name": "link in production clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "1a6118c29bd78b28"
+            ]
+        ]
+    },
+    {
+        "id": "2e929dca24e77fa9",
+        "type": "link call",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "links": [
+            "8438ec33152a3341"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "8226ab4353aadeb1",
+                "313ab92c54b8b2c3"
+            ]
+        ]
+    },
+    {
+        "id": "c1a67434013bb48a",
+        "type": "inject",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "2e929dca24e77fa9"
+            ]
+        ]
+    },
+    {
+        "id": "c7cc759199f90113",
+        "type": "inject",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "2e929dca24e77fa9"
+            ]
+        ]
+    },
+    {
+        "id": "1a6118c29bd78b28",
+        "type": "function",
+        "z": "b7ec5c0795a0393f",
+        "name": "if already done",
+        "func": "const productionClusteringDate = global.get( 'productionClusteringDate' );\nconst lastDate = global.get('productionLastDate');\n\nif (productionClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('productionClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "3a90528d185d0347"
+            ],
+            [
+                "6c30f7113ddbe4b3",
+                "2e929dca24e77fa9"
+            ]
+        ]
+    },
+    {
+        "id": "71dbdd31b4f0f0cc",
+        "type": "link call",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
         "links": [
             "ccdcc2fdde08e718"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 270,
-        "y": 500,
+        "x": 300,
+        "y": 380,
         "wires": [
             [
-                "150def491b82fe85"
+                "3a90528d185d0347"
+            ]
+        ]
+    },
+    {
+        "id": "5be46b2aceca3b99",
+        "type": "function",
+        "z": "b7ec5c0795a0393f",
+        "name": "prepare publish",
+        "func": "const production = msg.payload;\nmsg.payload = { production };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "71dbdd31b4f0f0cc"
+            ]
+        ]
+    },
+    {
+        "id": "7ab903a24411f2b3",
+        "type": "debug",
+        "z": "42c32db0efd3bac1",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "81d8c3d0c7b606be",
+        "type": "link call",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0771a85114491a8",
+        "type": "link out",
+        "z": "42c32db0efd3bac1",
+        "name": "link out 25",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "ed1602f667ce9c52",
+        "type": "link call",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "5f9e3ca1b8ea45f3"
+            ]
+        ]
+    },
+    {
+        "id": "5f9e3ca1b8ea45f3",
+        "type": "function",
+        "z": "42c32db0efd3bac1",
+        "name": "water clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst savingsAvg = data[ data.length - 1].savings_avg;\nconst productionAvg = data[data.length - 1].production_avg;\nconst ratios = data.map( x => [ x.savings_avg / x.production_avg ] );\nconst ratio = ratios[data.length - 1][ 0 ];\nconst clusters = makeClusters( ratios );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, ratio );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    savingsAvg,\n    productionAvg,\n    ratio,\n    level\n};\n\nglobal.set( 'waterClusteringResult', result );\n\nmsg.joinKey = undefined;\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 460,
+        "wires": [
+            [
+                "11b9aeddd5cef450",
+                "7ab903a24411f2b3"
+            ]
+        ]
+    },
+    {
+        "id": "e7b8060b470b3ca5",
+        "type": "change",
+        "z": "42c32db0efd3bac1",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Water clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "81d8c3d0c7b606be"
+            ]
+        ]
+    },
+    {
+        "id": "0718f521c7ca40aa",
+        "type": "link in",
+        "z": "42c32db0efd3bac1",
+        "name": "link in water clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "27f4c4232a03ca21"
+            ]
+        ]
+    },
+    {
+        "id": "94a9a77e514c43cd",
+        "type": "inject",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "84f0b490692f53d2"
+            ]
+        ]
+    },
+    {
+        "id": "51d8baa7fc7dba59",
+        "type": "link call",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "links": [
+            "9478bf2057f22b65"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "cb919f46fd03bd4b"
+            ]
+        ]
+    },
+    {
+        "id": "84f0b490692f53d2",
+        "type": "split",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "51d8baa7fc7dba59",
+                "047e10f4a83604f4"
+            ]
+        ]
+    },
+    {
+        "id": "047e10f4a83604f4",
+        "type": "link call",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "links": [
+            "8438ec33152a3341"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [
+                "cb919f46fd03bd4b"
+            ]
+        ]
+    },
+    {
+        "id": "cb919f46fd03bd4b",
+        "type": "join",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "joinKey",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "17d51e8ea5d860c7"
+            ]
+        ]
+    },
+    {
+        "id": "17d51e8ea5d860c7",
+        "type": "function",
+        "z": "42c32db0efd3bac1",
+        "name": "prepare query",
+        "func": "const savingsQuery = msg.payload.savings;\nconst productionQuery = msg.payload.production;\n\nconst query = \n`\nSELECT \n    s.period AS period,\n    s.year AS year,\n    s.period_avg AS savings_avg,\n    p.period_avg AS production_avg\nFROM ( ${savingsQuery } ) s\nJOIN ( ${productionQuery } ) p\nON s.year = p.year\n`\n;\n\nmsg.topic = query;\nmsg.payload = query;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "ed1602f667ce9c52",
+                "81d8c3d0c7b606be"
+            ]
+        ]
+    },
+    {
+        "id": "d8d686c03c68a97d",
+        "type": "inject",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "84f0b490692f53d2"
+            ]
+        ]
+    },
+    {
+        "id": "27f4c4232a03ca21",
+        "type": "function",
+        "z": "42c32db0efd3bac1",
+        "name": "if already done",
+        "func": "const { minDate } = global.get( 'dateHelpers' );\nconst waterClusteringDate = global.get( 'waterClusteringDate' );\n\nconst newWaterClusteringDate = minDate( [\n    global.get( 'savingsLastDate' ),\n    global.get( 'productionLastDate' )\n] );\n\nif (newWaterClusteringDate == waterClusteringDate ) {\n    return [ msg, null ];   \n}\n\nglobal.set('waterClusteringDate', newWaterClusteringDate);\nmsg.payload = newWaterClusteringDate;\n\nreturn [ null, msg ];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "b0771a85114491a8"
+            ],
+            [
+                "e7b8060b470b3ca5",
+                "84f0b490692f53d2"
+            ]
+        ]
+    },
+    {
+        "id": "11b9aeddd5cef450",
+        "type": "function",
+        "z": "42c32db0efd3bac1",
+        "name": "prepare publish",
+        "func": "const water = msg.payload;\nmsg.payload = { water };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 520,
+        "wires": [
+            [
+                "14dfa839b3eb4663"
+            ]
+        ]
+    },
+    {
+        "id": "14dfa839b3eb4663",
+        "type": "link call",
+        "z": "42c32db0efd3bac1",
+        "name": "",
+        "links": [
+            "1f299931cf658858"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 280,
+        "y": 560,
+        "wires": [
+            [
+                "b0771a85114491a8"
+            ]
+        ]
+    },
+    {
+        "id": "bc4d3eb33981ed7b",
+        "type": "debug",
+        "z": "11322c65b3bfae17",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "20542212bb2afe38",
+        "type": "link call",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb80b2332117524a",
+        "type": "link out",
+        "z": "11322c65b3bfae17",
+        "name": "link out 24",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "70cfed66a576c432",
+        "type": "link call",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "d7e7389c63dc7b62"
+            ]
+        ]
+    },
+    {
+        "id": "d7e7389c63dc7b62",
+        "type": "function",
+        "z": "11322c65b3bfae17",
+        "name": "weather clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[data.length - 1].precipitation_sum;\nconst values = data.map(x => [x.precipitation_sum ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    precipitationSum: value,\n    precipitationRepr: `${value} mm`,\n    level\n};\n\nglobal.set( 'weatherClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 280,
+        "wires": [
+            [
+                "207eef31f0dfeb97",
+                "bc4d3eb33981ed7b"
+            ]
+        ]
+    },
+    {
+        "id": "6791b2dc385a8eec",
+        "type": "change",
+        "z": "11322c65b3bfae17",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Weather clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "20542212bb2afe38"
+            ]
+        ]
+    },
+    {
+        "id": "32699b29fe9fdf8a",
+        "type": "link in",
+        "z": "11322c65b3bfae17",
+        "name": "link in weather clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "73e0b8bf57532c58"
+            ]
+        ]
+    },
+    {
+        "id": "25d3dba63ffda744",
+        "type": "inject",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
+        "id": "bd751375a065374d",
+        "type": "link call",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "links": [
+            "e1cb944c3d6d1a78"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "70cfed66a576c432",
+                "20542212bb2afe38"
+            ]
+        ]
+    },
+    {
+        "id": "a15a38acbf586bba",
+        "type": "inject",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
+        "id": "73e0b8bf57532c58",
+        "type": "function",
+        "z": "11322c65b3bfae17",
+        "name": "if already done",
+        "func": "const weatherClusteringDate = global.get( 'weatherClusteringDate' );\nconst lastDate = global.get('weatherLastDate');\n\nif (weatherClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('weatherClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "cb80b2332117524a"
+            ],
+            [
+                "6791b2dc385a8eec",
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
+        "id": "207eef31f0dfeb97",
+        "type": "function",
+        "z": "11322c65b3bfae17",
+        "name": "prepare publish",
+        "func": "const weather = msg.payload;\nmsg.payload = { weather };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "dbc2792366e128d0"
+            ]
+        ]
+    },
+    {
+        "id": "dbc2792366e128d0",
+        "type": "link call",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "links": [
+            "97d6feb23850ec65"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "20542212bb2afe38"
+            ]
+        ]
+    },
+    {
+        "id": "98de8468dc0441db",
+        "type": "link call",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "1308a07171a44c2c"
+            ]
+        ]
+    },
+    {
+        "id": "9cbd116b7819126a",
+        "type": "debug",
+        "z": "1701ccc8d2838ab0",
+        "name": "debug 27",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1308a07171a44c2c",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "reservoirs clustering",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst reservoirs = global.get( 'reservoirs' );\nconst data = msg.payload;\n\nconst results = [];\nfor ( let reservoir of reservoirs ) {\n\n    const reservoirData = data.filter( x => x.reservoir_id === reservoir.id );\n    if (reservoirData.length === 0) {\n        continue;\n    }\n\n    const period = reservoirData[ reservoirData.length - 1 ].period;\n    const value = reservoirData[ reservoirData.length - 1 ].period_avg;\n    const values = reservoirData.map( x => [ x.period_avg ] );\n    const clusters = makeClusters( values );\n    // node.warn( clusters );\n    const matchingClusterIndex = matchCluster( clusters, value );\n\n    const levels = clusterLevels.map( x => x.name );\n    levels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\n    const level = levels.join( ' ' );\n    const color = clusterLevels[ matchingClusterIndex ].color; \n    const valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\n    results.push( { \n        name: reservoir.name_en,\n        lat: reservoir.lat,\n        lon: reservoir.lon,\n        label: reservoir.name_en,\n        iconColor: color, \n        period,\n        average: `${valueRepr} cubic meters`,\n        level \n    } );\n}\n\nglobal.set( 'reservoirsClusteringResult', results );\n\nmsg.topic = undefined;\nmsg.payload = results;\nreturn msg;\n\n// for ( let result of results ) {\n//     msg.topic = undefined;\n//     msg.payload = result;\n//     node.send( msg );\n// }\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "5c4075558bfa1515",
+                "2ebf7ae4ea4859ae",
+                "9cbd116b7819126a"
+            ]
+        ]
+    },
+    {
+        "id": "5c4075558bfa1515",
+        "type": "worldmap",
+        "z": "1701ccc8d2838ab0",
+        "name": "Reservoirs map",
+        "lat": "38.43",
+        "lon": "22.87",
+        "zoom": "9",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 900,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "27b42da3153d628e",
+        "type": "link call",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "300a3f9168a9b4ed",
+        "type": "catch",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "scope": [
+            "5c4075558bfa1515"
+        ],
+        "uncaught": false,
+        "x": 870,
+        "y": 220,
+        "wires": [
+            [
+                "d71439a2eba7fc77"
+            ]
+        ]
+    },
+    {
+        "id": "d71439a2eba7fc77",
+        "type": "change",
+        "z": "1701ccc8d2838ab0",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 180,
+        "wires": [
+            [
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "08b8eaebd93fb988",
+        "type": "change",
+        "z": "1701ccc8d2838ab0",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Reservoirs clustering (' & msg.payload & ')'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "ccaf19d7f0d0e632",
+        "type": "link in",
+        "z": "1701ccc8d2838ab0",
+        "name": "link in reservoirs clustering",
+        "links": [],
+        "x": 55,
+        "y": 60,
+        "wires": [
+            [
+                "80d2166d46fb727d"
+            ]
+        ]
+    },
+    {
+        "id": "f89090b34c3bea4d",
+        "type": "link out",
+        "z": "1701ccc8d2838ab0",
+        "name": "link out 20",
+        "mode": "return",
+        "links": [],
+        "x": 835,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "53a0b0e5948328fe",
+        "type": "inject",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "cbc139c0f6212c2a"
+            ]
+        ]
+    },
+    {
+        "id": "cbc139c0f6212c2a",
+        "type": "link call",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "links": [
+            "024b62a1bbbeb6dd"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "98de8468dc0441db",
+                "27b42da3153d628e"
+            ]
+        ]
+    },
+    {
+        "id": "9e493fa5522867f8",
+        "type": "inject",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "cbc139c0f6212c2a"
+            ]
+        ]
+    },
+    {
+        "id": "80d2166d46fb727d",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "if already done",
+        "func": "const reservoirsClusteringDate = global.get( 'reservoirsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (reservoirsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('reservoirsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 60,
+        "wires": [
+            [
+                "f89090b34c3bea4d"
+            ],
+            [
+                "08b8eaebd93fb988",
+                "cbc139c0f6212c2a"
+            ]
+        ]
+    },
+    {
+        "id": "2ebf7ae4ea4859ae",
+        "type": "function",
+        "z": "1701ccc8d2838ab0",
+        "name": "prepare publish",
+        "func": "const reservoirs = msg.payload;\nmsg.payload = { reservoirs };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "f442c6daffed750b"
+            ]
+        ]
+    },
+    {
+        "id": "f442c6daffed750b",
+        "type": "link call",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "links": [
+            "fc7aaaa19c985f47"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 300,
+        "y": 380,
+        "wires": [
+            [
+                "f89090b34c3bea4d"
             ]
         ]
     },
@@ -2687,9 +3911,9 @@
         "id": "3c4c570a2f5ad214",
         "type": "amqp-out",
         "z": "bac88e4feb8bab3d",
-        "name": "weather exchange",
+        "name": "reservoirs exchange",
         "broker": "774630f253d36966",
-        "exchangeName": "weather",
+        "exchangeName": "reservoirs",
         "exchangeType": "fanout",
         "exchangeRoutingKey": "",
         "exchangeRoutingKeyType": "str",
@@ -2697,7 +3921,7 @@
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 290,
+        "x": 300,
         "y": 60,
         "wires": []
     },
@@ -2705,7 +3929,7 @@
         "id": "fc7aaaa19c985f47",
         "type": "link in",
         "z": "bac88e4feb8bab3d",
-        "name": "link in weather exchange",
+        "name": "link in reservoirs exchange",
         "links": [],
         "x": 115,
         "y": 60,
@@ -2743,8 +3967,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Publish weather...",
-                "tot": "str"
+                "to": "'Publish ' & msg.payload",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2775,7 +3999,7 @@
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
         "x": 290,
-        "y": 200,
+        "y": 180,
         "wires": []
     },
     {
@@ -2793,7 +4017,7 @@
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
         "x": 300,
-        "y": 340,
+        "y": 300,
         "wires": []
     },
     {
@@ -2806,8 +4030,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Publish savings...",
-                "tot": "str"
+                "to": "'Publish ' & msg.payload",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2816,7 +4040,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
                 "2a75c15a621dcc4c"
@@ -2833,8 +4057,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Publish production...",
-                "tot": "str"
+                "to": "'Publish ' & msg.payload",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2843,7 +4067,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 400,
+        "y": 360,
         "wires": [
             [
                 "2a75c15a621dcc4c"
@@ -2857,7 +4081,7 @@
         "name": "link in savings exchange",
         "links": [],
         "x": 115,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
                 "7b776b5260599c79",
@@ -2873,7 +4097,7 @@
         "name": "link in production exchange",
         "links": [],
         "x": 115,
-        "y": 340,
+        "y": 300,
         "wires": [
             [
                 "22949025a62cfe73",
@@ -2886,9 +4110,9 @@
         "id": "e5a271de8bd6c1a0",
         "type": "amqp-out",
         "z": "bac88e4feb8bab3d",
-        "name": "result exchange",
+        "name": "water exchange",
         "broker": "774630f253d36966",
-        "exchangeName": "result",
+        "exchangeName": "water",
         "exchangeType": "fanout",
         "exchangeRoutingKey": "",
         "exchangeRoutingKeyType": "str",
@@ -2897,7 +4121,7 @@
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
         "x": 280,
-        "y": 480,
+        "y": 420,
         "wires": []
     },
     {
@@ -2910,8 +4134,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Publish result...",
-                "tot": "str"
+                "to": "'Publish ' & msg.payload",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -2920,7 +4144,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 540,
+        "y": 480,
         "wires": [
             [
                 "2a75c15a621dcc4c"
@@ -2931,10 +4155,10 @@
         "id": "1f299931cf658858",
         "type": "link in",
         "z": "bac88e4feb8bab3d",
-        "name": "link in result exchange",
+        "name": "link in water exchange",
         "links": [],
         "x": 115,
-        "y": 480,
+        "y": 420,
         "wires": [
             [
                 "e5a271de8bd6c1a0",
@@ -2952,7 +4176,8 @@
             "3c4c570a2f5ad214",
             "7b776b5260599c79",
             "22949025a62cfe73",
-            "e5a271de8bd6c1a0"
+            "e5a271de8bd6c1a0",
+            "8116ae1bd2a4f43a"
         ],
         "uncaught": false,
         "x": 850,
@@ -2999,160 +4224,38 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
-        "y": 580,
+        "x": 900,
+        "y": 420,
         "wires": []
     },
     {
         "id": "220fa75884132e53",
         "type": "amqp-in",
         "z": "bac88e4feb8bab3d",
-        "name": "queue.result.consumer1",
-        "broker": "f95f44a518aa1c5e",
-        "prefetch": 0,
-        "noAck": true,
-        "exchangeName": "result",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeDurable": true,
-        "queueName": "queue.result.consumer1",
-        "queueExclusive": false,
-        "queueDurable": true,
-        "queueAutoDelete": false,
-        "headers": "{}",
-        "x": 660,
-        "y": 580,
-        "wires": [
-            [
-                "f05efffd73c83168"
-            ]
-        ]
-    },
-    {
-        "id": "a13fad69333b4888",
-        "type": "amqp-in",
-        "z": "bac88e4feb8bab3d",
-        "name": "queue.weather.consumer1",
-        "broker": "f95f44a518aa1c5e",
-        "prefetch": 0,
-        "noAck": true,
-        "exchangeName": "weather",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeDurable": true,
-        "queueName": "queue.weather.consumer1",
-        "queueExclusive": false,
-        "queueDurable": true,
-        "queueAutoDelete": false,
-        "headers": "{}",
-        "x": 670,
-        "y": 400,
-        "wires": [
-            [
-                "56b345bc8dd76f42"
-            ]
-        ]
-    },
-    {
-        "id": "56b345bc8dd76f42",
-        "type": "debug",
-        "z": "bac88e4feb8bab3d",
-        "name": "debug 23",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "519126195694f9c7",
-        "type": "amqp-in",
-        "z": "bac88e4feb8bab3d",
-        "name": "queue.savings.consumer1",
-        "broker": "f95f44a518aa1c5e",
+        "name": "queue (savings)",
+        "broker": "774630f253d36966",
         "prefetch": 0,
         "noAck": true,
         "exchangeName": "savings",
         "exchangeType": "fanout",
         "exchangeRoutingKey": "",
         "exchangeDurable": true,
-        "queueName": "queue.savings.consumer1",
+        "queueName": "queue.user00",
         "queueExclusive": false,
         "queueDurable": true,
         "queueAutoDelete": false,
         "headers": "{}",
-        "x": 670,
-        "y": 460,
+        "x": 720,
+        "y": 420,
         "wires": [
             [
-                "beacc13fa3b4f5f9"
+                "f05efffd73c83168"
             ]
         ]
-    },
-    {
-        "id": "beacc13fa3b4f5f9",
-        "type": "debug",
-        "z": "bac88e4feb8bab3d",
-        "name": "debug 24",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "dcdc291289cc929f",
-        "type": "amqp-in",
-        "z": "bac88e4feb8bab3d",
-        "name": "queue.production.consumer1",
-        "broker": "f95f44a518aa1c5e",
-        "prefetch": 0,
-        "noAck": true,
-        "exchangeName": "production",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeDurable": true,
-        "queueName": "queue.production.consumer1",
-        "queueExclusive": false,
-        "queueDurable": true,
-        "queueAutoDelete": false,
-        "headers": "{}",
-        "x": 680,
-        "y": 520,
-        "wires": [
-            [
-                "a7e5bbdf47f75d27"
-            ]
-        ]
-    },
-    {
-        "id": "a7e5bbdf47f75d27",
-        "type": "debug",
-        "z": "bac88e4feb8bab3d",
-        "name": "debug 25",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 520,
-        "wires": []
     },
     {
         "id": "78327d262f4b2133",
@@ -3164,6 +4267,67 @@
         "x": 65,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "8116ae1bd2a4f43a",
+        "type": "amqp-out",
+        "z": "bac88e4feb8bab3d",
+        "name": "weather exchange",
+        "broker": "774630f253d36966",
+        "exchangeName": "weather",
+        "exchangeType": "fanout",
+        "exchangeRoutingKey": "",
+        "exchangeRoutingKeyType": "str",
+        "exchangeDurable": true,
+        "amqpProperties": "{ \"headers\": {} }",
+        "rpcTimeoutMilliseconds": 3000,
+        "outputs": 0,
+        "x": 290,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "97d6feb23850ec65",
+        "type": "link in",
+        "z": "bac88e4feb8bab3d",
+        "name": "link in weather exchange",
+        "links": [],
+        "x": 115,
+        "y": 540,
+        "wires": [
+            [
+                "8116ae1bd2a4f43a",
+                "216c4bc768b60929",
+                "78327d262f4b2133"
+            ]
+        ]
+    },
+    {
+        "id": "216c4bc768b60929",
+        "type": "change",
+        "z": "bac88e4feb8bab3d",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "'Publish ' & msg.payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 600,
+        "wires": [
+            [
+                "2a75c15a621dcc4c"
+            ]
+        ]
     },
     {
         "id": "776d2b916bc913ec",
@@ -5862,252 +7026,211 @@
         ]
     },
     {
-        "id": "c7ef80a6ea38e846",
-        "type": "debug",
-        "z": "a8ca5f37ab8664a6",
-        "name": "debug 28",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "266b71e4d0db2853",
-        "type": "link call",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 890,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "193e53da1dcf8019",
-        "type": "link out",
-        "z": "a8ca5f37ab8664a6",
-        "name": "link out 22",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "1df0e0ece91af8f3",
-        "type": "link call",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "f444e4306180eff9"
-            ]
-        ]
-    },
-    {
-        "id": "f444e4306180eff9",
+        "id": "9d8750f65038db75",
         "type": "function",
-        "z": "a8ca5f37ab8664a6",
-        "name": "savings clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "z": "08eda6c1b66e16e5",
+        "name": "create vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nconst body = {\n    description: \"athens-water project\", \n    tags: \"athens,water\"\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 270,
-        "y": 300,
-        "wires": [
-            [
-                "193e53da1dcf8019",
-                "c7ef80a6ea38e846"
-            ]
-        ]
-    },
-    {
-        "id": "f80e433eb3f5cbe9",
-        "type": "change",
-        "z": "a8ca5f37ab8664a6",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Savings clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
+        "x": 130,
         "y": 120,
         "wires": [
             [
-                "266b71e4d0db2853"
+                "fc92ab505adc448e"
             ]
         ]
     },
     {
-        "id": "825d7f4f827524c2",
-        "type": "link in",
-        "z": "a8ca5f37ab8664a6",
-        "name": "link in savings clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "195d01cff4a595f0"
-            ]
-        ]
-    },
-    {
-        "id": "ef61379ce7dc460d",
+        "id": "fc92ab505adc448e",
         "type": "link call",
-        "z": "a8ca5f37ab8664a6",
+        "z": "08eda6c1b66e16e5",
         "name": "",
         "links": [
-            "9478bf2057f22b65"
+            "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 310,
-        "y": 180,
+        "x": 150,
+        "y": 160,
         "wires": [
             [
-                "266b71e4d0db2853",
-                "1df0e0ece91af8f3"
+                "0fa12d682a245aba"
             ]
         ]
     },
     {
-        "id": "adb61f3a0489986d",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 480,
+        "id": "9d05317d2d3d7ad1",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "retrieve vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
         "wires": [
             [
-                "ef61379ce7dc460d"
+                "bffd1ab283921d61"
             ]
         ]
     },
     {
-        "id": "02766e51d35f3d41",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
+        "id": "bffd1ab283921d61",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
         "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
+        "links": [
+            "2e4a12651ca65a7d"
         ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "22ea041ede3540cb"
+            ]
+        ]
+    },
+    {
+        "id": "50a374ef88f9961b",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "delete vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "bcc2cbd5bc07d820"
+            ]
+        ]
+    },
+    {
+        "id": "bcc2cbd5bc07d820",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 830,
         "y": 440,
         "wires": [
             [
-                "ef61379ce7dc460d"
+                "22ea041ede3540cb"
             ]
         ]
     },
     {
-        "id": "195d01cff4a595f0",
-        "type": "function",
-        "z": "a8ca5f37ab8664a6",
-        "name": "if already done",
-        "func": "const savingsClusteringDate = global.get( 'savingsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (savingsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('savingsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
+        "id": "f74f69771383e10e",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go create vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
         "y": 60,
         "wires": [
             [
-                "193e53da1dcf8019"
-            ],
-            [
-                "f80e433eb3f5cbe9",
-                "ef61379ce7dc460d"
+                "9d8750f65038db75"
             ]
         ]
     },
     {
-        "id": "98de8468dc0441db",
-        "type": "link call",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "links": [
-            "ab0e6d979d760a4a"
+        "id": "66c6ac0a31b83989",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go retrieve vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
         ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 260,
-        "y": 240,
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 500,
+        "y": 60,
         "wires": [
             [
-                "1308a07171a44c2c"
+                "9d05317d2d3d7ad1"
             ]
         ]
     },
     {
-        "id": "9cbd116b7819126a",
+        "id": "b15e9bf9306ba337",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go delete vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "24901ae9f7293c0c"
+            ]
+        ]
+    },
+    {
+        "id": "22ea041ede3540cb",
         "type": "debug",
-        "z": "1701ccc8d2838ab0",
-        "name": "debug 27",
+        "z": "08eda6c1b66e16e5",
+        "name": "debug 33",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -6115,899 +7238,90 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
-        "y": 340,
+        "x": 460,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "1308a07171a44c2c",
+        "id": "0fa12d682a245aba",
         "type": "function",
-        "z": "1701ccc8d2838ab0",
-        "name": "reservoirs clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst reservoirs = global.get( 'reservoirs' );\nconst data = msg.payload;\n\nconst results = [];\nfor ( let reservoir of reservoirs ) {\n\n    const reservoirData = data.filter( x => x.reservoir_id === reservoir.id );\n    if (reservoirData.length === 0) {\n        continue;\n    }\n\n    const period = reservoirData[ reservoirData.length - 1 ].period;\n    const value = reservoirData[ reservoirData.length - 1 ].period_avg;\n    const values = reservoirData.map( x => [ x.period_avg ] );\n    const clusters = makeClusters( values );\n    // node.warn( clusters );\n    const matchingClusterIndex = matchCluster( clusters, value );\n\n    const levels = clusterLevels.map( x => x.name );\n    levels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\n    const level = levels.join( ' ' );\n    const color = clusterLevels[ matchingClusterIndex ].color; \n    const valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\n    results.push( { \n        name: reservoir.name_en,\n        lat: reservoir.lat,\n        lon: reservoir.lon,\n        label: reservoir.name_en,\n        iconColor: color, \n        period,\n        average: `${valueRepr} cubic meters`,\n        level \n    } );\n}\n\nglobal.set( 'reservoirsClusteringResult', results );\n\nfor ( let result of results ) {\n    msg.topic = undefined;\n    msg.payload = result;\n    node.send( msg );\n}\n\n",
+        "z": "08eda6c1b66e16e5",
+        "name": "create exchanges",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst AW_EXCHANGES = env.get( 'AW_EXCHANGES' )\nconst exchanges = AW_EXCHANGES.split( ',' );\n\nfor ( let exchange of exchanges ) {\n    const path = `/exchanges/${AW_VHOST}/${exchange}`;\n\n    const body = {\n        type: \"fanout\",\n        auto_delete: false, \n        durable: true, \n        internal: false, \n        arguments: {}   \n    };\n\n    msg.url = path;\n    msg.method = 'PUT';\n    msg.payload = body;\n    node.send( msg );\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 300,
+        "x": 150,
+        "y": 220,
         "wires": [
             [
-                "9cbd116b7819126a",
-                "5c4075558bfa1515",
-                "f89090b34c3bea4d"
+                "f702bb7915c19f50"
             ]
         ]
     },
     {
-        "id": "5c4075558bfa1515",
-        "type": "worldmap",
-        "z": "1701ccc8d2838ab0",
-        "name": "Reservoirs map",
-        "lat": "38.43",
-        "lon": "22.87",
-        "zoom": "9",
-        "layer": "OSMG",
-        "cluster": "",
-        "maxage": "",
-        "usermenu": "show",
-        "layers": "show",
-        "panit": "false",
-        "panlock": "false",
-        "zoomlock": "false",
-        "hiderightclick": "false",
-        "coords": "none",
-        "showgrid": "false",
-        "showruler": "false",
-        "allowFileDrop": "false",
-        "path": "/worldmap",
-        "overlist": "DR,CO,RA,DN",
-        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
-        "mapname": "",
-        "mapurl": "",
-        "mapopt": "",
-        "mapwms": false,
-        "x": 260,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "27b42da3153d628e",
+        "id": "f702bb7915c19f50",
         "type": "link call",
-        "z": "1701ccc8d2838ab0",
+        "z": "08eda6c1b66e16e5",
         "name": "",
         "links": [
-            "992e1a45369732e3"
+            "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 890,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "300a3f9168a9b4ed",
-        "type": "catch",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "scope": [
-            "5c4075558bfa1515"
-        ],
-        "uncaught": false,
-        "x": 870,
+        "x": 150,
         "y": 260,
         "wires": [
             [
-                "d71439a2eba7fc77"
+                "22ea041ede3540cb"
             ]
         ]
     },
     {
-        "id": "d71439a2eba7fc77",
-        "type": "change",
-        "z": "1701ccc8d2838ab0",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "error.message",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 900,
-        "y": 200,
-        "wires": [
-            [
-                "27b42da3153d628e"
-            ]
-        ]
-    },
-    {
-        "id": "08b8eaebd93fb988",
-        "type": "change",
-        "z": "1701ccc8d2838ab0",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Reservoirs clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 120,
-        "wires": [
-            [
-                "27b42da3153d628e"
-            ]
-        ]
-    },
-    {
-        "id": "ccaf19d7f0d0e632",
-        "type": "link in",
-        "z": "1701ccc8d2838ab0",
-        "name": "link in reservoirs clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "80d2166d46fb727d"
-            ]
-        ]
-    },
-    {
-        "id": "f89090b34c3bea4d",
-        "type": "link out",
-        "z": "1701ccc8d2838ab0",
-        "name": "link out 20",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "53a0b0e5948328fe",
-        "type": "inject",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 580,
-        "wires": [
-            [
-                "cbc139c0f6212c2a"
-            ]
-        ]
-    },
-    {
-        "id": "cbc139c0f6212c2a",
-        "type": "link call",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "links": [
-            "024b62a1bbbeb6dd"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 310,
-        "y": 180,
-        "wires": [
-            [
-                "98de8468dc0441db",
-                "27b42da3153d628e"
-            ]
-        ]
-    },
-    {
-        "id": "9e493fa5522867f8",
-        "type": "inject",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 540,
-        "wires": [
-            [
-                "cbc139c0f6212c2a"
-            ]
-        ]
-    },
-    {
-        "id": "80d2166d46fb727d",
+        "id": "24901ae9f7293c0c",
         "type": "function",
-        "z": "1701ccc8d2838ab0",
-        "name": "if already done",
-        "func": "const reservoirsClusteringDate = global.get( 'reservoirsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (reservoirsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('reservoirsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 60,
-        "wires": [
-            [
-                "f89090b34c3bea4d"
-            ],
-            [
-                "08b8eaebd93fb988",
-                "cbc139c0f6212c2a"
-            ]
-        ]
-    },
-    {
-        "id": "e9db637dda81a734",
-        "type": "debug",
-        "z": "b7ec5c0795a0393f",
-        "name": "debug 29",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "313ab92c54b8b2c3",
-        "type": "link call",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 890,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "3a90528d185d0347",
-        "type": "link out",
-        "z": "b7ec5c0795a0393f",
-        "name": "link out 23",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "8226ab4353aadeb1",
-        "type": "link call",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "9242e2dffccfb7fb"
-            ]
-        ]
-    },
-    {
-        "id": "9242e2dffccfb7fb",
-        "type": "function",
-        "z": "b7ec5c0795a0393f",
-        "name": "production clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    productionAvg: value,\n    productionRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set( 'productionClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "z": "08eda6c1b66e16e5",
+        "name": "retrieve exchanges",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/exchanges/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 300,
-        "wires": [
-            [
-                "e9db637dda81a734",
-                "3a90528d185d0347"
-            ]
-        ]
-    },
-    {
-        "id": "6c30f7113ddbe4b3",
-        "type": "change",
-        "z": "b7ec5c0795a0393f",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Production clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
+        "x": 830,
         "y": 120,
         "wires": [
             [
-                "313ab92c54b8b2c3"
+                "9b2b051edc30dbe7"
             ]
         ]
     },
     {
-        "id": "a629a24ab77645c8",
-        "type": "link in",
-        "z": "b7ec5c0795a0393f",
-        "name": "link in production clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "1a6118c29bd78b28"
-            ]
-        ]
-    },
-    {
-        "id": "2e929dca24e77fa9",
+        "id": "9b2b051edc30dbe7",
         "type": "link call",
-        "z": "b7ec5c0795a0393f",
+        "z": "08eda6c1b66e16e5",
         "name": "",
         "links": [
-            "8438ec33152a3341"
+            "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 310,
-        "y": 180,
+        "x": 830,
+        "y": 160,
         "wires": [
             [
-                "8226ab4353aadeb1",
-                "313ab92c54b8b2c3"
+                "29926587a615f050"
             ]
         ]
     },
     {
-        "id": "c1a67434013bb48a",
-        "type": "inject",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 500,
-        "wires": [
-            [
-                "2e929dca24e77fa9"
-            ]
-        ]
-    },
-    {
-        "id": "c7cc759199f90113",
-        "type": "inject",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 460,
-        "wires": [
-            [
-                "2e929dca24e77fa9"
-            ]
-        ]
-    },
-    {
-        "id": "1a6118c29bd78b28",
-        "type": "function",
-        "z": "b7ec5c0795a0393f",
-        "name": "if already done",
-        "func": "const productionClusteringDate = global.get( 'productionClusteringDate' );\nconst lastDate = global.get('productionLastDate');\n\nif (productionClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('productionClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 60,
-        "wires": [
-            [
-                "3a90528d185d0347"
-            ],
-            [
-                "6c30f7113ddbe4b3",
-                "2e929dca24e77fa9"
-            ]
-        ]
-    },
-    {
-        "id": "bc4d3eb33981ed7b",
-        "type": "debug",
-        "z": "11322c65b3bfae17",
-        "name": "debug 30",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "20542212bb2afe38",
-        "type": "link call",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 890,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "cb80b2332117524a",
-        "type": "link out",
-        "z": "11322c65b3bfae17",
-        "name": "link out 24",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "70cfed66a576c432",
-        "type": "link call",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "d7e7389c63dc7b62"
-            ]
-        ]
-    },
-    {
-        "id": "d7e7389c63dc7b62",
-        "type": "function",
-        "z": "11322c65b3bfae17",
-        "name": "weather clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[data.length - 1].precipitation_sum;\nconst values = data.map(x => [x.precipitation_sum ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    precipitationSum: value,\n    precipitationRepr: `${value} mm`,\n    level\n};\n\nglobal.set( 'weatherClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 300,
-        "wires": [
-            [
-                "bc4d3eb33981ed7b",
-                "cb80b2332117524a"
-            ]
-        ]
-    },
-    {
-        "id": "6791b2dc385a8eec",
-        "type": "change",
-        "z": "11322c65b3bfae17",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Weather clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 120,
-        "wires": [
-            [
-                "20542212bb2afe38"
-            ]
-        ]
-    },
-    {
-        "id": "32699b29fe9fdf8a",
-        "type": "link in",
-        "z": "11322c65b3bfae17",
-        "name": "link in weather clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "73e0b8bf57532c58"
-            ]
-        ]
-    },
-    {
-        "id": "25d3dba63ffda744",
-        "type": "inject",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 420,
-        "wires": [
-            [
-                "bd751375a065374d"
-            ]
-        ]
-    },
-    {
-        "id": "bd751375a065374d",
-        "type": "link call",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "links": [
-            "e1cb944c3d6d1a78"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 310,
-        "y": 180,
-        "wires": [
-            [
-                "70cfed66a576c432",
-                "20542212bb2afe38"
-            ]
-        ]
-    },
-    {
-        "id": "a15a38acbf586bba",
-        "type": "inject",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 380,
-        "wires": [
-            [
-                "bd751375a065374d"
-            ]
-        ]
-    },
-    {
-        "id": "73e0b8bf57532c58",
-        "type": "function",
-        "z": "11322c65b3bfae17",
-        "name": "if already done",
-        "func": "const weatherClusteringDate = global.get( 'weatherClusteringDate' );\nconst lastDate = global.get('weatherLastDate');\n\nif (weatherClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('weatherClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 60,
-        "wires": [
-            [
-                "cb80b2332117524a"
-            ],
-            [
-                "6791b2dc385a8eec",
-                "bd751375a065374d"
-            ]
-        ]
-    },
-    {
-        "id": "7ab903a24411f2b3",
-        "type": "debug",
-        "z": "42c32db0efd3bac1",
-        "name": "debug 31",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "81d8c3d0c7b606be",
-        "type": "link call",
-        "z": "42c32db0efd3bac1",
-        "name": "",
-        "links": [
-            "992e1a45369732e3"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 890,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b0771a85114491a8",
-        "type": "link out",
-        "z": "42c32db0efd3bac1",
-        "name": "link out 25",
-        "mode": "return",
-        "links": [],
-        "x": 835,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "ed1602f667ce9c52",
-        "type": "link call",
-        "z": "42c32db0efd3bac1",
-        "name": "call database",
-        "links": [
-            "ab0e6d979d760a4a"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 250,
-        "y": 460,
-        "wires": [
-            [
-                "5f9e3ca1b8ea45f3"
-            ]
-        ]
-    },
-    {
-        "id": "5f9e3ca1b8ea45f3",
-        "type": "function",
-        "z": "42c32db0efd3bac1",
-        "name": "water clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst savingsAvg = data[ data.length - 1].savings_avg;\nconst productionAvg = data[data.length - 1].production_avg;\nconst ratios = data.map( x => [ x.savings_avg / x.production_avg ] );\nconst ratio = ratios[data.length - 1][ 0 ];\nconst clusters = makeClusters( ratios );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, ratio );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    savingsAvg,\n    productionAvg,\n    ratio,\n    level\n};\n\nglobal.set( 'waterClusteringResult', result );\n\nmsg.joinKey = undefined;\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 520,
-        "wires": [
-            [
-                "7ab903a24411f2b3",
-                "b0771a85114491a8"
-            ]
-        ]
-    },
-    {
-        "id": "e7b8060b470b3ca5",
-        "type": "change",
-        "z": "42c32db0efd3bac1",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Water clustering (' & msg.payload & ')'",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 120,
-        "wires": [
-            [
-                "81d8c3d0c7b606be"
-            ]
-        ]
-    },
-    {
-        "id": "0718f521c7ca40aa",
-        "type": "link in",
-        "z": "42c32db0efd3bac1",
-        "name": "link in water clustering",
-        "links": [],
-        "x": 55,
-        "y": 60,
-        "wires": [
-            [
-                "27f4c4232a03ca21"
-            ]
-        ]
-    },
-    {
-        "id": "94a9a77e514c43cd",
-        "type": "inject",
-        "z": "42c32db0efd3bac1",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 600,
-        "wires": [
-            [
-                "84f0b490692f53d2"
-            ]
-        ]
-    },
-    {
-        "id": "51d8baa7fc7dba59",
-        "type": "link call",
-        "z": "42c32db0efd3bac1",
-        "name": "",
-        "links": [
-            "9478bf2057f22b65"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 350,
-        "y": 240,
-        "wires": [
-            [
-                "cb919f46fd03bd4b"
-            ]
-        ]
-    },
-    {
-        "id": "84f0b490692f53d2",
+        "id": "29926587a615f050",
         "type": "split",
-        "z": "42c32db0efd3bac1",
+        "z": "08eda6c1b66e16e5",
         "name": "",
         "splt": "\\n",
         "spltType": "str",
@@ -7015,132 +7329,77 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
-        "x": 230,
-        "y": 180,
+        "x": 790,
+        "y": 220,
         "wires": [
             [
-                "51d8baa7fc7dba59",
-                "047e10f4a83604f4"
+                "7eed5244245c2e69"
             ]
         ]
     },
     {
-        "id": "047e10f4a83604f4",
-        "type": "link call",
-        "z": "42c32db0efd3bac1",
-        "name": "",
-        "links": [
-            "8438ec33152a3341"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 350,
-        "y": 280,
-        "wires": [
-            [
-                "cb919f46fd03bd4b"
-            ]
-        ]
-    },
-    {
-        "id": "cb919f46fd03bd4b",
+        "id": "f0a0b656105e894e",
         "type": "join",
-        "z": "42c32db0efd3bac1",
+        "z": "08eda6c1b66e16e5",
         "name": "",
         "mode": "custom",
-        "build": "object",
+        "build": "array",
         "property": "payload",
         "propertyType": "msg",
-        "key": "joinKey",
+        "key": "topic",
         "joiner": "\\n",
         "joinerType": "str",
         "accumulate": false,
         "timeout": "",
-        "count": "2",
+        "count": "",
         "reduceRight": false,
         "reduceExp": "",
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 230,
+        "x": 790,
         "y": 340,
         "wires": [
             [
-                "17d51e8ea5d860c7"
+                "50a374ef88f9961b"
             ]
         ]
     },
     {
-        "id": "17d51e8ea5d860c7",
+        "id": "24e33f0cb14b29e8",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "f0a0b656105e894e"
+            ]
+        ]
+    },
+    {
+        "id": "7eed5244245c2e69",
         "type": "function",
-        "z": "42c32db0efd3bac1",
-        "name": "set query",
-        "func": "const savingsQuery = msg.payload.savings;\nconst productionQuery = msg.payload.production;\n\nconst query = \n`\nSELECT \n    s.period AS period,\n    s.year AS year,\n    s.period_avg AS savings_avg,\n    p.period_avg AS production_avg\nFROM ( ${savingsQuery } ) s\nJOIN ( ${productionQuery } ) p\nON s.year = p.year\n`\n;\n\nmsg.topic = query;\nmsg.payload = query;\n\nreturn msg;",
+        "z": "08eda6c1b66e16e5",
+        "name": "delete exchange",
+        "func": "const { vhost, name } = msg.payload;\n\nconst path = `/api/exchanges/${vhost}/${name}`;\n\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 240,
-        "y": 400,
+        "x": 840,
+        "y": 260,
         "wires": [
             [
-                "ed1602f667ce9c52",
-                "81d8c3d0c7b606be"
-            ]
-        ]
-    },
-    {
-        "id": "d8d686c03c68a97d",
-        "type": "inject",
-        "z": "42c32db0efd3bac1",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 640,
-        "wires": [
-            [
-                "84f0b490692f53d2"
-            ]
-        ]
-    },
-    {
-        "id": "27f4c4232a03ca21",
-        "type": "function",
-        "z": "42c32db0efd3bac1",
-        "name": "if already done",
-        "func": "const { minDate } = global.get( 'dateHelpers' );\nconst waterClusteringDate = global.get( 'waterClusteringDate' );\n\nconst newWaterClusteringDate = minDate( [\n    global.get( 'savingsLastDate' ),\n    global.get( 'productionLastDate' )\n] );\n\nif (newWaterClusteringDate == waterClusteringDate ) {\n    return [ msg, null ];   \n}\n\nglobal.set('waterClusteringDate', newWaterClusteringDate);\nmsg.payload = newWaterClusteringDate;\n\nreturn [ null, msg ];",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 60,
-        "wires": [
-            [
-                "b0771a85114491a8"
-            ],
-            [
-                "e7b8060b470b3ca5",
-                "84f0b490692f53d2"
+                "24e33f0cb14b29e8"
             ]
         ]
     },
@@ -7557,7 +7816,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "create permissions",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\n\nconst path = `/permissions/${AW_VHOST}/${username}`\nconst body = {\n    // configure: \".*\",\n    // write: \".*\",\n    // read: \".*\",\n    // read: `^queue.*.${username}$`,\n    configure: \"^$ \",\n    write: \"^$ \",\n    read: `queue.${username}`,\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\n\nconst path = `/permissions/${AW_VHOST}/${username}`\nconst body = {\n    // configure: \".*\",\n    // write: \".*\",\n    // read: \".*\",\n    // read: `^queue.*.${username}$`,\n    // read: `queue.${username}`,\n    configure: \"^$ \",\n    write: \"^$ \",\n    read: \".*\",\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -7956,383 +8215,6 @@
         "wires": [
             [
                 "4c153d3b2afe70f3"
-            ]
-        ]
-    },
-    {
-        "id": "9d8750f65038db75",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "create vhost",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nconst body = {\n    description: \"athens-water project\", \n    tags: \"athens,water\"\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 130,
-        "y": 120,
-        "wires": [
-            [
-                "fc92ab505adc448e"
-            ]
-        ]
-    },
-    {
-        "id": "fc92ab505adc448e",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 150,
-        "y": 160,
-        "wires": [
-            [
-                "22ea041ede3540cb",
-                "0fa12d682a245aba"
-            ]
-        ]
-    },
-    {
-        "id": "9d05317d2d3d7ad1",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "retrieve vhost",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 480,
-        "y": 120,
-        "wires": [
-            [
-                "bffd1ab283921d61"
-            ]
-        ]
-    },
-    {
-        "id": "bffd1ab283921d61",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 490,
-        "y": 160,
-        "wires": [
-            [
-                "22ea041ede3540cb"
-            ]
-        ]
-    },
-    {
-        "id": "50a374ef88f9961b",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "delete vhost",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = null;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 400,
-        "wires": [
-            [
-                "bcc2cbd5bc07d820"
-            ]
-        ]
-    },
-    {
-        "id": "bcc2cbd5bc07d820",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 830,
-        "y": 440,
-        "wires": [
-            [
-                "22ea041ede3540cb"
-            ]
-        ]
-    },
-    {
-        "id": "f74f69771383e10e",
-        "type": "inject",
-        "z": "08eda6c1b66e16e5",
-        "name": "go create vhost",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 60,
-        "wires": [
-            [
-                "9d8750f65038db75"
-            ]
-        ]
-    },
-    {
-        "id": "66c6ac0a31b83989",
-        "type": "inject",
-        "z": "08eda6c1b66e16e5",
-        "name": "go retrieve vhost",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 480,
-        "y": 60,
-        "wires": [
-            [
-                "9d05317d2d3d7ad1"
-            ]
-        ]
-    },
-    {
-        "id": "b15e9bf9306ba337",
-        "type": "inject",
-        "z": "08eda6c1b66e16e5",
-        "name": "go delete vhost",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 840,
-        "y": 60,
-        "wires": [
-            [
-                "24901ae9f7293c0c"
-            ]
-        ]
-    },
-    {
-        "id": "22ea041ede3540cb",
-        "type": "debug",
-        "z": "08eda6c1b66e16e5",
-        "name": "debug 33",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 460,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "0fa12d682a245aba",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "create exchanges",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst AW_EXCHANGES = env.get( 'AW_EXCHANGES' )\nconst exchanges = AW_EXCHANGES.split( ',' );\n\nfor ( let exchange of exchanges ) {\n    const path = `/exchanges/${AW_VHOST}/${exchange}`;\n\n    const body = {\n        type: \"fanout\",\n        auto_delete: false, \n        durable: true, \n        internal: false, \n        arguments: {}   \n    };\n\n    msg.url = path;\n    msg.method = 'PUT';\n    msg.payload = body;\n    node.send( msg );\n}\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 150,
-        "y": 220,
-        "wires": [
-            [
-                "f702bb7915c19f50"
-            ]
-        ]
-    },
-    {
-        "id": "f702bb7915c19f50",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 150,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "24901ae9f7293c0c",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "retrieve exchanges",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/exchanges/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 830,
-        "y": 120,
-        "wires": [
-            [
-                "9b2b051edc30dbe7"
-            ]
-        ]
-    },
-    {
-        "id": "9b2b051edc30dbe7",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 830,
-        "y": 160,
-        "wires": [
-            [
-                "29926587a615f050"
-            ]
-        ]
-    },
-    {
-        "id": "29926587a615f050",
-        "type": "split",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 790,
-        "y": 220,
-        "wires": [
-            [
-                "7eed5244245c2e69"
-            ]
-        ]
-    },
-    {
-        "id": "f0a0b656105e894e",
-        "type": "join",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "mode": "custom",
-        "build": "array",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 790,
-        "y": 340,
-        "wires": [
-            [
-                "50a374ef88f9961b"
-            ]
-        ]
-    },
-    {
-        "id": "24e33f0cb14b29e8",
-        "type": "link call",
-        "z": "08eda6c1b66e16e5",
-        "name": "",
-        "links": [
-            "2e4a12651ca65a7d"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 850,
-        "y": 300,
-        "wires": [
-            [
-                "f0a0b656105e894e"
-            ]
-        ]
-    },
-    {
-        "id": "7eed5244245c2e69",
-        "type": "function",
-        "z": "08eda6c1b66e16e5",
-        "name": "delete exchange",
-        "func": "const { vhost, name } = msg.payload;\n\nconst path = `/api/exchanges/${vhost}/${name}`;\n\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 260,
-        "wires": [
-            [
-                "24e33f0cb14b29e8"
             ]
         ]
     }
