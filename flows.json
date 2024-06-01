@@ -2856,11 +2856,11 @@
         "z": "a8ca5f37ab8664a6",
         "name": "",
         "links": [
-            "346adf5f28e6d8c6"
+            "fc7aaaa19c985f47"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 290,
+        "x": 310,
         "y": 380,
         "wires": [
             [
@@ -2873,7 +2873,7 @@
         "type": "function",
         "z": "a8ca5f37ab8664a6",
         "name": "prepare publish",
-        "func": "const savings = msg.payload;\nmsg.payload = { savings };\nreturn msg;",
+        "func": "const savings = msg.payload;\nmsg.payload = { savings };\nmsg.routingKey = \"savings\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3118,11 +3118,11 @@
         "z": "b7ec5c0795a0393f",
         "name": "",
         "links": [
-            "ccdcc2fdde08e718"
+            "fc7aaaa19c985f47"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 300,
+        "x": 310,
         "y": 380,
         "wires": [
             [
@@ -3135,7 +3135,7 @@
         "type": "function",
         "z": "b7ec5c0795a0393f",
         "name": "prepare publish",
-        "func": "const production = msg.payload;\nmsg.payload = { production };\nreturn msg;",
+        "func": "const production = msg.payload;\nmsg.payload = { production };\nmsg.routingKey = \"production\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3465,7 +3465,7 @@
         "type": "function",
         "z": "42c32db0efd3bac1",
         "name": "prepare publish",
-        "func": "const water = msg.payload;\nmsg.payload = { water };\nreturn msg;",
+        "func": "const water = msg.payload;\nmsg.payload = { water };\nmsg.routingKey = \"water\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3486,11 +3486,11 @@
         "z": "42c32db0efd3bac1",
         "name": "",
         "links": [
-            "1f299931cf658858"
+            "fc7aaaa19c985f47"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 280,
+        "x": 310,
         "y": 560,
         "wires": [
             [
@@ -3727,7 +3727,7 @@
         "type": "function",
         "z": "11322c65b3bfae17",
         "name": "prepare publish",
-        "func": "const weather = msg.payload;\nmsg.payload = { weather };\nreturn msg;",
+        "func": "const weather = msg.payload;\nmsg.payload = { weather };\nmsg.routingKey = \"weather\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3748,11 +3748,11 @@
         "z": "11322c65b3bfae17",
         "name": "",
         "links": [
-            "97d6feb23850ec65"
+            "fc7aaaa19c985f47"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 290,
+        "x": 310,
         "y": 380,
         "wires": [
             [
@@ -4066,7 +4066,7 @@
         "type": "function",
         "z": "1701ccc8d2838ab0",
         "name": "prepare publish",
-        "func": "const reservoirs = msg.payload;\nmsg.payload = { reservoirs };\nreturn msg;",
+        "func": "const reservoirs = msg.payload;\nmsg.payload = { reservoirs };\nmsg.routingKey = \"reservoirs\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4091,7 +4091,7 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 300,
+        "x": 310,
         "y": 380,
         "wires": [
             [
@@ -4103,17 +4103,17 @@
         "id": "3c4c570a2f5ad214",
         "type": "amqp-out",
         "z": "bac88e4feb8bab3d",
-        "name": "reservoirs exchange",
+        "name": "athenswaterall exchange",
         "broker": "774630f253d36966",
-        "exchangeName": "reservoirs",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
+        "exchangeName": "athenswaterall",
+        "exchangeType": "direct",
+        "exchangeRoutingKey": "reservoirs,savings,production,water,weather",
         "exchangeRoutingKeyType": "str",
         "exchangeDurable": true,
         "amqpProperties": "{ \"headers\": {} }",
         "rpcTimeoutMilliseconds": 3000,
         "outputs": 0,
-        "x": 300,
+        "x": 250,
         "y": 60,
         "wires": []
     },
@@ -4121,9 +4121,9 @@
         "id": "fc7aaaa19c985f47",
         "type": "link in",
         "z": "bac88e4feb8bab3d",
-        "name": "link in reservoirs exchange",
+        "name": "link in athenswaterall exchange",
         "links": [],
-        "x": 115,
+        "x": 55,
         "y": 60,
         "wires": [
             [
@@ -4143,8 +4143,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 870,
-        "y": 80,
+        "x": 810,
+        "y": 120,
         "wires": [
             []
         ]
@@ -4168,194 +4168,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
+        "x": 220,
         "y": 120,
         "wires": [
             [
                 "2a75c15a621dcc4c"
-            ]
-        ]
-    },
-    {
-        "id": "7b776b5260599c79",
-        "type": "amqp-out",
-        "z": "bac88e4feb8bab3d",
-        "name": "savings exchange",
-        "broker": "774630f253d36966",
-        "exchangeName": "savings",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeRoutingKeyType": "str",
-        "exchangeDurable": true,
-        "amqpProperties": "{ \"headers\": {} }",
-        "rpcTimeoutMilliseconds": 3000,
-        "outputs": 0,
-        "x": 290,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "22949025a62cfe73",
-        "type": "amqp-out",
-        "z": "bac88e4feb8bab3d",
-        "name": "production exchange",
-        "broker": "774630f253d36966",
-        "exchangeName": "production",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeRoutingKeyType": "str",
-        "exchangeDurable": true,
-        "amqpProperties": "{ \"headers\": {} }",
-        "rpcTimeoutMilliseconds": 3000,
-        "outputs": 0,
-        "x": 300,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "36dab2cdafd398dc",
-        "type": "change",
-        "z": "bac88e4feb8bab3d",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Publish ' & msg.payload",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 240,
-        "wires": [
-            [
-                "2a75c15a621dcc4c"
-            ]
-        ]
-    },
-    {
-        "id": "565eaf0f4ec6d9d3",
-        "type": "change",
-        "z": "bac88e4feb8bab3d",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Publish ' & msg.payload",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 360,
-        "wires": [
-            [
-                "2a75c15a621dcc4c"
-            ]
-        ]
-    },
-    {
-        "id": "346adf5f28e6d8c6",
-        "type": "link in",
-        "z": "bac88e4feb8bab3d",
-        "name": "link in savings exchange",
-        "links": [],
-        "x": 115,
-        "y": 180,
-        "wires": [
-            [
-                "7b776b5260599c79",
-                "36dab2cdafd398dc",
-                "78327d262f4b2133"
-            ]
-        ]
-    },
-    {
-        "id": "ccdcc2fdde08e718",
-        "type": "link in",
-        "z": "bac88e4feb8bab3d",
-        "name": "link in production exchange",
-        "links": [],
-        "x": 115,
-        "y": 300,
-        "wires": [
-            [
-                "22949025a62cfe73",
-                "565eaf0f4ec6d9d3",
-                "78327d262f4b2133"
-            ]
-        ]
-    },
-    {
-        "id": "e5a271de8bd6c1a0",
-        "type": "amqp-out",
-        "z": "bac88e4feb8bab3d",
-        "name": "water exchange",
-        "broker": "774630f253d36966",
-        "exchangeName": "water",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeRoutingKeyType": "str",
-        "exchangeDurable": true,
-        "amqpProperties": "{ \"headers\": {} }",
-        "rpcTimeoutMilliseconds": 3000,
-        "outputs": 0,
-        "x": 280,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "1cb08c474388e315",
-        "type": "change",
-        "z": "bac88e4feb8bab3d",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Publish ' & msg.payload",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 480,
-        "wires": [
-            [
-                "2a75c15a621dcc4c"
-            ]
-        ]
-    },
-    {
-        "id": "1f299931cf658858",
-        "type": "link in",
-        "z": "bac88e4feb8bab3d",
-        "name": "link in water exchange",
-        "links": [],
-        "x": 115,
-        "y": 420,
-        "wires": [
-            [
-                "e5a271de8bd6c1a0",
-                "1cb08c474388e315",
-                "78327d262f4b2133"
             ]
         ]
     },
@@ -4365,15 +4182,11 @@
         "z": "bac88e4feb8bab3d",
         "name": "",
         "scope": [
-            "3c4c570a2f5ad214",
-            "7b776b5260599c79",
-            "22949025a62cfe73",
-            "e5a271de8bd6c1a0",
-            "8116ae1bd2a4f43a"
+            "3c4c570a2f5ad214"
         ],
         "uncaught": false,
-        "x": 850,
-        "y": 220,
+        "x": 790,
+        "y": 240,
         "wires": [
             [
                 "d3f7bceabc093354"
@@ -4399,8 +4212,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
-        "y": 160,
+        "x": 820,
+        "y": 200,
         "wires": [
             [
                 "2a75c15a621dcc4c"
@@ -4420,29 +4233,29 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 900,
-        "y": 400,
+        "x": 800,
+        "y": 340,
         "wires": []
     },
     {
         "id": "220fa75884132e53",
         "type": "amqp-in",
         "z": "bac88e4feb8bab3d",
-        "name": "queue (savings)",
+        "name": "queue.user00",
         "broker": "774630f253d36966",
         "prefetch": 0,
         "noAck": true,
-        "exchangeName": "savings",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
+        "exchangeName": "athenswaterall",
+        "exchangeType": "direct",
+        "exchangeRoutingKey": "reservoirs,savings,production,water,weather",
         "exchangeDurable": true,
         "queueName": "queue.user00",
         "queueExclusive": false,
         "queueDurable": true,
         "queueAutoDelete": false,
         "headers": "{}",
-        "x": 720,
-        "y": 400,
+        "x": 210,
+        "y": 340,
         "wires": [
             [
                 "f05efffd73c83168"
@@ -4456,70 +4269,9 @@
         "name": "link out 19",
         "mode": "return",
         "links": [],
-        "x": 65,
-        "y": 640,
+        "x": 755,
+        "y": 60,
         "wires": []
-    },
-    {
-        "id": "8116ae1bd2a4f43a",
-        "type": "amqp-out",
-        "z": "bac88e4feb8bab3d",
-        "name": "weather exchange",
-        "broker": "774630f253d36966",
-        "exchangeName": "weather",
-        "exchangeType": "fanout",
-        "exchangeRoutingKey": "",
-        "exchangeRoutingKeyType": "str",
-        "exchangeDurable": true,
-        "amqpProperties": "{ \"headers\": {} }",
-        "rpcTimeoutMilliseconds": 3000,
-        "outputs": 0,
-        "x": 290,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "97d6feb23850ec65",
-        "type": "link in",
-        "z": "bac88e4feb8bab3d",
-        "name": "link in weather exchange",
-        "links": [],
-        "x": 115,
-        "y": 540,
-        "wires": [
-            [
-                "8116ae1bd2a4f43a",
-                "216c4bc768b60929",
-                "78327d262f4b2133"
-            ]
-        ]
-    },
-    {
-        "id": "216c4bc768b60929",
-        "type": "change",
-        "z": "bac88e4feb8bab3d",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "'Publish ' & msg.payload",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 600,
-        "wires": [
-            [
-                "2a75c15a621dcc4c"
-            ]
-        ]
     },
     {
         "id": "776d2b916bc913ec",
