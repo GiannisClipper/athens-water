@@ -38,7 +38,7 @@ process.env.NR_MADRID_SQLITE='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/se
 process.env.NR_MADRID_URL='http://informo.munimadrid.es/informo/tmadrid/pm.xml'
 
 process.env.AW_VHOST='athenswater';
-process.env.AW_EXCHANGES='weather,savings,production,result';
+process.env.AW_EXCHANGES='reservoirs,savings,production,water,weather';
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 /*
   SPECIFIC SETTINGS IN NODE-RED:
@@ -524,6 +524,7 @@ module.exports = {
     functionGlobalContext: {
         // os:require('os'),
         clusters:require( 'clusters' ),
+        clusterHelpers:require( './projects/athens-water/helpers/cluster.js' ),
         dateHelpers:require( './projects/athens-water/helpers/date.js' ),
     },
 

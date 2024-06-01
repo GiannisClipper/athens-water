@@ -98,7 +98,7 @@
     {
         "id": "61bc9ba532c143ca",
         "type": "tab",
-        "label": "RabbitMQ api",
+        "label": "rabbitmq api",
         "disabled": false,
         "info": "",
         "env": []
@@ -178,7 +178,23 @@
     {
         "id": "c05f2d05a65c769e",
         "type": "tab",
-        "label": "registration",
+        "label": "rabbitmq register",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "caf565125e59062a",
+        "type": "tab",
+        "label": "rabbitmq unregister",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "08eda6c1b66e16e5",
+        "type": "tab",
+        "label": "rabbitmq admin",
         "disabled": false,
         "info": "",
         "env": []
@@ -273,7 +289,7 @@
         "id": "8c28ad9eafaca440",
         "type": "link call",
         "z": "6d278dbe6de7a110",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -678,8 +694,8 @@
         "createDir": false,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 830,
-        "y": 340,
+        "x": 210,
+        "y": 620,
         "wires": [
             []
         ]
@@ -705,8 +721,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 810,
-        "y": 300,
+        "x": 190,
+        "y": 580,
         "wires": [
             [
                 "bc33fac1bfdac6f3"
@@ -726,8 +742,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 140,
+        "x": 200,
+        "y": 420,
         "wires": []
     },
     {
@@ -742,8 +758,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 100,
+        "x": 210,
+        "y": 380,
         "wires": [
             [
                 "ad8fd501b129cfec"
@@ -771,8 +787,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 810,
-        "y": 200,
+        "x": 190,
+        "y": 480,
         "wires": [
             [
                 "0578fa751ff3e995"
@@ -791,8 +807,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 240,
+        "x": 210,
+        "y": 520,
         "wires": [
             []
         ]
@@ -818,8 +834,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 810,
-        "y": 60,
+        "x": 190,
+        "y": 340,
         "wires": [
             [
                 "06c779112978aaa2"
@@ -871,7 +887,7 @@
         "id": "9e34cddef0583d1a",
         "type": "link call",
         "z": "b196196f1ccccbbb",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -2705,7 +2721,7 @@
         "id": "2a75c15a621dcc4c",
         "type": "link call",
         "z": "bac88e4feb8bab3d",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -3965,8 +3981,8 @@
         "authType": "basic",
         "senderr": false,
         "headers": [],
-        "x": 430,
-        "y": 60,
+        "x": 230,
+        "y": 180,
         "wires": [
             [
                 "af05a74b2187be8a"
@@ -3977,7 +3993,7 @@
         "id": "2e4a12651ca65a7d",
         "type": "link in",
         "z": "61bc9ba532c143ca",
-        "name": "link in 1",
+        "name": "link in rabbitmq api",
         "links": [],
         "x": 65,
         "y": 60,
@@ -3994,8 +4010,8 @@
         "name": "link out 1",
         "mode": "return",
         "links": [],
-        "x": 615,
-        "y": 60,
+        "x": 175,
+        "y": 240,
         "wires": []
     },
     {
@@ -4014,7 +4030,95 @@
         "y": 60,
         "wires": [
             [
-                "1966a0a3058cc40f"
+                "1966a0a3058cc40f",
+                "39836e8f3488f67a"
+            ]
+        ]
+    },
+    {
+        "id": "0f69fae04798c822",
+        "type": "change",
+        "z": "61bc9ba532c143ca",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 140,
+        "wires": [
+            [
+                "df3ce2745f8171c7"
+            ]
+        ]
+    },
+    {
+        "id": "5e4b0481573b5619",
+        "type": "catch",
+        "z": "61bc9ba532c143ca",
+        "name": "",
+        "scope": [
+            "1966a0a3058cc40f"
+        ],
+        "uncaught": false,
+        "x": 770,
+        "y": 200,
+        "wires": [
+            [
+                "0f69fae04798c822"
+            ]
+        ]
+    },
+    {
+        "id": "df3ce2745f8171c7",
+        "type": "link call",
+        "z": "61bc9ba532c143ca",
+        "name": "",
+        "links": [
+            "992e1a45369732e3"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 790,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39836e8f3488f67a",
+        "type": "change",
+        "z": "61bc9ba532c143ca",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "url",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 120,
+        "wires": [
+            [
+                "df3ce2745f8171c7"
             ]
         ]
     },
@@ -4979,7 +5083,7 @@
         "id": "1f32928059d87d0d",
         "type": "link call",
         "z": "e6dee893d75f8487",
-        "name": "call create",
+        "name": "",
         "links": [
             "d1dec8c105658e64"
         ],
@@ -5022,13 +5126,13 @@
         "id": "7bbe422a10db75e1",
         "type": "link call",
         "z": "e6dee893d75f8487",
-        "name": "call read",
+        "name": "",
         "links": [
             "19aebb1bef4790ee"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 280,
+        "x": 290,
         "y": 560,
         "wires": [
             [
@@ -5065,7 +5169,7 @@
         "id": "24066d75ea8360cf",
         "type": "link call",
         "z": "e6dee893d75f8487",
-        "name": "call delete",
+        "name": "",
         "links": [
             "137a3afc7bc0fc9f"
         ],
@@ -5201,13 +5305,13 @@
         "id": "d93151c3e77b20b1",
         "type": "link call",
         "z": "e6dee893d75f8487",
-        "name": "call read",
+        "name": "",
         "links": [
             "aed874d4f1b36917"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 280,
+        "x": 300,
         "y": 440,
         "wires": [
             [
@@ -6750,7 +6854,7 @@
         "id": "81d8c3d0c7b606be",
         "type": "link call",
         "z": "42c32db0efd3bac1",
-        "name": "call logger",
+        "name": "",
         "links": [
             "992e1a45369732e3"
         ],
@@ -7076,53 +7180,19 @@
         "wires": []
     },
     {
-        "id": "5e1a1e95a8bb2c53",
-        "type": "http response",
-        "z": "c05f2d05a65c769e",
-        "name": "send response",
-        "statusCode": "",
-        "headers": {},
-        "x": 840,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "0841672cf9af9759",
-        "type": "function",
-        "z": "c05f2d05a65c769e",
-        "name": "check username",
-        "func": "const { username } = msg.req.params;\n\nconst usernames = msg.payload;\n\nnode.warn(usernames);\n\nif (usernames.includes(username ) ) {\n    msg.statusCode = 200;\n    msg.payload = `Error from Athens-water. Invalid registration. Username ${username} not available.`;\n    return [null, msg];\n}\n\nreturn [msg, null];\n",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 120,
-        "y": 260,
-        "wires": [
-            [
-                "2032088449cbed34"
-            ],
-            [
-                "5e1a1e95a8bb2c53"
-            ]
-        ]
-    },
-    {
         "id": "94d7a80de5ca2315",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "retrieve users request",
-        "func": "const path = '/users'\nmsg.url = path;\nmsg.method = 'GET';\nreturn msg;",
+        "name": "retrieve users",
+        "func": "const path = '/users'\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 140,
-        "y": 120,
+        "x": 120,
+        "y": 140,
         "wires": [
             [
                 "82dab64868db30c4"
@@ -7133,14 +7203,14 @@
         "id": "82dab64868db30c4",
         "type": "link call",
         "z": "c05f2d05a65c769e",
-        "name": "call RabbitMQ api",
+        "name": "",
         "links": [
             "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 130,
-        "y": 160,
+        "y": 180,
         "wires": [
             [
                 "587a5f1a2f1cf992"
@@ -7151,42 +7221,19 @@
         "id": "587a5f1a2f1cf992",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "parse response",
-        "func": "const { payload } = msg;\nconst names = payload.map( x => x.name );\nmsg.payload = names;\nreturn msg;",
+        "name": "validate username",
+        "func": "const { payload } = msg;\n//node.warn(payload);\n\nconst usernames = payload.map( x => x.name );\nconst { username } = msg.req.params;\n//node.warn(usernames);\n\nif (usernames.includes(username ) ) {\n    throw `Error from Athens-water. Invalid registration. Username ${username} not available.`;\n}\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 120,
-        "y": 200,
-        "wires": [
-            [
-                "0841672cf9af9759"
-            ]
-        ]
-    },
-    {
-        "id": "bb9dc6c395721bc9",
-        "type": "function",
-        "z": "c05f2d05a65c769e",
-        "name": "check exchanges",
-        "func": "let { exchanges, username } = msg.req.params;\nexchanges = exchanges.split( ',' );\n\nconst existingExchanges = msg.payload;\n\nnode.warn(exchanges);\nnode.warn(existingExchanges);\n\nfor ( let exchange of exchanges ) {\n    if (!existingExchanges.includes(exchange ) ) {\n        msg.statusCode = 200;\n        msg.payload = `Error from Athens-water. Invalid registration. Exchange ${exchange} not available.`;\n        return [null, msg];\n    }\n}\n\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges.join(',')} exchanges.`;\n\nreturn [msg, null];",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
         "x": 130,
-        "y": 460,
+        "y": 220,
         "wires": [
             [
-                "5ec2a1163f0b1f92"
-            ],
-            [
-                "5e1a1e95a8bb2c53"
+                "2032088449cbed34"
             ]
         ]
     },
@@ -7194,19 +7241,19 @@
         "id": "20063f98b5c417ee",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "get response",
-        "func": "const { payload } = msg;\nconst names = payload.map( x => x.name );\nmsg.payload = names;\nreturn msg;",
+        "name": "validate exchanges",
+        "func": "const existingExchanges = msg.payload.map( x => x.name );\n// node.warn(existingExchanges);\n\nlet { exchanges } = msg.req.params;\nexchanges = exchanges.split( ',' );\n// node.warn(exchanges);\n\nfor ( let exchange of exchanges ) {\n    if (!existingExchanges.includes(exchange ) ) {\n        throw `Error from Athens-water. Invalid registration. Exchange ${exchange} not available.`;\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 110,
-        "y": 400,
+        "x": 130,
+        "y": 360,
         "wires": [
             [
-                "bb9dc6c395721bc9"
+                "5ec2a1163f0b1f92"
             ]
         ]
     },
@@ -7214,14 +7261,14 @@
         "id": "c895025fb03bc432",
         "type": "link call",
         "z": "c05f2d05a65c769e",
-        "name": "call RabbitMQ api",
+        "name": "",
         "links": [
             "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
         "x": 130,
-        "y": 360,
+        "y": 320,
         "wires": [
             [
                 "20063f98b5c417ee"
@@ -7232,16 +7279,16 @@
         "id": "2032088449cbed34",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "retreive exchanges request",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst path = `/exchanges/${AW_VHOST}`;\nmsg.url = path;\nmsg.method = 'GET';\nreturn msg;",
+        "name": "retreive exchanges",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/exchanges/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 160,
-        "y": 320,
+        "x": 130,
+        "y": 280,
         "wires": [
             [
                 "c895025fb03bc432"
@@ -7252,16 +7299,16 @@
         "id": "5ec2a1163f0b1f92",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "create user request",
-        "func": "const { username, password } = msg.req.params;\nconst path = `/users/${username}`\n\nconst body = {\n    password: password,\n    tags: \"athenswater,consumer\"\n};\n\nnode.warn( body )\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
+        "name": "create user",
+        "func": "const { username, password } = msg.req.params;\nconst path = `/users/${username}`\n\nconst body = {\n    password: password,\n    tags: \"athenswater,consumer\"\n};\n\n//node.warn( body )\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 130,
-        "y": 500,
+        "x": 470,
+        "y": 140,
         "wires": [
             [
                 "e8b47afadef0ca81"
@@ -7272,26 +7319,329 @@
         "id": "e8b47afadef0ca81",
         "type": "link call",
         "z": "c05f2d05a65c769e",
-        "name": "call RabbitMQ api",
+        "name": "",
         "links": [
             "2e4a12651ca65a7d"
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 130,
-        "y": 540,
+        "x": 490,
+        "y": 180,
         "wires": [
             [
-                "3f71aa715cbd16c1"
+                "fc67e870266bf62e"
             ]
         ]
     },
     {
-        "id": "3f71aa715cbd16c1",
+        "id": "adaffe23485f51e8",
+        "type": "http response",
+        "z": "c05f2d05a65c769e",
+        "name": "send response",
+        "statusCode": "",
+        "headers": {},
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "45f722efd22e620b",
+        "type": "change",
+        "z": "c05f2d05a65c769e",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 380,
+        "wires": [
+            [
+                "adaffe23485f51e8"
+            ]
+        ]
+    },
+    {
+        "id": "f8be82e938fa0cc9",
+        "type": "catch",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "scope": [
+            "587a5f1a2f1cf992",
+            "20063f98b5c417ee"
+        ],
+        "uncaught": false,
+        "x": 810,
+        "y": 420,
+        "wires": [
+            [
+                "45f722efd22e620b"
+            ]
+        ]
+    },
+    {
+        "id": "dca4afaac3038c25",
         "type": "function",
         "z": "c05f2d05a65c769e",
-        "name": "make response",
-        "func": "let { exchanges, username } = msg.req.params;\n\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges} exchanges.`;\n\nreturn msg;",
+        "name": "set response",
+        "func": "const { username, exchanges  } = msg.req.params;\nmsg.statusCode = 200;\nmsg.payload = `Hello ${username} from Athens-water. Your registration is ok, you should be able receiving messages for ${exchanges} exchange(s).`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 700,
+        "wires": [
+            [
+                "adaffe23485f51e8"
+            ]
+        ]
+    },
+    {
+        "id": "fc67e870266bf62e",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "create queue",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nlet { username } = msg.req.params;\nconst queue = `queue.${username}`;\n\nconst path = `/queues/${AW_VHOST}/${queue}`;\n\nconst body = {\n    auto_delete: false,\n    durable: true,\n    arguments:{},\n    // node:\"rabbit@smacmullen\"\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\nmsg.queue =queue;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "3b5ba1898af07606"
+            ]
+        ]
+    },
+    {
+        "id": "3b5ba1898af07606",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "885f297ecf1a7ca0"
+            ]
+        ]
+    },
+    {
+        "id": "848321ee6ffc42ed",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "create binding",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { exchange, queue } = msg.payload;\n\nconst path = `/bindings/${AW_VHOST}/e/${exchange}/q/${queue}`;\n\nconst body = null;\n\n// const body = {\n    //  routing_key: \"my_routing_key\", \n    //  arguments: {\"x-arg\": \"value\"}\n// };\n\nmsg.url = path;\nmsg.method = 'POST';\nmsg.payload = body;\nmsg.binding = undefined;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 440,
+        "wires": [
+            [
+                "b46fc170c98ce15f"
+            ]
+        ]
+    },
+    {
+        "id": "962dbdc9e5a425da",
+        "type": "split",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "848321ee6ffc42ed"
+            ]
+        ]
+    },
+    {
+        "id": "885f297ecf1a7ca0",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "define bindings",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nlet { exchanges } = msg.req.params;\nexchanges = exchanges.split( ',' );\nconst { queue } = msg;\n\nconst bindings = [];\nfor ( let exchange of exchanges ) {\n    bindings.push( { exchange, queue } );\n}\n\nmsg.payload = bindings;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "962dbdc9e5a425da"
+            ]
+        ]
+    },
+    {
+        "id": "edc75caa6a942ef3",
+        "type": "join",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 450,
+        "y": 540,
+        "wires": [
+            [
+                "ae2c12177510f34f"
+            ]
+        ]
+    },
+    {
+        "id": "b46fc170c98ce15f",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 510,
+        "y": 480,
+        "wires": [
+            [
+                "edc75caa6a942ef3"
+            ]
+        ]
+    },
+    {
+        "id": "ae2c12177510f34f",
+        "type": "function",
+        "z": "c05f2d05a65c769e",
+        "name": "create permissions",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\n\nconst path = `/permissions/${AW_VHOST}/${username}`\nconst body = {\n    // configure: \".*\",\n    // write: \".*\",\n    // read: \".*\",\n    // read: `^queue.*.${username}$`,\n    configure: \"^$ \",\n    write: \"^$ \",\n    read: `queue.${username}`,\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "7c92b5d60b8c1c42"
+            ]
+        ]
+    },
+    {
+        "id": "7c92b5d60b8c1c42",
+        "type": "link call",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "dca4afaac3038c25"
+            ]
+        ]
+    },
+    {
+        "id": "f6e0d7bc799ed002",
+        "type": "http in",
+        "z": "caf565125e59062a",
+        "name": "",
+        "url": "/unregister/username/:username/password/:password",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 60,
+        "wires": [
+            [
+                "bb7df6e8718b07b7",
+                "d324e91b5e39b518"
+            ]
+        ]
+    },
+    {
+        "id": "bb7df6e8718b07b7",
+        "type": "debug",
+        "z": "caf565125e59062a",
+        "name": "debug 34",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "a211a7d5211cafab",
+        "type": "http response",
+        "z": "caf565125e59062a",
+        "name": "send response",
+        "statusCode": "",
+        "headers": {},
+        "x": 840,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d324e91b5e39b518",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "retrieve users",
+        "func": "const path = '/users'\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -7299,10 +7649,690 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 600,
+        "y": 140,
         "wires": [
             [
-                "5e1a1e95a8bb2c53"
+                "3262c262f9d9fc9b"
+            ]
+        ]
+    },
+    {
+        "id": "3262c262f9d9fc9b",
+        "type": "link call",
+        "z": "caf565125e59062a",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "f3e4619bb30501a9"
+            ]
+        ]
+    },
+    {
+        "id": "f3e4619bb30501a9",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "validate username",
+        "func": "const { payload } = msg;\n//node.warn(payload);\n\nconst usernames = payload.map( x => x.name );\nconst { username } = msg.req.params;\n//node.warn(usernames);\n\nif (! usernames.includes(username ) ) {\n    throw `Error from Athens-water. User ${username} not exists.`;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "1ad5c3e404d43eda"
+            ]
+        ]
+    },
+    {
+        "id": "4e1f77a9616a6fbd",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "create user",
+        "func": "const { username } = msg.req.params;\n\nconst path = `/users/${username}`\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 420,
+        "wires": [
+            [
+                "5fd6cc1fbc5b81aa"
+            ]
+        ]
+    },
+    {
+        "id": "5fd6cc1fbc5b81aa",
+        "type": "link call",
+        "z": "caf565125e59062a",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "d2190fca0e60f2b1"
+            ]
+        ]
+    },
+    {
+        "id": "abeaa50ce00c96cf",
+        "type": "change",
+        "z": "caf565125e59062a",
+        "name": "set log message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "error.message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 340,
+        "wires": [
+            [
+                "a211a7d5211cafab"
+            ]
+        ]
+    },
+    {
+        "id": "542818c3b5acc0cf",
+        "type": "catch",
+        "z": "caf565125e59062a",
+        "name": "",
+        "scope": [
+            "f3e4619bb30501a9",
+            "8a552210a049ec13"
+        ],
+        "uncaught": false,
+        "x": 810,
+        "y": 380,
+        "wires": [
+            [
+                "abeaa50ce00c96cf"
+            ]
+        ]
+    },
+    {
+        "id": "d2190fca0e60f2b1",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "set response",
+        "func": "const { username  } = msg.req.params;\nmsg.statusCode = 200;\nmsg.payload = `User ${username} removed successfull from Athens-water.`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "a211a7d5211cafab"
+            ]
+        ]
+    },
+    {
+        "id": "ff6e2e737e3e4b65",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "delete queue",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nlet { username } = msg.req.params;\nconst queue = `queue.${username}`;\n\nconst path = `/queues/${AW_VHOST}/${queue}`;\n\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "64081a0140c28b66"
+            ]
+        ]
+    },
+    {
+        "id": "64081a0140c28b66",
+        "type": "link call",
+        "z": "caf565125e59062a",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 360,
+        "wires": [
+            [
+                "4e1f77a9616a6fbd"
+            ]
+        ]
+    },
+    {
+        "id": "eb0f4e73df5013d1",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "delete binding",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { source, destination, properties_key } = msg.payload;\n\nconst path = `/api/bindings/${AW_VHOST}/e/${source}/q/${destination}/${properties_key}`;\n\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "c9c50606bff10093"
+            ]
+        ]
+    },
+    {
+        "id": "c4f06c18c0fe0a38",
+        "type": "split",
+        "z": "caf565125e59062a",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "eb0f4e73df5013d1"
+            ]
+        ]
+    },
+    {
+        "id": "2ed36d42619b5f1d",
+        "type": "join",
+        "z": "caf565125e59062a",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "ff6e2e737e3e4b65"
+            ]
+        ]
+    },
+    {
+        "id": "c9c50606bff10093",
+        "type": "link call",
+        "z": "caf565125e59062a",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "2ed36d42619b5f1d"
+            ]
+        ]
+    },
+    {
+        "id": "4c153d3b2afe70f3",
+        "type": "link call",
+        "z": "caf565125e59062a",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "bb7df6e8718b07b7",
+                "c4f06c18c0fe0a38"
+            ]
+        ]
+    },
+    {
+        "id": "1ad5c3e404d43eda",
+        "type": "function",
+        "z": "caf565125e59062a",
+        "name": "retreive bindings",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\nconst queue = `queue.${username}`;\n\nconst path = `/queues/${AW_VHOST}/${queue}/bindings`;\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "4c153d3b2afe70f3"
+            ]
+        ]
+    },
+    {
+        "id": "9d8750f65038db75",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "create vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nconst body = {\n    description: \"athens-water project\", \n    tags: \"athens,water\"\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "fc92ab505adc448e"
+            ]
+        ]
+    },
+    {
+        "id": "fc92ab505adc448e",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "22ea041ede3540cb",
+                "0fa12d682a245aba"
+            ]
+        ]
+    },
+    {
+        "id": "9d05317d2d3d7ad1",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "retrieve vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "bffd1ab283921d61"
+            ]
+        ]
+    },
+    {
+        "id": "bffd1ab283921d61",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "22ea041ede3540cb"
+            ]
+        ]
+    },
+    {
+        "id": "50a374ef88f9961b",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "delete vhost",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/vhosts/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 400,
+        "wires": [
+            [
+                "bcc2cbd5bc07d820"
+            ]
+        ]
+    },
+    {
+        "id": "bcc2cbd5bc07d820",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 830,
+        "y": 440,
+        "wires": [
+            [
+                "22ea041ede3540cb"
+            ]
+        ]
+    },
+    {
+        "id": "f74f69771383e10e",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go create vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "9d8750f65038db75"
+            ]
+        ]
+    },
+    {
+        "id": "66c6ac0a31b83989",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go retrieve vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 480,
+        "y": 60,
+        "wires": [
+            [
+                "9d05317d2d3d7ad1"
+            ]
+        ]
+    },
+    {
+        "id": "b15e9bf9306ba337",
+        "type": "inject",
+        "z": "08eda6c1b66e16e5",
+        "name": "go delete vhost",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "24901ae9f7293c0c"
+            ]
+        ]
+    },
+    {
+        "id": "22ea041ede3540cb",
+        "type": "debug",
+        "z": "08eda6c1b66e16e5",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "0fa12d682a245aba",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "create exchanges",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst AW_EXCHANGES = env.get( 'AW_EXCHANGES' )\nconst exchanges = AW_EXCHANGES.split( ',' );\n\nfor ( let exchange of exchanges ) {\n    const path = `/exchanges/${AW_VHOST}/${exchange}`;\n\n    const body = {\n        type: \"fanout\",\n        auto_delete: false, \n        durable: true, \n        internal: false, \n        arguments: {}   \n    };\n\n    msg.url = path;\n    msg.method = 'PUT';\n    msg.payload = body;\n    node.send( msg );\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "f702bb7915c19f50"
+            ]
+        ]
+    },
+    {
+        "id": "f702bb7915c19f50",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24901ae9f7293c0c",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "retrieve exchanges",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\n\nconst path = `/exchanges/${AW_VHOST}`;\n\nmsg.url = path;\nmsg.method = 'GET';\nmsg.payload = null;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 120,
+        "wires": [
+            [
+                "9b2b051edc30dbe7"
+            ]
+        ]
+    },
+    {
+        "id": "9b2b051edc30dbe7",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 830,
+        "y": 160,
+        "wires": [
+            [
+                "29926587a615f050"
+            ]
+        ]
+    },
+    {
+        "id": "29926587a615f050",
+        "type": "split",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 790,
+        "y": 220,
+        "wires": [
+            [
+                "7eed5244245c2e69"
+            ]
+        ]
+    },
+    {
+        "id": "f0a0b656105e894e",
+        "type": "join",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 790,
+        "y": 340,
+        "wires": [
+            [
+                "50a374ef88f9961b"
+            ]
+        ]
+    },
+    {
+        "id": "24e33f0cb14b29e8",
+        "type": "link call",
+        "z": "08eda6c1b66e16e5",
+        "name": "",
+        "links": [
+            "2e4a12651ca65a7d"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "f0a0b656105e894e"
+            ]
+        ]
+    },
+    {
+        "id": "7eed5244245c2e69",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "delete exchange",
+        "func": "const { vhost, name } = msg.payload;\n\nconst path = `/api/exchanges/${vhost}/${name}`;\n\nconst body = null;\n\nmsg.url = path;\nmsg.method = 'DELETE';\nmsg.payload = body;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 260,
+        "wires": [
+            [
+                "24e33f0cb14b29e8"
             ]
         ]
     }
