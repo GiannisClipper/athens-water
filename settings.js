@@ -39,7 +39,7 @@ process.env.NR_MADRID_URL='http://informo.munimadrid.es/informo/tmadrid/pm.xml'
 
 process.env.AW_VHOST='athenswater';
 process.env.AW_EXCHANGE='athenswaterall';
-// process.env.AW_EXCHANGES='reservoirs,savings,production,water,weather';
+process.env.AW_ROUTING_KEYS='reservoirs,savings,production,water,weather';
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 /*
   SPECIFIC SETTINGS IN NODE-RED:
@@ -116,14 +116,23 @@ module.exports = {
     /** To password protect the Node-RED editor and admin API, the following
      * property can be used. See https://nodered.org/docs/security.html for details.
      */
-    //adminAuth: {
-    //    type: "credentials",
-    //    users: [{
-    //        username: "admin",
-    //        password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
-    //        permissions: "*"
-    //    }]
-    //},
+    // adminAuth: {
+    //     type: "credentials",
+    //     users: [
+    //         {
+    //             username: "admin",
+    //             password: "$2b$08$a6oNh7Hha6N0g9Rw8cXbieWL6UXvWZMGaKB5IR7xV6P8/qd4SMS1S",
+    //             //    password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
+    //             permissions: "*"
+    //         },
+    //         {
+    //             username: "guest",
+    //             password: "$2b$08$a6oNh7Hha6N0g9Rw8cXbieWL6UXvWZMGaKB5IR7xV6P8/qd4SMS1S",
+    //             //    password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
+    //             permissions: "read"
+    //         }
+    //     ]
+    // },
 
     /** The following property can be used to enable HTTPS
      * This property can be either an object, containing both a (private) key

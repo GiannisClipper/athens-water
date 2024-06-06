@@ -1515,7 +1515,7 @@
         "id": "7ea925825ff95888",
         "type": "function",
         "z": "d7c8565c02c92dbd",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const lastDate = global.get( 'weatherLastDate' );\nconst locations = global.get( 'locations' );\n\nif ( lastDate && locations ) {\n    msg.payload = \"Weather already initialized.\";\n    return [ msg, null ];\n}\n\nmsg.payload = \"Weather initialization.\";\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -1523,7 +1523,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -1743,7 +1743,7 @@
         "id": "64214e1c1947fd0e",
         "type": "function",
         "z": "369c55fe302803f7",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const lastDate = global.get( 'savingsLastDate' );\nconst reservoirs = global.get( 'reservoirs' );\n\nif ( lastDate && reservoirs ) {\n    msg.payload = \"Savings already initialized.\";\n    return [ msg, null ];\n}\n\nmsg.payload = \"Savings initialization.\";\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -1751,7 +1751,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -1971,7 +1971,7 @@
         "id": "0da6883389d1746f",
         "type": "function",
         "z": "aba327fbb26c5653",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const lastDate = global.get( 'productionLastDate' );\nconst factories = global.get( 'factories' );\n\nif ( lastDate && factories ) {\n    msg.payload = \"Production already initialized.\";\n    return [ msg, null ];\n}\n\nmsg.payload = \"Production initialization.\";\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -1979,7 +1979,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -2054,7 +2054,7 @@
         "id": "2fb4cc5afb478162",
         "type": "function",
         "z": "1dc82d7c84b0491f",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'weatherLastDate' );\n\nif ( daysDistance( lastDate, today ) <= 1 ) {\n    msg.payload = \"Weather up to date.\"\n    return [ msg, null ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ null, msg ];\n\n",
         "outputs": 2,
         "timeout": 0,
@@ -2062,7 +2062,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -2290,7 +2290,7 @@
         "id": "c7c23ca1cd6e436a",
         "type": "function",
         "z": "61022c35528d6ffa",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'savingsLastDate' );\n\nif ( daysDistance( lastDate, today ) <= 1 ) {\n    msg.payload = \"Savings up to date.\"\n    return [ msg, null ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -2298,7 +2298,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -2536,7 +2536,7 @@
         "id": "722008d1f8785f62",
         "type": "function",
         "z": "d21f4bda462bb9a5",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst lastDate = global.get( 'productionLastDate' );\n\nif ( daysDistance( lastDate, today ) <= 1 ) {\n    msg.payload = \"Production up to date.\"\n    return [ msg, null ];\n}\n\nconst nextLastDate = timeRepr( nextDate( lastDate ), 'YYYY-MM-DD' );\nmsg.payload = nextLastDate;\n\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -2544,7 +2544,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 250,
         "y": 60,
         "wires": [
             [
@@ -3230,7 +3230,7 @@
         "id": "1a6118c29bd78b28",
         "type": "function",
         "z": "b7ec5c0795a0393f",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const productionClusteringDate = global.get( 'productionClusteringDate' );\nconst lastDate = global.get('productionLastDate');\n\nif (productionClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('productionClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
@@ -3238,7 +3238,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 290,
         "y": 60,
         "wires": [
             [
@@ -3578,7 +3578,7 @@
         "id": "27f4c4232a03ca21",
         "type": "function",
         "z": "42c32db0efd3bac1",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const { minDate } = global.get( 'dateHelpers' );\nconst waterClusteringDate = global.get( 'waterClusteringDate' );\n\nconst newWaterClusteringDate = minDate( [\n    global.get( 'savingsLastDate' ),\n    global.get( 'productionLastDate' )\n] );\n\nif (newWaterClusteringDate == waterClusteringDate ) {\n    return [ msg, null ];   \n}\n\nglobal.set('waterClusteringDate', newWaterClusteringDate);\nmsg.payload = newWaterClusteringDate;\n\nreturn [ null, msg ];",
         "outputs": 2,
         "timeout": 0,
@@ -3586,7 +3586,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 290,
         "y": 60,
         "wires": [
             [
@@ -3840,7 +3840,7 @@
         "id": "73e0b8bf57532c58",
         "type": "function",
         "z": "11322c65b3bfae17",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const weatherClusteringDate = global.get( 'weatherClusteringDate' );\nconst lastDate = global.get('weatherLastDate');\n\nif (weatherClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('weatherClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
@@ -3848,7 +3848,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 290,
         "y": 60,
         "wires": [
             [
@@ -4146,7 +4146,7 @@
         "id": "80d2166d46fb727d",
         "type": "function",
         "z": "1701ccc8d2838ab0",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const reservoirsClusteringDate = global.get( 'reservoirsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (reservoirsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('reservoirsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
@@ -4154,7 +4154,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 290,
         "y": 60,
         "wires": [
             [
@@ -5971,10 +5971,10 @@
         "title": "",
         "label": "levels",
         "format": "{{value}}",
-        "min": "1",
+        "min": "0",
         "max": "5",
         "colors": [
-            "#f9f06b",
+            "#8ff0a4",
             "#99c1f1",
             "#3584e4"
         ],
@@ -6314,10 +6314,10 @@
         "title": "",
         "label": "levels",
         "format": "{{value}}",
-        "min": "1",
+        "min": "0",
         "max": "5",
         "colors": [
-            "#f9f06b",
+            "#8ff0a4",
             "#99c1f1",
             "#3584e4"
         ],
@@ -6584,10 +6584,10 @@
         "title": "",
         "label": "levels",
         "format": "{{value}}",
-        "min": "1",
+        "min": "0",
         "max": "5",
         "colors": [
-            "#f9f06b",
+            "#8ff0a4",
             "#99c1f1",
             "#3584e4"
         ],
@@ -6854,10 +6854,10 @@
         "title": "",
         "label": "levels",
         "format": "{{value}}",
-        "min": "1",
+        "min": "0",
         "max": "5",
         "colors": [
-            "#f9f06b",
+            "#8ff0a4",
             "#99c1f1",
             "#3584e4"
         ],
