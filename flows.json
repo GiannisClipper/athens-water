@@ -152,6 +152,14 @@
         "env": []
     },
     {
+        "id": "ccd26f1ff828de10",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "746d8aad27723fd7",
         "type": "sqlitedb",
         "db": "~/.node-red/projects/athens-water/data/water.sqlite",
@@ -206,6 +214,184 @@
         "vhost": "athenswater",
         "tls": false,
         "credsFromSettings": false
+    },
+    {
+        "id": "0f96e66c24834495",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "61dc0696db7e299c",
+        "type": "ui_tab",
+        "name": "Register",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e5eb101865a4956c",
+        "type": "ui_tab",
+        "name": "Athens water",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "41d8d96855cdf066",
+        "type": "ui_group",
+        "name": "Water savings (avg)",
+        "tab": "e5eb101865a4956c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4afc52cffe622b4e",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "61dc0696db7e299c",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "b184d28a483bd8a4",
+        "type": "ui_spacer",
+        "z": "ccd26f1ff828de10",
+        "name": "spacer",
+        "group": "0d73b135b3ecef8f",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e9dadc9b91976a6c",
+        "type": "ui_group",
+        "name": "Water production (avg)",
+        "tab": "e5eb101865a4956c",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f9e106f2f849bd54",
+        "type": "ui_group",
+        "name": "Savings / production (ratio)",
+        "tab": "e5eb101865a4956c",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "98353c4bdf751f2b",
+        "type": "ui_group",
+        "name": "Precipitation (sum)",
+        "tab": "e5eb101865a4956c",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "9521260f5086eed6",
@@ -502,7 +688,7 @@
         "id": "b0b4dd2181b99a1a",
         "type": "function",
         "z": "6d278dbe6de7a110",
-        "name": "if waiting data",
+        "name": "if waiting data... else...",
         "func": "const { timeRepr, daysDistance, nextDate } = global.get( 'dateHelpers' );\nconst today = timeRepr( new Date(), 'YYYY-MM-DD' );\n\nconst savingsLastDate = global.get( 'savingsLastDate' );\nconst productionLastDate = global.get( 'productionLastDate' );\nconst weatherLastDate = global.get( 'weatherLastDate' );\n\nif ( \n    daysDistance( savingsLastDate, today ) > 1 ||\n    daysDistance( productionLastDate, today ) > 1 ||\n    daysDistance( weatherLastDate, today ) > 1\n) {\n    return [ msg, null ];\n}\n\nreturn [ null, msg ];\n",
         "outputs": 2,
         "timeout": 0,
@@ -510,7 +696,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 520,
         "y": 540,
         "wires": [
             [
@@ -2644,7 +2830,7 @@
         "type": "function",
         "z": "a8ca5f37ab8664a6",
         "name": "savings clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst level = matchingClusterIndex + 1;\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst levelRepr = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    savingsAvg: value,\n    savingsRepr: `${valueRepr} cubic meters`,\n    level,\n    levelRepr\n};\n\nglobal.set('savingsClusteringResult', result);\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2768,7 +2954,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "2024-01-05",
+        "payload": "2024-01-07",
         "payloadType": "str",
         "x": 130,
         "y": 480,
@@ -2782,7 +2968,7 @@
         "id": "195d01cff4a595f0",
         "type": "function",
         "z": "a8ca5f37ab8664a6",
-        "name": "if already done",
+        "name": "if already done... else...",
         "func": "const savingsClusteringDate = global.get( 'savingsClusteringDate' );\nconst lastDate = global.get('savingsLastDate');\n\nif (savingsClusteringDate === lastDate) {\n    return [ msg, null ];\n}\n\nglobal.set('savingsClusteringDate', lastDate);\n\nmsg.payload = lastDate;\nreturn [null, msg];\n",
         "outputs": 2,
         "timeout": 0,
@@ -2790,7 +2976,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 290,
         "y": 60,
         "wires": [
             [
@@ -2906,7 +3092,7 @@
         "type": "function",
         "z": "b7ec5c0795a0393f",
         "name": "production clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    productionAvg: value,\n    productionRepr: `${valueRepr} cubic meters`,\n    level\n};\n\nglobal.set( 'productionClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[ data.length - 1 ].period_avg;\nconst values = data.map( x => [ x.period_avg ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst level = matchingClusterIndex + 1;\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst levelRepr = levels.join( ' ' );\nconst valueRepr = new Intl.NumberFormat().format( Math.trunc( value ) );\n\nconst result = {\n    period,\n    productionAvg: value,\n    productionRepr: `${valueRepr} cubic meters`,\n    level,\n    levelRepr\n};\n\nglobal.set( 'productionClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3168,7 +3354,7 @@
         "type": "function",
         "z": "42c32db0efd3bac1",
         "name": "water clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst savingsAvg = data[ data.length - 1].savings_avg;\nconst productionAvg = data[data.length - 1].production_avg;\nconst ratios = data.map( x => [ x.savings_avg / x.production_avg ] );\nconst ratio = ratios[data.length - 1][ 0 ];\nconst clusters = makeClusters( ratios );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, ratio );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    savingsAvg,\n    productionAvg,\n    ratio,\n    level\n};\n\nglobal.set( 'waterClusteringResult', result );\n\nmsg.joinKey = undefined;\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst savingsAvg = data[ data.length - 1].savings_avg;\nconst productionAvg = data[data.length - 1].production_avg;\nconst ratios = data.map( x => [ x.savings_avg / x.production_avg ] );\nconst ratio = ratios[ data.length - 1 ][ 0 ];\nconst clusters = makeClusters( ratios );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, ratio );\n\nconst level = matchingClusterIndex + 1;\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst levelRepr = levels.join( ' ' );\n\nconst result = {\n    period,\n    savingsAvg,\n    productionAvg,\n    ratio,\n    ratioRepr: `ratio: ${Math.round(ratio)}`,\n    level,\n    levelRepr\n};\n\nglobal.set( 'waterClusteringResult', result );\n\nmsg.joinKey = undefined;\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3516,7 +3702,7 @@
         "type": "function",
         "z": "11322c65b3bfae17",
         "name": "weather clustering",
-        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[data.length - 1].precipitation_sum;\nconst values = data.map(x => [x.precipitation_sum ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst level = levels.join( ' ' );\n\nconst result = {\n    period,\n    precipitationSum: value,\n    precipitationRepr: `${value} mm`,\n    level\n};\n\nglobal.set( 'weatherClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
+        "func": "const { makeClusters, matchCluster } = global.get( 'clusterHelpers' );\nconst clusterLevels = global.get( 'clusterLevels' );\nconst data = msg.payload;\n\nconst period = data[ data.length - 1 ].period;\nconst value = data[data.length - 1].precipitation_sum;\nconst values = data.map(x => [x.precipitation_sum ] );\nconst clusters = makeClusters( values );\n// node.warn( clusters );\nconst matchingClusterIndex = matchCluster( clusters, value );\n\nconst level = matchingClusterIndex + 1;\nconst levels = clusterLevels.map( x => x.name );\nlevels[ matchingClusterIndex ] = levels[ matchingClusterIndex ].toUpperCase();\nconst levelRepr = levels.join( ' ' );\n\nconst result = {\n    period,\n    precipitationSum: value,\n    precipitationRepr: `${value} mm`,\n    level,\n    levelRepr\n};\n\nglobal.set( 'weatherClusteringResult', result );\n\nmsg.topic = undefined;\nmsg.payload = result;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3762,43 +3948,10 @@
         "y": 280,
         "wires": [
             [
-                "5c4075558bfa1515",
                 "2ebf7ae4ea4859ae",
                 "9cbd116b7819126a"
             ]
         ]
-    },
-    {
-        "id": "5c4075558bfa1515",
-        "type": "worldmap",
-        "z": "1701ccc8d2838ab0",
-        "name": "Reservoirs map",
-        "lat": "38.43",
-        "lon": "22.87",
-        "zoom": "9",
-        "layer": "OSMG",
-        "cluster": "",
-        "maxage": "",
-        "usermenu": "show",
-        "layers": "show",
-        "panit": "false",
-        "panlock": "false",
-        "zoomlock": "false",
-        "hiderightclick": "false",
-        "coords": "none",
-        "showgrid": "false",
-        "showruler": "false",
-        "allowFileDrop": "false",
-        "path": "/worldmap",
-        "overlist": "DR,CO,RA,DN",
-        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
-        "mapname": "",
-        "mapurl": "",
-        "mapopt": "",
-        "mapwms": false,
-        "x": 900,
-        "y": 340,
-        "wires": []
     },
     {
         "id": "27b42da3153d628e",
@@ -4124,7 +4277,8 @@
         "y": 120,
         "wires": [
             [
-                "2a75c15a621dcc4c"
+                "2a75c15a621dcc4c",
+                "f05efffd73c83168"
             ]
         ]
     },
@@ -4186,33 +4340,8 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 800,
-        "y": 340,
+        "y": 320,
         "wires": []
-    },
-    {
-        "id": "220fa75884132e53",
-        "type": "amqp-in",
-        "z": "bac88e4feb8bab3d",
-        "name": "queue.user00",
-        "broker": "774630f253d36966",
-        "prefetch": 0,
-        "noAck": true,
-        "exchangeName": "athenswaterall",
-        "exchangeType": "direct",
-        "exchangeRoutingKey": "reservoirs,savings,production,water,weather",
-        "exchangeDurable": true,
-        "queueName": "queue.user00",
-        "queueExclusive": false,
-        "queueDurable": true,
-        "queueAutoDelete": false,
-        "headers": "{}",
-        "x": 210,
-        "y": 340,
-        "wires": [
-            [
-                "f05efffd73c83168"
-            ]
-        ]
     },
     {
         "id": "78327d262f4b2133",
@@ -5659,5 +5788,1315 @@
                 "4c153d3b2afe70f3"
             ]
         ]
+    },
+    {
+        "id": "ed7e4cba906f3eae",
+        "type": "ui_text_input",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "label": "Username",
+        "tooltip": "",
+        "group": "4afc52cffe622b4e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f2a1de329dc0d515",
+        "type": "ui_text_input",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "label": "Password",
+        "tooltip": "",
+        "group": "4afc52cffe622b4e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41dd7b6abebba8b8",
+        "type": "ui_button",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "4afc52cffe622b4e",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Register",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b068e279bddc6c4",
+        "type": "ui_dropdown",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "label": "Keys",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "4afc52cffe622b4e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": true,
+        "options": [
+            {
+                "label": "Water savings",
+                "value": "1",
+                "type": "str"
+            },
+            {
+                "label": "Water production",
+                "value": "2",
+                "type": "str"
+            },
+            {
+                "label": "Savings / Production",
+                "value": "3",
+                "type": "str"
+            },
+            {
+                "label": "Precipitation",
+                "value": "4",
+                "type": "str"
+            },
+            {
+                "label": "Reservoirs (savings)",
+                "value": "5",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ba7fd1c9781115e",
+        "type": "ui_chart",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "41d8d96855cdf066",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "441a7c5c2047a421",
+        "type": "ui_gauge",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "41d8d96855cdf066",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "levels",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "5",
+        "colors": [
+            "#f9f06b",
+            "#99c1f1",
+            "#3584e4"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "dee4de38b218b1c0",
+        "type": "amqp-in",
+        "z": "ccd26f1ff828de10",
+        "name": "queue.user00",
+        "broker": "774630f253d36966",
+        "prefetch": 0,
+        "noAck": true,
+        "exchangeName": "athenswaterall",
+        "exchangeType": "direct",
+        "exchangeRoutingKey": "reservoirs,savings,production,water,weather",
+        "exchangeDurable": true,
+        "queueName": "queue.user00",
+        "queueExclusive": false,
+        "queueDurable": true,
+        "queueAutoDelete": false,
+        "headers": "{}",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "2f2281cb86b35820"
+            ]
+        ]
+    },
+    {
+        "id": "92e8ef7bded27706",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "41d8d96855cdf066",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "last period:",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 970,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "aead3c84386b0ff5",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "41d8d96855cdf066",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "levels",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 950,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3287507fc47fad3b",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "41d8d96855cdf066",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "quantity",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 960,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f93ba8c01d27bd43",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.period",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 60,
+        "wires": [
+            [
+                "92e8ef7bded27706"
+            ]
+        ]
+    },
+    {
+        "id": "c02aa1441502416e",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.savingsAvg",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 100,
+        "wires": [
+            [
+                "5ba7fd1c9781115e"
+            ]
+        ]
+    },
+    {
+        "id": "1e4a1a72c682a826",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.savingsRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 140,
+        "wires": [
+            [
+                "3287507fc47fad3b"
+            ]
+        ]
+    },
+    {
+        "id": "3368e70968a06115",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 180,
+        "wires": [
+            [
+                "441a7c5c2047a421"
+            ]
+        ]
+    },
+    {
+        "id": "76a77b86506a0f8d",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.levelRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "aead3c84386b0ff5"
+            ]
+        ]
+    },
+    {
+        "id": "2f2281cb86b35820",
+        "type": "function",
+        "z": "ccd26f1ff828de10",
+        "name": "switch by key",
+        "func": "const { savings, production, water, weather, reservoirs } = msg.payload;\n\nif ( savings !== undefined ) {\n    msg.payload = savings;\n    return [ msg, null, null, null, null ];\n}\n\nif ( production !== undefined ) {\n    msg.payload = production;\n    return [ null, msg, null, null, null ];\n}\n\nif ( water !== undefined ) {\n    msg.payload = water;\n    return [ null, null, msg, null, null ];\n}\n\nif ( weather !== undefined ) {\n    msg.payload = weather;\n    return [ null, null, null, msg, null ];\n}\n\nif ( reservoirs !== undefined ) {\n    msg.payload = reservoirs;\n    return [ null, null, null, null, msg ];\n}\n",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "c02aa1441502416e",
+                "1e4a1a72c682a826",
+                "3368e70968a06115",
+                "76a77b86506a0f8d",
+                "f93ba8c01d27bd43"
+            ],
+            [
+                "c29c5bd06b41ed33",
+                "2d1210931583467a",
+                "cb53568fa1f01553",
+                "d037fadf82248bc2",
+                "276dfbee0c492bed"
+            ],
+            [
+                "cf5d0468eef80313",
+                "ed23dadad2a6b44b",
+                "e0b18fbefacd36b9",
+                "96c0fa9db08ca859",
+                "13913b31e8315170"
+            ],
+            [
+                "c3f854349ff40320",
+                "1b769a440f19fd80",
+                "5cc799d19558d5b8",
+                "150d10e58bd82af4",
+                "b862f6f8e5eb5bab"
+            ],
+            [
+                "5c4075558bfa1515"
+            ]
+        ]
+    },
+    {
+        "id": "5cd93f4d4a55cfaa",
+        "type": "ui_chart",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "e9dadc9b91976a6c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45be40ebf604959a",
+        "type": "ui_gauge",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "e9dadc9b91976a6c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "levels",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "5",
+        "colors": [
+            "#f9f06b",
+            "#99c1f1",
+            "#3584e4"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d7ec77da6f1d0b94",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "e9dadc9b91976a6c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "last period:",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 970,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "64c140c65780481f",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "e9dadc9b91976a6c",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "levels",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 950,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "53dca47acc23c475",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "e9dadc9b91976a6c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "quantity",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 960,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c29c5bd06b41ed33",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.period",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 280,
+        "wires": [
+            [
+                "d7ec77da6f1d0b94"
+            ]
+        ]
+    },
+    {
+        "id": "2d1210931583467a",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.productionAvg",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 320,
+        "wires": [
+            [
+                "5cd93f4d4a55cfaa"
+            ]
+        ]
+    },
+    {
+        "id": "cb53568fa1f01553",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.productionRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 360,
+        "wires": [
+            [
+                "53dca47acc23c475"
+            ]
+        ]
+    },
+    {
+        "id": "d037fadf82248bc2",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 400,
+        "wires": [
+            [
+                "45be40ebf604959a"
+            ]
+        ]
+    },
+    {
+        "id": "276dfbee0c492bed",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.levelRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "64c140c65780481f"
+            ]
+        ]
+    },
+    {
+        "id": "edfe8d74ff905c2c",
+        "type": "ui_chart",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "f9e106f2f849bd54",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "476025eec9744b33",
+        "type": "ui_gauge",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "f9e106f2f849bd54",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "levels",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "5",
+        "colors": [
+            "#f9f06b",
+            "#99c1f1",
+            "#3584e4"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "73cfb66f30c3a3d4",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "f9e106f2f849bd54",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "last period:",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 970,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "cea06905dfe435bd",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "f9e106f2f849bd54",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "levels",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 950,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "6b47ac1abe0e2737",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "f9e106f2f849bd54",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "ratio",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 950,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "cf5d0468eef80313",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.period",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 500,
+        "wires": [
+            [
+                "73cfb66f30c3a3d4"
+            ]
+        ]
+    },
+    {
+        "id": "ed23dadad2a6b44b",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.ratio",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 540,
+        "wires": [
+            [
+                "edfe8d74ff905c2c"
+            ]
+        ]
+    },
+    {
+        "id": "e0b18fbefacd36b9",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.ratioRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 580,
+        "wires": [
+            [
+                "6b47ac1abe0e2737"
+            ]
+        ]
+    },
+    {
+        "id": "96c0fa9db08ca859",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 620,
+        "wires": [
+            [
+                "476025eec9744b33"
+            ]
+        ]
+    },
+    {
+        "id": "13913b31e8315170",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.levelRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 660,
+        "wires": [
+            [
+                "cea06905dfe435bd"
+            ]
+        ]
+    },
+    {
+        "id": "16f63a59ffab8366",
+        "type": "ui_chart",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "98353c4bdf751f2b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c10de22470904b09",
+        "type": "ui_gauge",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "group": "98353c4bdf751f2b",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "",
+        "label": "levels",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "5",
+        "colors": [
+            "#f9f06b",
+            "#99c1f1",
+            "#3584e4"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e5432d8c4e1743ff",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "98353c4bdf751f2b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "last period:",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 970,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "35bc5902a7c39318",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "98353c4bdf751f2b",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "levels",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 950,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "73da2a7870cdcec3",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "98353c4bdf751f2b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "precipitation",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#62a0ea",
+        "x": 970,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "c3f854349ff40320",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.period",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 720,
+        "wires": [
+            [
+                "e5432d8c4e1743ff"
+            ]
+        ]
+    },
+    {
+        "id": "1b769a440f19fd80",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.precipitationSum",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 760,
+        "wires": [
+            [
+                "16f63a59ffab8366"
+            ]
+        ]
+    },
+    {
+        "id": "5cc799d19558d5b8",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.precipitationRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 800,
+        "wires": [
+            [
+                "73da2a7870cdcec3"
+            ]
+        ]
+    },
+    {
+        "id": "150d10e58bd82af4",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 840,
+        "wires": [
+            [
+                "c10de22470904b09"
+            ]
+        ]
+    },
+    {
+        "id": "b862f6f8e5eb5bab",
+        "type": "change",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.levelRepr",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 880,
+        "wires": [
+            [
+                "35bc5902a7c39318"
+            ]
+        ]
+    },
+    {
+        "id": "5c4075558bfa1515",
+        "type": "worldmap",
+        "z": "ccd26f1ff828de10",
+        "name": "Reservoirs map",
+        "lat": "38.43",
+        "lon": "22.87",
+        "zoom": "9",
+        "layer": "OSMG",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 780,
+        "y": 940,
+        "wires": []
     }
 ]
