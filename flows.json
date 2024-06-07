@@ -713,8 +713,8 @@
         "z": "6d278dbe6de7a110",
         "name": "",
         "pauseType": "delay",
-        "timeout": "20",
-        "timeoutUnits": "minutes",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
@@ -724,7 +724,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 370,
+        "x": 360,
         "y": 660,
         "wires": [
             [
@@ -905,8 +905,8 @@
             "bc33fac1bfdac6f3"
         ],
         "uncaught": false,
-        "x": 190,
-        "y": 300,
+        "x": 630,
+        "y": 140,
         "wires": [
             [
                 "e5dd25d01ed47935"
@@ -932,8 +932,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
-        "y": 260,
+        "x": 660,
+        "y": 100,
         "wires": [
             [
                 "7c9527a0cc39587f"
@@ -952,8 +952,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 200,
-        "y": 220,
+        "x": 640,
+        "y": 60,
         "wires": []
     },
     {
@@ -967,8 +967,8 @@
         "createDir": false,
         "overwriteFile": "delete",
         "encoding": "none",
-        "x": 810,
-        "y": 340,
+        "x": 130,
+        "y": 280,
         "wires": [
             []
         ]
@@ -994,8 +994,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 790,
-        "y": 300,
+        "x": 110,
+        "y": 240,
         "wires": [
             [
                 "bc33fac1bfdac6f3"
@@ -1015,8 +1015,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 140,
+        "x": 380,
+        "y": 320,
         "wires": []
     },
     {
@@ -1031,8 +1031,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 810,
-        "y": 100,
+        "x": 390,
+        "y": 280,
         "wires": [
             [
                 "ad8fd501b129cfec"
@@ -1060,8 +1060,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 790,
-        "y": 200,
+        "x": 370,
+        "y": 380,
         "wires": [
             [
                 "0578fa751ff3e995"
@@ -1080,8 +1080,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 810,
-        "y": 240,
+        "x": 390,
+        "y": 420,
         "wires": [
             []
         ]
@@ -1107,13 +1107,164 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 790,
-        "y": 60,
+        "x": 370,
+        "y": 240,
         "wires": [
             [
                 "06c779112978aaa2"
             ]
         ]
+    },
+    {
+        "id": "f717e318f24f4da8",
+        "type": "inject",
+        "z": "9e38695607437acd",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "c15708cb8162f79b"
+            ]
+        ]
+    },
+    {
+        "id": "c15708cb8162f79b",
+        "type": "function",
+        "z": "9e38695607437acd",
+        "name": "delete savings after 31/5/2024",
+        "func": "const query = `DELETE FROM savings WHERE date > '2024-05-31'`;\nmsg.topic = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 320,
+        "wires": [
+            [
+                "f15393761f8974fb"
+            ]
+        ]
+    },
+    {
+        "id": "f15393761f8974fb",
+        "type": "link call",
+        "z": "9e38695607437acd",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "e7c1c04ba2994cae"
+            ]
+        ]
+    },
+    {
+        "id": "e7c1c04ba2994cae",
+        "type": "function",
+        "z": "9e38695607437acd",
+        "name": "delete production after 31/5/2024",
+        "func": "const query = `DELETE FROM production WHERE date > '2024-05-31'`;\nmsg.topic = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 400,
+        "wires": [
+            [
+                "5a0f0ecb08697c1a"
+            ]
+        ]
+    },
+    {
+        "id": "50abc6c3d2209c10",
+        "type": "function",
+        "z": "9e38695607437acd",
+        "name": "delete weather after 31/5/2024",
+        "func": "const query = `DELETE FROM weather WHERE date > '2024-05-31'`;\nmsg.topic = query;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 480,
+        "wires": [
+            [
+                "b49091d09b60d05f"
+            ]
+        ]
+    },
+    {
+        "id": "5a0f0ecb08697c1a",
+        "type": "link call",
+        "z": "9e38695607437acd",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 680,
+        "y": 440,
+        "wires": [
+            [
+                "50abc6c3d2209c10"
+            ]
+        ]
+    },
+    {
+        "id": "b49091d09b60d05f",
+        "type": "link call",
+        "z": "9e38695607437acd",
+        "name": "",
+        "links": [
+            "ab0e6d979d760a4a"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 680,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a511b36ce1ec5ba8",
+        "type": "comment",
+        "z": "9e38695607437acd",
+        "name": "for demo purposes",
+        "info": "",
+        "x": 670,
+        "y": 240,
+        "wires": []
     },
     {
         "id": "4f48bf4d39cb2c86",
