@@ -32,7 +32,8 @@ process.env.FOO = 'just another bar';
 
 Warning: REMEMBER TO RESTART NODE_RED WHEN ENVIRONMENT VARIABLES ARE CHANGED
 */
- 
+
+// added by giannisclipper 
 process.env.NR_MADRID_CSV='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/services-and-network-systems/flows/madrid/data.csv' 
 process.env.NR_MADRID_SQLITE='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/services-and-network-systems/flows/madrid/data.sqlite' 
 process.env.NR_MADRID_URL='http://informo.munimadrid.es/informo/tmadrid/pm.xml'
@@ -41,6 +42,7 @@ process.env.AW_VHOST='athenswater';
 process.env.AW_EXCHANGE='athenswaterall';
 process.env.AW_ROUTING_KEYS='reservoirs,savings,production,water,weather';
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 /*
   SPECIFIC SETTINGS IN NODE-RED:
   in settings.js => process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
@@ -65,6 +67,11 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 module.exports = {
 
+    // added by giannisclipper, credentials for rabbitmq producer, consumer
+    MW_CONTRIB_AMQP_USERNAME: 'admin',
+    MW_CONTRIB_AMQP_PASSWORD: 'pass',
+    
+    
 /*******************************************************************************
  * Flow File and User Directory Settings
  *  - flowFile
@@ -447,7 +454,10 @@ module.exports = {
 
         projects: {
             /** To enable the Projects feature, set this value to true */
+            
+            // changed by giannisclipper, to enable node-red project management
             enabled: true,
+
             workflow: {
                 /** Set the default projects workflow mode.
                  *  - manual - you must manually commit changes
@@ -533,9 +543,12 @@ module.exports = {
      */
     functionGlobalContext: {
         // os:require('os'),
+        
+        // added by giannisclipper, access to nodejs libraries
         clusters:require( 'clusters' ),
         clusterHelpers:require( './projects/athens-water/helpers/cluster.js' ),
         dateHelpers:require( './projects/athens-water/helpers/date.js' ),
+
     },
 
     /** The maximum number of messages nodes will buffer internally as part of their

@@ -39,28 +39,6 @@ function nextDate( reprDate ) {
     return new Date( date.getTime() + oneDayInMillisecs );
 }
 
-// function rangeToDates( from, to ) {
-
-//     const result = [];
-
-//     from = new Date( from );
-//     to = new Date( to );
-//     while ( from <= to ) {
-//         result.push( timeRepr( from, 'YYYY-MM-DD' ) );
-//         from = new Date( from.getTime() + oneDayInMillisecs );
-//     }
-
-//     return result;
-// }
-
-// function rangeToCounter( from, to ) {
-
-//     from = new Date( from );
-//     to = new Date( to );
-
-//     return ( to.getTime() - from.getTime() ) / oneDayInMillisecs;
-// }
-
 const isLeapYear = year => {
     year = parseInt( year );
     return year % 4 === 0 && ( year % 100 !== 0 || year % 400 === 0 );
@@ -155,8 +133,6 @@ const minDate = dates => {
 
 module.exports = {
     timeRepr,
-    // rangeToDates,
-    // rangeToCounter,
     daysDistance,
     nextDate,
     startPeriod30,

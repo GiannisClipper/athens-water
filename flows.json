@@ -162,13 +162,13 @@
     {
         "id": "746d8aad27723fd7",
         "type": "sqlitedb",
-        "db": "~/.node-red/projects/athens-water/data/water.sqlite",
+        "db": ".node-red/projects/athens-water/athens-water.sqlite",
         "mode": "RWC"
     },
     {
         "id": "09a55da13a5eea8d",
         "type": "sqlitedb",
-        "db": "athens-water.sqlite",
+        "db": "athens-water/athens-water.sqlite",
         "mode": "RWC"
     },
     {
@@ -203,7 +203,7 @@
         "port": "5672",
         "vhost": "athenswater",
         "tls": false,
-        "credsFromSettings": false
+        "credsFromSettings": true
     },
     {
         "id": "f95f44a518aa1c5e",
@@ -344,11 +344,13 @@
     {
         "id": "4afc52cffe622b4e",
         "type": "ui_group",
-        "name": "Group 1",
+        "name": "Registration to RabbitMq (athenswaterall exchange)",
         "tab": "61dc0696db7e299c",
         "order": 1,
         "disp": true,
-        "width": 6
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "b184d28a483bd8a4",
@@ -392,6 +394,16 @@
         "width": "6",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "f4a035a66294bf88",
+        "type": "ui_spacer",
+        "z": "ccd26f1ff828de10",
+        "name": "spacer",
+        "group": "4afc52cffe622b4e",
+        "order": 1,
+        "width": "1",
+        "height": "1"
     },
     {
         "id": "9521260f5086eed6",
@@ -714,7 +726,7 @@
         "name": "",
         "pauseType": "delay",
         "timeout": "10",
-        "timeoutUnits": "seconds",
+        "timeoutUnits": "minutes",
         "rate": "1",
         "nbRateUnits": "1",
         "rateUnits": "second",
@@ -724,7 +736,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 360,
+        "x": 370,
         "y": 660,
         "wires": [
             [
@@ -818,7 +830,7 @@
         "type": "file",
         "z": "9e38695607437acd",
         "name": "write into log file",
-        "filename": "athens-water.log",
+        "filename": ".node-red/projects/athens-water/athens-water.log",
         "filenameType": "str",
         "appendNewline": true,
         "createDir": false,
@@ -1270,7 +1282,7 @@
         "id": "4f48bf4d39cb2c86",
         "type": "sqlite",
         "z": "b196196f1ccccbbb",
-        "mydb": "09a55da13a5eea8d",
+        "mydb": "746d8aad27723fd7",
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "database",
@@ -4518,7 +4530,7 @@
         "persist": false,
         "proxy": "",
         "insecureHTTPParser": false,
-        "authType": "basic",
+        "authType": "",
         "senderr": false,
         "headers": [],
         "x": 230,
@@ -4559,7 +4571,7 @@
         "type": "function",
         "z": "61bc9ba532c143ca",
         "name": "set url",
-        "func": "const path = msg.url;\nconst url = 'http://localhost:15672/api' + path;\nmsg.url = url;\nreturn msg;",
+        "func": "const path = msg.url;\nconst url = 'http://admin:pass@localhost:15672/api' + path;\nmsg.url = url;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5074,7 +5086,7 @@
         "y": 160,
         "wires": [
             [
-                "75244b95c06fc39f"
+                "1b548dfa71bdb5e0"
             ]
         ]
     },
@@ -5090,7 +5102,7 @@
         "stream": false,
         "addname": "",
         "x": 470,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "8ed5938c462721ce"
@@ -5118,7 +5130,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 470,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "24901ae9f7293c0c"
@@ -5136,7 +5148,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 530,
-        "y": 300,
+        "y": 360,
         "wires": [
             [
                 "38084c3372b500a2"
@@ -5156,7 +5168,7 @@
         "finalize": "",
         "libs": [],
         "x": 510,
-        "y": 260,
+        "y": 320,
         "wires": [
             [
                 "c3b212b787f8d4e1"
@@ -5164,20 +5176,25 @@
         ]
     },
     {
-        "id": "547ff65f37d94edb",
-        "type": "http in",
-        "z": "c05f2d05a65c769e",
-        "name": "",
-        "url": "/register/username/:username/password/:password/keys/:keys",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 280,
-        "y": 60,
+        "id": "1b548dfa71bdb5e0",
+        "type": "function",
+        "z": "08eda6c1b66e16e5",
+        "name": "if no queues... else...",
+        "func": "if ( msg.payload.length === 0 ) {\n    return [ msg, null ];\n}\nreturn [ null, msg ];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 220,
         "wires": [
             [
-                "9a30c7dfe3f94f88",
-                "94d7a80de5ca2315"
+                "24901ae9f7293c0c"
+            ],
+            [
+                "75244b95c06fc39f"
             ]
         ]
     },
@@ -5211,7 +5228,7 @@
         "finalize": "",
         "libs": [],
         "x": 120,
-        "y": 140,
+        "y": 160,
         "wires": [
             [
                 "82dab64868db30c4"
@@ -5229,7 +5246,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 130,
-        "y": 180,
+        "y": 200,
         "wires": [
             [
                 "587a5f1a2f1cf992"
@@ -5249,7 +5266,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 220,
+        "y": 240,
         "wires": [
             [
                 "20063f98b5c417ee"
@@ -5261,7 +5278,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "validate keys",
-        "func": "const AW_ROUTING_KEYS = env.get( 'AW_ROUTING_KEYS' );\nconst routingKeys = AW_ROUTING_KEYS.split( ',' );\n// node.warn(routingKeys);\n\nlet { keys } = msg.req.params;\nkeys = keys.split( ',' );\n// node.warn(keys);\n\nfor ( let key of keys ) {\n    if (!routingKeys.includes(key ) ) {\n        throw `Error from Athens-water. Invalid registration. Routing key '${key}' not available.`;\n    }\n}\n\nreturn msg;",
+        "func": "const AW_ROUTING_KEYS = env.get( 'AW_ROUTING_KEYS' );\nconst routingKeys = AW_ROUTING_KEYS.split( ',' );\n// node.warn(routingKeys);\n\nlet { keys } = msg.req.params;\n\nif ( keys === \"\" ) {\n        throw `Error from Athens-water. Invalid registration. No routing keys selected.`;\n}\n\nkeys = keys.split( ',' );\n// node.warn(keys);\n\nfor ( let key of keys ) {\n    if (!routingKeys.includes(key ) ) {\n        throw `Error from Athens-water. Invalid registration. Routing key '${key}' not available.`;\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5269,7 +5286,7 @@
         "finalize": "",
         "libs": [],
         "x": 110,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
                 "5ec2a1163f0b1f92"
@@ -5289,7 +5306,7 @@
         "finalize": "",
         "libs": [],
         "x": 470,
-        "y": 140,
+        "y": 160,
         "wires": [
             [
                 "e8b47afadef0ca81"
@@ -5307,7 +5324,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 490,
-        "y": 180,
+        "y": 200,
         "wires": [
             [
                 "fc67e870266bf62e"
@@ -5322,7 +5339,7 @@
         "statusCode": "",
         "headers": {},
         "x": 840,
-        "y": 320,
+        "y": 340,
         "wires": []
     },
     {
@@ -5345,7 +5362,7 @@
         "to": "",
         "reg": false,
         "x": 840,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "adaffe23485f51e8"
@@ -5363,7 +5380,7 @@
         ],
         "uncaught": false,
         "x": 810,
-        "y": 420,
+        "y": 440,
         "wires": [
             [
                 "45f722efd22e620b"
@@ -5383,7 +5400,7 @@
         "finalize": "",
         "libs": [],
         "x": 470,
-        "y": 700,
+        "y": 720,
         "wires": [
             [
                 "adaffe23485f51e8"
@@ -5403,7 +5420,7 @@
         "finalize": "",
         "libs": [],
         "x": 470,
-        "y": 240,
+        "y": 260,
         "wires": [
             [
                 "3b5ba1898af07606"
@@ -5421,7 +5438,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 490,
-        "y": 280,
+        "y": 300,
         "wires": [
             [
                 "885f297ecf1a7ca0"
@@ -5441,7 +5458,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 440,
+        "y": 460,
         "wires": [
             [
                 "b46fc170c98ce15f"
@@ -5460,7 +5477,7 @@
         "stream": false,
         "addname": "",
         "x": 450,
-        "y": 380,
+        "y": 400,
         "wires": [
             [
                 "848321ee6ffc42ed"
@@ -5480,7 +5497,7 @@
         "finalize": "",
         "libs": [],
         "x": 480,
-        "y": 340,
+        "y": 360,
         "wires": [
             [
                 "962dbdc9e5a425da"
@@ -5508,7 +5525,7 @@
         "reduceInitType": "",
         "reduceFixup": "",
         "x": 450,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "ae2c12177510f34f"
@@ -5526,7 +5543,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 510,
-        "y": 480,
+        "y": 500,
         "wires": [
             [
                 "edc75caa6a942ef3"
@@ -5538,7 +5555,7 @@
         "type": "function",
         "z": "c05f2d05a65c769e",
         "name": "create permissions",
-        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\n\nconst path = `/permissions/${AW_VHOST}/${username}`\nconst body = {\n    // configure: \".*\",\n    // write: \".*\",\n    // read: \".*\",\n    // read: `^queue.*.${username}$`,\n    // read: `queue.${username}`,\n    configure: \"^$ \",\n    write: \"^$ \",\n    read: \".*\",\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
+        "func": "const AW_VHOST = env.get( 'AW_VHOST' );\nconst { username } = msg.req.params;\n\nconst path = `/permissions/${AW_VHOST}/${username}`\nconst body = {\n    // configure: \".*\",\n    // write: \".*\",\n    // read: \".*\",\n    // read: `^queue.*.${username}$`,\n    configure: \"^$ \",\n    write: \"^$ \",\n    read: `queue.${username}`,\n};\n\nmsg.url = path;\nmsg.method = 'PUT';\nmsg.payload = body;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5546,7 +5563,7 @@
         "finalize": "",
         "libs": [],
         "x": 490,
-        "y": 600,
+        "y": 620,
         "wires": [
             [
                 "7c92b5d60b8c1c42"
@@ -5564,10 +5581,55 @@
         "linkType": "static",
         "timeout": "30",
         "x": 490,
-        "y": 640,
+        "y": 660,
         "wires": [
             [
                 "dca4afaac3038c25"
+            ]
+        ]
+    },
+    {
+        "id": "32b655d779cb5bf8",
+        "type": "http in",
+        "z": "c05f2d05a65c769e",
+        "name": "",
+        "url": "/register",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [
+                "9a30c7dfe3f94f88",
+                "e5d91bd27fac6bf7"
+            ]
+        ]
+    },
+    {
+        "id": "e5d91bd27fac6bf7",
+        "type": "change",
+        "z": "c05f2d05a65c769e",
+        "name": "set req.params",
+        "rules": [
+            {
+                "t": "set",
+                "p": "req.params",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "94d7a80de5ca2315"
             ]
         ]
     },
@@ -5938,131 +6000,6 @@
             [
                 "4c153d3b2afe70f3"
             ]
-        ]
-    },
-    {
-        "id": "ed7e4cba906f3eae",
-        "type": "ui_text_input",
-        "z": "ccd26f1ff828de10",
-        "name": "",
-        "label": "Username",
-        "tooltip": "",
-        "group": "4afc52cffe622b4e",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "mode": "text",
-        "delay": 300,
-        "topic": "topic",
-        "sendOnBlur": true,
-        "className": "",
-        "topicType": "msg",
-        "x": 150,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "f2a1de329dc0d515",
-        "type": "ui_text_input",
-        "z": "ccd26f1ff828de10",
-        "name": "",
-        "label": "Password",
-        "tooltip": "",
-        "group": "4afc52cffe622b4e",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "mode": "text",
-        "delay": 300,
-        "topic": "topic",
-        "sendOnBlur": true,
-        "className": "",
-        "topicType": "msg",
-        "x": 140,
-        "y": 100,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "41dd7b6abebba8b8",
-        "type": "ui_button",
-        "z": "ccd26f1ff828de10",
-        "name": "",
-        "group": "4afc52cffe622b4e",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Register",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "topic",
-        "topicType": "msg",
-        "x": 140,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "0b068e279bddc6c4",
-        "type": "ui_dropdown",
-        "z": "ccd26f1ff828de10",
-        "name": "",
-        "label": "Keys",
-        "tooltip": "",
-        "place": "Select option",
-        "group": "4afc52cffe622b4e",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "multiple": true,
-        "options": [
-            {
-                "label": "Water savings",
-                "value": "1",
-                "type": "str"
-            },
-            {
-                "label": "Water production",
-                "value": "2",
-                "type": "str"
-            },
-            {
-                "label": "Savings / Production",
-                "value": "3",
-                "type": "str"
-            },
-            {
-                "label": "Precipitation",
-                "value": "4",
-                "type": "str"
-            },
-            {
-                "label": "Reservoirs (savings)",
-                "value": "5",
-                "type": "str"
-            }
-        ],
-        "payload": "",
-        "topic": "topic",
-        "topicType": "msg",
-        "className": "",
-        "x": 130,
-        "y": 140,
-        "wires": [
-            []
         ]
     },
     {
@@ -7249,5 +7186,155 @@
         "x": 780,
         "y": 940,
         "wires": []
+    },
+    {
+        "id": "e082748426ba99c2",
+        "type": "ui_form",
+        "z": "ccd26f1ff828de10",
+        "name": "registration form",
+        "label": "",
+        "group": "4afc52cffe622b4e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Username",
+                "value": "username",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "key - savings",
+                "value": "key_savings",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "key - reservoirs",
+                "value": "key_reservoirs",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "key -production",
+                "value": "key_production",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "key - water",
+                "value": "key_water",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "key - weather",
+                "value": "key_weather",
+                "type": "checkbox",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "username": "",
+            "password": "",
+            "key_savings": false,
+            "key_reservoirs": false,
+            "key_production": false,
+            "key_water": false,
+            "key_weather": false
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 160,
+        "y": 60,
+        "wires": [
+            [
+                "98404f332384b914"
+            ]
+        ]
+    },
+    {
+        "id": "677aac7b512d788e",
+        "type": "ui_text",
+        "z": "ccd26f1ff828de10",
+        "group": "4afc52cffe622b4e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "registration result",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": "14",
+        "color": "#9a9996",
+        "x": 170,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "98404f332384b914",
+        "type": "function",
+        "z": "ccd26f1ff828de10",
+        "name": "prepare request",
+        "func": "const { \n    username, \n    password,\n    key_savings,\n    key_reservoirs,\n    key_production,\n    key_water,\n    key_weather\n} = msg.payload;\n\nlet keys = [];\n\nif ( key_savings ) keys.push( 'savings' );\nif ( key_reservoirs ) keys.push( 'reservoirs' );\nif ( key_production ) keys.push( 'production' );\nif ( key_water ) keys.push( 'water' );\nif ( key_weather ) keys.push( 'weather' );\n\nkeys = keys.join( ',' );\n\nmsg.url = 'localhost:1880/register';\nmsg.method = 'POST';\nmsg.headers={\n    'Content-Type': 'application/json'\n};\nmsg.payload = { username, password, keys };\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "56ba7cfbd915e7ee"
+            ]
+        ]
+    },
+    {
+        "id": "56ba7cfbd915e7ee",
+        "type": "http request",
+        "z": "ccd26f1ff828de10",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "677aac7b512d788e"
+            ]
+        ]
     }
 ]
