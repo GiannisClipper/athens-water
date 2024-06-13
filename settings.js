@@ -34,10 +34,6 @@ Warning: REMEMBER TO RESTART NODE_RED WHEN ENVIRONMENT VARIABLES ARE CHANGED
 */
 
 // added by giannisclipper 
-process.env.NR_MADRID_CSV='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/services-and-network-systems/flows/madrid/data.csv' 
-process.env.NR_MADRID_SQLITE='/media/user/ECDA11D3DA119AC2/data/hua/F-2023-24/services-and-network-systems/flows/madrid/data.sqlite' 
-process.env.NR_MADRID_URL='http://informo.munimadrid.es/informo/tmadrid/pm.xml'
-
 process.env.AW_VHOST='athenswater';
 process.env.AW_EXCHANGE='athenswaterall';
 process.env.AW_ROUTING_KEYS='reservoirs,savings,production,water,weather';

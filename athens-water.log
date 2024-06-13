@@ -1,0 +1,170 @@
+2024-06-13 18:31:25 System state (weatherLastDate: , savingsLastDate: , reservoirsClusteringDate: , productionLastDate: , reservoirsClusteringDate: , savingsLastDate: , productionLastDate: , weatherLastDate: , waterLastDate: , commonLastDate: )
+2024-06-13 18:31:25 Savings initialization.
+2024-06-13 18:31:25 Initial savings last date: 2024-06-09
+2024-06-13 18:31:25 Initial reservoirs (4)
+2024-06-13 18:31:25 Production initialization.
+2024-06-13 18:31:25 Initial production last date: 2024-06-09
+2024-06-13 18:31:25 Initial factories (4)
+2024-06-13 18:31:25 Weather initialization.
+2024-06-13 18:31:25 Initial weather last date: 2024-06-08
+2024-06-13 18:31:25 Initial weather locations (8)
+2024-06-13 18:31:25 (2024-06-10) => https://www.eydap.gr/el/Controls/GeneralControls/SavingsDetails.aspx?DaysSpan=Day&Date=10-06-2024
+2024-06-13 18:31:26 INSERT INTO savings (date,reservoir_id,quantity) VALUES ("2024-06-10",1,58855000),("2024-06-10",2,26858000),("2024-06-10",3,429156000),("2024-06-10",4,331876000)
+2024-06-13 18:31:26 Savings update (2024-06-10)
+2024-06-13 18:31:26 (2024-06-10) => https://www.eydap.gr/el/Controls/GeneralControls/DrinkingWaterProductionDetails.aspx?DaysSpan=Day&Date=10-06-2024
+2024-06-13 18:31:27 INSERT INTO production (date,factory_id,quantity) VALUES ("2024-06-10",1,152080),("2024-06-10",2,349059),("2024-06-10",3,158784),("2024-06-10",4,612360)
+2024-06-13 18:31:27 Production update (2024-06-10)
+2024-06-13 18:31:27 (2024-06-09) => https://archive-api.open-meteo.com/v1/archive?daily=weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum&timezone=Europe/Athens&past_days=4&latitude=37.9842,38.5253,38.4625,38.9121,38.8972,38.4361,38.321,38.6263&longitude=23.7281,22.3753,23.595,21.795,22.4311,22.875,23.3178,21.409
+2024-06-13 18:31:27 INSERT INTO weather (date,location_id,weather_code,temperature_2m_min,temperature_2m_mean,temperature_2m_max,precipitation_sum,rain_sum,snowfall_sum) VALUES ("2024-06-09",1,0,23.1,29.1,34.4,0,0,0),("2024-06-09",2,51,21.4,27.6,33,0.5,0,0),("2024-06-09",3,0,20.8,28.6,35.5,0,0,0),("2024-06-09",4,51,18.1,23.4,28,0.3,null,null),("2024-06-09",5,0,21.8,28.6,35.2,0,null,null),("2024-06-09",6,0,21,27.4,33.4,0,null,null),("2024-06-09",7,0,20.9,28.6,35.1,0,null,null),("2024-06-09",8,0,24.1,28.8,35.2,0,null,null)
+2024-06-13 18:31:27 Weather update (2024-06-09)
+2024-06-13 18:31:27 Reservoirs clustering (2024-06-10)
+2024-06-13 18:31:27 
+SELECT 
+    '10/05-10/06' AS period, 
+    reservoir_id, 
+    SUBSTR(date, 1, 4) AS year,
+    count(date) as days, 
+    SUM(day_sum) AS period_sum, 
+    AVG(day_sum) AS period_avg
+FROM
+(
+    SELECT 
+        reservoir_id,
+        date, 
+        SUM(quantity) AS day_sum, 
+        avg(quantity) AS quantity
+    FROM savings
+    WHERE quantity > 0 
+    AND 
+    (
+        (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '10') 
+        OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '10')
+    )
+    GROUP BY date, reservoir_id
+)
+GROUP BY SUBSTR(date, 1, 4), reservoir_id
+
+2024-06-13 18:31:27 Publish {"reservoirs":[{"name":"Evinos","lat":38.66,"lon":21.85,"label":"Evinos","iconColor":"MediumAquaMarine","period":"10/05-10/06","average":"66,748,290 cubic meters","level":"lower low MID high higher"},{"name":"Marathonas","lat":38.16,"lon":23.9,"label":"Marathonas","iconColor":"MediumAquaMarine","period":"10/05-10/06","average":"26,231,562 cubic meters","level":"lower low MID high higher"},{"name":"Mornos","lat":38.54,"lon":22.16,"label":"Mornos","iconColor":"MediumAquaMarine","period":"10/05-10/06","average":"439,160,781 cubic meters","level":"lower low MID high higher"},{"name":"Yliki","lat":38.4,"lon":23.28,"label":"Yliki","iconColor":"Khaki","period":"10/05-10/06","average":"337,469,000 cubic meters","level":"lower LOW mid high higher"}]}
+2024-06-13 18:31:27 Savings clustering (2024-06-10)
+2024-06-13 18:31:27 
+SELECT 
+    '10/05-10/06' AS period, 
+    SUBSTR(date, 1, 4) AS year,
+    count(date) as days, 
+    SUM(day_sum) AS period_sum, 
+    AVG(day_sum) AS period_avg
+FROM
+(
+    SELECT 
+        date, 
+        SUM(quantity) AS day_sum, 
+        avg(quantity) AS quantity
+    FROM savings
+    WHERE quantity > 0 
+    AND 
+    (
+        (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '10') 
+        OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '10')
+    )
+    GROUP BY date
+)
+GROUP BY SUBSTR(date, 1, 4)
+
+2024-06-13 18:31:27 Publish {"savings":{"period":"10/05-10/06","savingsAvg":867523750,"savingsRepr":"867,523,750 cubic meters","level":2,"levelRepr":"lower LOW mid high higher"}}
+2024-06-13 18:31:27 Production clustering (2024-06-10)
+2024-06-13 18:31:27 
+SELECT 
+    '10/05-10/06' AS period, 
+    SUBSTR(date, 1, 4) AS year,
+    count(date) as days, 
+    SUM(day_sum) AS period_sum, 
+    AVG(day_sum) AS period_avg
+FROM
+(
+    SELECT 
+        date, 
+        SUM(quantity) AS day_sum, 
+        avg(quantity) AS quantity
+    FROM production
+    WHERE quantity > 0 
+    AND 
+    (
+        (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '10') 
+        OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '10')
+    )
+    GROUP BY date
+)
+GROUP BY SUBSTR(date, 1, 4)
+
+2024-06-13 18:31:27 Publish {"production":{"period":"10/05-10/06","productionAvg":1182472.8125,"productionRepr":"1,182,472 cubic meters","level":5,"levelRepr":"lower low mid high HIGHER"}}
+2024-06-13 18:31:27 Water clustering (2024-06-10)
+2024-06-13 18:31:27 
+SELECT 
+    s.period AS period,
+    s.year AS year,
+    s.period_avg AS savings_avg,
+    p.period_avg AS production_avg
+FROM ( 
+SELECT 
+    '10/05-10/06' AS period, 
+    SUBSTR(date, 1, 4) AS year,
+    count(date) as days, 
+    SUM(day_sum) AS period_sum, 
+    AVG(day_sum) AS period_avg
+FROM
+(
+    SELECT 
+        date, 
+        SUM(quantity) AS day_sum, 
+        avg(quantity) AS quantity
+    FROM savings
+    WHERE quantity > 0 
+    AND 
+    (
+        (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '10') 
+        OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '10')
+    )
+    GROUP BY date
+)
+GROUP BY SUBSTR(date, 1, 4)
+ ) s
+JOIN ( 
+SELECT 
+    '10/05-10/06' AS period, 
+    SUBSTR(date, 1, 4) AS year,
+    count(date) as days, 
+    SUM(day_sum) AS period_sum, 
+    AVG(day_sum) AS period_avg
+FROM
+(
+    SELECT 
+        date, 
+        SUM(quantity) AS day_sum, 
+        avg(quantity) AS quantity
+    FROM production
+    WHERE quantity > 0 
+    AND 
+    (
+        (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '10') 
+        OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '10')
+    )
+    GROUP BY date
+)
+GROUP BY SUBSTR(date, 1, 4)
+ ) p
+ON s.year = p.year
+
+2024-06-13 18:31:27 Publish {"water":{"period":"10/05-10/06","savingsAvg":867523750,"productionAvg":1182472.8125,"ratio":733.652174349675,"ratioRepr":"ratio: 734","level":1,"levelRepr":"LOWER low mid high higher"}}
+2024-06-13 18:31:27 Weather clustering (2024-06-09)
+2024-06-13 18:31:27 
+SELECT 
+    '09/05-09/06' AS period,
+    SUBSTR(date, 1, 4) AS year,
+    SUM(precipitation_sum) AS precipitation_sum
+FROM weather 
+WHERE (SUBSTR(date, 6, 2) = '05' AND SUBSTR(date, 9, 2) >= '09') 
+OR (SUBSTR(date, 6, 2) = '06' AND SUBSTR(date, 9, 2) <= '09')
+GROUP BY SUBSTR(date, 1, 4)
+
+2024-06-13 18:31:27 Publish {"weather":{"period":"09/05-09/06","precipitationSum":307.4,"precipitationRepr":"307.4 mm","level":3,"levelRepr":"lower low MID high higher"}}
+2024-06-13 18:31:27 Data waiting...

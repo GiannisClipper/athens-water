@@ -344,7 +344,7 @@
     {
         "id": "4afc52cffe622b4e",
         "type": "ui_group",
-        "name": "Registration to RabbitMq (athenswaterall exchange)",
+        "name": "Registration to RabbitMQ",
         "tab": "61dc0696db7e299c",
         "order": 1,
         "disp": true,
@@ -401,7 +401,7 @@
         "z": "ccd26f1ff828de10",
         "name": "spacer",
         "group": "4afc52cffe622b4e",
-        "order": 1,
+        "order": 2,
         "width": "1",
         "height": "1"
     },
@@ -973,7 +973,7 @@
         "type": "file",
         "z": "9e38695607437acd",
         "name": "delete log file",
-        "filename": "athens-water.log",
+        "filename": ".node-red/projects/athens-water/athens-water.log",
         "filenameType": "str",
         "appendNewline": true,
         "createDir": false,
@@ -3070,64 +3070,6 @@
         ]
     },
     {
-        "id": "adb61f3a0489986d",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 520,
-        "wires": [
-            [
-                "ef61379ce7dc460d"
-            ]
-        ]
-    },
-    {
-        "id": "02766e51d35f3d41",
-        "type": "inject",
-        "z": "a8ca5f37ab8664a6",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-07",
-        "payloadType": "str",
-        "x": 130,
-        "y": 480,
-        "wires": [
-            [
-                "ef61379ce7dc460d"
-            ]
-        ]
-    },
-    {
         "id": "195d01cff4a595f0",
         "type": "function",
         "z": "a8ca5f37ab8664a6",
@@ -3186,6 +3128,64 @@
         "wires": [
             [
                 "e155bbefca1f3401"
+            ]
+        ]
+    },
+    {
+        "id": "adb61f3a0489986d",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
+            ]
+        ]
+    },
+    {
+        "id": "02766e51d35f3d41",
+        "type": "inject",
+        "z": "a8ca5f37ab8664a6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-07",
+        "payloadType": "str",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "ef61379ce7dc460d"
             ]
         ]
     },
@@ -3332,64 +3332,6 @@
         ]
     },
     {
-        "id": "c1a67434013bb48a",
-        "type": "inject",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 540,
-        "wires": [
-            [
-                "2e929dca24e77fa9"
-            ]
-        ]
-    },
-    {
-        "id": "c7cc759199f90113",
-        "type": "inject",
-        "z": "b7ec5c0795a0393f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 500,
-        "wires": [
-            [
-                "2e929dca24e77fa9"
-            ]
-        ]
-    },
-    {
         "id": "1a6118c29bd78b28",
         "type": "function",
         "z": "b7ec5c0795a0393f",
@@ -3448,6 +3390,64 @@
         "wires": [
             [
                 "71dbdd31b4f0f0cc"
+            ]
+        ]
+    },
+    {
+        "id": "c7cc759199f90113",
+        "type": "inject",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "2e929dca24e77fa9"
+            ]
+        ]
+    },
+    {
+        "id": "c1a67434013bb48a",
+        "type": "inject",
+        "z": "b7ec5c0795a0393f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "2e929dca24e77fa9"
             ]
         ]
     },
@@ -3923,35 +3923,6 @@
         ]
     },
     {
-        "id": "25d3dba63ffda744",
-        "type": "inject",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 580,
-        "wires": [
-            [
-                "bd751375a065374d"
-            ]
-        ]
-    },
-    {
         "id": "bd751375a065374d",
         "type": "link call",
         "z": "11322c65b3bfae17",
@@ -3967,35 +3938,6 @@
             [
                 "70cfed66a576c432",
                 "20542212bb2afe38"
-            ]
-        ]
-    },
-    {
-        "id": "a15a38acbf586bba",
-        "type": "inject",
-        "z": "11322c65b3bfae17",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 540,
-        "wires": [
-            [
-                "bd751375a065374d"
             ]
         ]
     },
@@ -4062,6 +4004,64 @@
         ]
     },
     {
+        "id": "25d3dba63ffda744",
+        "type": "inject",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
+        "id": "a15a38acbf586bba",
+        "type": "inject",
+        "z": "11322c65b3bfae17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "bd751375a065374d"
+            ]
+        ]
+    },
+    {
         "id": "98de8468dc0441db",
         "type": "link call",
         "z": "1701ccc8d2838ab0",
@@ -4092,7 +4092,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 880,
-        "y": 280,
+        "y": 180,
         "wires": []
     },
     {
@@ -4130,50 +4130,6 @@
         "y": 120,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "300a3f9168a9b4ed",
-        "type": "catch",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "scope": [
-            "5c4075558bfa1515"
-        ],
-        "uncaught": false,
-        "x": 870,
-        "y": 220,
-        "wires": [
-            [
-                "d71439a2eba7fc77"
-            ]
-        ]
-    },
-    {
-        "id": "d71439a2eba7fc77",
-        "type": "change",
-        "z": "1701ccc8d2838ab0",
-        "name": "set log message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "error.message",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 900,
-        "y": 180,
-        "wires": [
-            [
-                "27b42da3153d628e"
-            ]
         ]
     },
     {
@@ -4229,35 +4185,6 @@
         "wires": []
     },
     {
-        "id": "53a0b0e5948328fe",
-        "type": "inject",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-05-23",
-        "payloadType": "str",
-        "x": 130,
-        "y": 520,
-        "wires": [
-            [
-                "cbc139c0f6212c2a"
-            ]
-        ]
-    },
-    {
         "id": "cbc139c0f6212c2a",
         "type": "link call",
         "z": "1701ccc8d2838ab0",
@@ -4273,35 +4200,6 @@
             [
                 "98de8468dc0441db",
                 "27b42da3153d628e"
-            ]
-        ]
-    },
-    {
-        "id": "9e493fa5522867f8",
-        "type": "inject",
-        "z": "1701ccc8d2838ab0",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "2024-01-05",
-        "payloadType": "str",
-        "x": 130,
-        "y": 480,
-        "wires": [
-            [
-                "cbc139c0f6212c2a"
             ]
         ]
     },
@@ -4364,6 +4262,64 @@
         "wires": [
             [
                 "f89090b34c3bea4d"
+            ]
+        ]
+    },
+    {
+        "id": "53a0b0e5948328fe",
+        "type": "inject",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-05-23",
+        "payloadType": "str",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "cbc139c0f6212c2a"
+            ]
+        ]
+    },
+    {
+        "id": "9e493fa5522867f8",
+        "type": "inject",
+        "z": "1701ccc8d2838ab0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2024-01-05",
+        "payloadType": "str",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "cbc139c0f6212c2a"
             ]
         ]
     },
@@ -7195,8 +7151,8 @@
         "label": "",
         "group": "4afc52cffe622b4e",
         "order": 1,
-        "width": 0,
-        "height": 0,
+        "width": "0",
+        "height": "0",
         "options": [
             {
                 "label": "Username",
@@ -7262,7 +7218,7 @@
         "cancel": "cancel",
         "topic": "topic",
         "topicType": "msg",
-        "splitLayout": "",
+        "splitLayout": false,
         "className": "",
         "x": 160,
         "y": 60,
@@ -7277,7 +7233,7 @@
         "type": "ui_text",
         "z": "ccd26f1ff828de10",
         "group": "4afc52cffe622b4e",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "registration result",
